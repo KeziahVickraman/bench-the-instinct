@@ -20,7 +20,7 @@ website:
       - text: "Interactive Dashboard"
         href: app.qmd
     right:
-      - text: "📄 Submission"
+      - text: "📄 Academic Paper"
         href: submission.qmd
       - text: "Revision Log"
         href: revision_log.qmd
