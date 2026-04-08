@@ -1,0 +1,21 @@
+{
+  "part1_causal.qmd": {
+    "part1_causal.html": "a860f24a"
+  },
+  "index.qmd": {
+    "index.html": "d5808b36"
+  },
+  "app.qmd": {
+    "app.html": "aca3136a"
+  },
+  "revision_log.qmd": {
+    "revision_log.html": "742feba0"
+  },
+  "submission.qmd": {
+    "submission.html": "7c827c79",
+    "submission.tex": "cd995ec6"
+  },
+  "part2_predictive.qmd": {
+    "part2_predictive.html": "28b66ba9"
+  }
+}

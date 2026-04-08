@@ -1,0 +1,95 @@
+/*-- scss:defaults --*/
+/*-- NBA Capstone Custom Theme --*/
+/*-- Extends Quarto's flatly theme with NBA brand colours --*/
+
+/*-- Fonts --*/
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Roboto:wght@300;400;500&display=swap');
+
+/*-- Brand colours --*/
+$nba-blue:       #17408B;
+$nba-red:        #CE1141;
+$nba-white:      #FFFFFF;
+$nba-grey:       #E0E0E0;
+$nba-dark-grey:  #333333;
+$nba-orange:     #FF6B00;
+
+/*-- Override flatly primary colour with NBA blue --*/
+$primary:        $nba-blue;
+$link-color:     $nba-blue;
+
+/*-- Body --*/
+$body-bg:        #F8F9FA;
+$body-color:     $nba-dark-grey;
+$font-family-sans-serif: 'Roboto', sans-serif;
+
+/*-- Headings --*/
+$headings-font-family: 'Roboto Condensed', sans-serif;
+$headings-font-weight: 700;
+$headings-color:       $nba-blue;
+
+h2 { color: $nba-blue; border-bottom: 2px solid $nba-red; padding-bottom: 6px; }
+h3 { color: $nba-red; }
+
+/*-- Navbar --*/
+.navbar { font-family: 'Roboto Condensed', sans-serif; font-weight: 700; letter-spacing: 0.03em; }
+
+/*-- Callout blocks --*/
+.callout-note    { border-left-color: $nba-blue !important; }
+.callout-warning { border-left-color: $nba-orange !important; }
+.callout-tip     { border-left-color: $nba-red !important; }
+.callout-important { border-left-color: $nba-red !important; }
+
+/*-- Hero banner (landing page) --*/
+.hero-banner {
+  background: linear-gradient(135deg, $nba-blue 0%, #0d2b5e 100%);
+  color: $nba-white;
+  padding: 60px 40px;
+  border-radius: 8px;
+  margin-bottom: 40px;
+}
+.hero-banner h1 { color: $nba-white; border-bottom: none; }
+.hero-banner p  { color: rgba(255,255,255,0.85); font-size: 1.1rem; }
+.hero-banner .badge-red {
+  background: $nba-red;
+  color: $nba-white;
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+/*-- Part cards --*/
+.part-card {
+  background: $nba-white;
+  border: 1px solid $nba-grey;
+  border-top: 4px solid $nba-blue;
+  border-radius: 6px;
+  padding: 24px;
+  margin-bottom: 20px;
+  transition: box-shadow 0.2s;
+}
+.part-card:hover { box-shadow: 0 4px 16px rgba(23,64,139,0.12); }
+.part-card.red   { border-top-color: $nba-red; }
+
+/*-- Risk tier badges --*/
+.badge-high     { background: $nba-red;    color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; }
+.badge-moderate { background: $nba-orange; color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; }
+.badge-low      { background: $nba-blue;   color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; }
+
+/*-- Code blocks --*/
+.sourceCode { font-size: 0.85rem; }
+
+/*-- Revision log specific --*/
+.revision-entry {
+  border-left: 4px solid $nba-grey;
+  padding: 12px 20px;
+  margin-bottom: 16px;
+  background: $nba-white;
+}
+.revision-entry.resolved  { border-left-color: #2E8B57; }
+.revision-entry.pending   { border-left-color: $nba-orange; }
+.revision-entry.major     { border-left-color: $nba-red; }
+
+/*-- Footer --*/
+.nav-footer { font-size: 0.85rem; }

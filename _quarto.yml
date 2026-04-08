@@ -1,0 +1,62 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Bench the Instinct"
+  description: "NBA Achilles Load Management Study — Keziah Vickraman, 2025"
+
+  navbar:
+    background: "#17408B"
+    foreground: "#FFFFFF"
+    title: "🏀 Bench the Instinct"
+    left:
+      - text: "Home"
+        href: index.qmd
+      - text: "Did Load Kill the Achilles?"
+        href: part1_causal.qmd
+      - text: "Predict | Who's next?"
+        href: part2_predictive.qmd
+      - text: "Interactive Dashboard"
+        href: app.qmd
+    right:
+      - text: "📄 Submission"
+        href: submission.qmd
+      - text: "Revision Log"
+        href: revision_log.qmd
+      - icon: github
+        href: https://github.com/YOUR_USERNAME/YOUR_REPO_NAME
+        aria-label: GitHub
+
+  page-footer:
+    background: "#17408B"
+    foreground: "#FFFFFF"
+    left: "Keziah Vickraman · Capstone 2025"
+    center: "*We know load caused the spike. Now we know who's next.*"
+    right: "Built with [Quarto](https://quarto.org)"
+
+format:
+  html:
+    theme:
+      light: [flatly, assets/custom.scss]
+    toc: true
+    toc-depth: 3
+    toc-title: "On this page"
+    toc-location: right
+    code-fold: true
+    code-tools: true
+    code-copy: true
+    code-overflow: wrap
+    highlight-style: github
+    fig-align: center
+    fig-cap-location: bottom
+    df-print: paged
+    smooth-scroll: true
+    anchor-sections: true
+
+execute:
+  echo: true
+  warning: false
+  message: false
+  cache: true
+  freeze: auto

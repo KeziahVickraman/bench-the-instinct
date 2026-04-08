@@ -1,0 +1,1415 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="Transparent record of supervisor feedback and project iterations">
+
+<title>Revision Log – Bench the Instinct</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-065a5179aebd64318d7ea99d77b64a9e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-1ee2f1216c0f7c7908e60f6449a23654.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    </a>
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">🏀 Bench the Instinct</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./part1_causal.html"> 
+<span class="menu-text">Did Load Kill the Achilles?</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./part2_predictive.html"> 
+<span class="menu-text">Predict | Who’s next?</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./app.html"> 
+<span class="menu-text">Interactive Dashboard</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./submission.html"> 
+<span class="menu-text">📄 Submission</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./revision_log.html" aria-current="page"> 
+<span class="menu-text">Revision Log</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/YOUR_USERNAME/YOUR_REPO_NAME"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul class="collapse">
+  <li><a href="#version-history" id="toc-version-history" class="nav-link active" data-scroll-target="#version-history">Version History</a></li>
+  <li><a href="#round-1-initial-ideation-feedback" id="toc-round-1-initial-ideation-feedback" class="nav-link" data-scroll-target="#round-1-initial-ideation-feedback">Round 1 — Initial Ideation Feedback</a></li>
+  <li><a href="#round-2-submission-feedback" id="toc-round-2-submission-feedback" class="nav-link" data-scroll-target="#round-2-submission-feedback">Round 2 — Submission Feedback</a></li>
+  <li><a href="#iterative-self-revisions-part-2-pipeline" id="toc-iterative-self-revisions-part-2-pipeline" class="nav-link" data-scroll-target="#iterative-self-revisions-part-2-pipeline">Iterative Self-Revisions (Part 2 Pipeline)</a></li>
+  <li><a href="#self-identified-limitations" id="toc-self-identified-limitations" class="nav-link" data-scroll-target="#self-identified-limitations">Self-Identified Limitations</a></li>
+  <li><a href="#reflection" id="toc-reflection" class="nav-link" data-scroll-target="#reflection">Reflection</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Revision Log</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<p class="subtitle lead">Documented Feedback, Responses &amp; Version History</p>
+</div>
+
+<div>
+  <div class="description">
+    Transparent record of supervisor feedback and project iterations
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<style>
+.revision-entry {
+  border-left: 4px solid #ccc;
+  padding: 1rem 1.2rem;
+  margin: 1rem 0;
+  border-radius: 0 6px 6px 0;
+  background: #fafafa;
+}
+.revision-entry.major   { border-left-color: #CE1141; background: #fff8f8; }
+.revision-entry.resolved { border-left-color: #17408B; background: #f5f8ff; }
+.revision-entry.pending  { border-left-color: #f0a500; background: #fffdf0; }
+.revision-entry.wontfix  { border-left-color: #888;    background: #f5f5f5; }
+</style>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>How to read this page
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This log documents all substantive feedback received on the project, our team’s response to each point, and the version in which it was addressed. Entries are grouped by feedback round and ordered chronologically.</p>
+<p><strong>Status tags:</strong> 🟢 Resolved · 🟡 In Progress · ⚪ Acknowledged / By design</p>
+</div>
+</div>
+<hr>
+<section id="version-history" class="level2">
+<h2 class="anchored" data-anchor-id="version-history">Version History</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Version</th>
+<th>Date</th>
+<th>Summary of changes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>v0.1</td>
+<td>July 2025</td>
+<td>Initial proposal — NBA + NCAA data, binary <code>injured_achilles</code> classifier, random 80/20 split, RF + XGB with SMOTE/ROSE/ADASYN · <a href="Vickraman_Tan_Said_FINAL.html">📄 Original Submission</a></td>
+</tr>
+<tr class="even">
+<td>v0.2</td>
+<td>July 2025</td>
+<td>Added NCAA Achilles injury data (21 cases manually compiled); structured project into two explicit angles: DiD causal inference + ML classification</td>
+</tr>
+<tr class="odd">
+<td>v1.0</td>
+<td>August 2025</td>
+<td>Pivoted target to <code>pct_games_missed</code> (continuous regression); dropped NCAA; temporal train/test split (2018–2021 / 2022–2025); hurdle model explored</td>
+</tr>
+<tr class="even">
+<td>v1.1</td>
+<td>August 2025</td>
+<td>Removed survivorship-biased features (<code>total_minutes</code>, <code>back_to_back_games</code>, <code>avg_days_rest</code>); retained lagged <code>avg_rolling_minutes_3</code> only</td>
+</tr>
+<tr class="odd">
+<td>v1.2</td>
+<td>August 2025</td>
+<td>Dropped hurdle model (Stage A uninformative at ~87–94% non-zero rate); pivoted to direct XGBoost regression</td>
+</tr>
+<tr class="even">
+<td>v1.3</td>
+<td>August 2025</td>
+<td>Fixed data leakage (temporal feature discipline, hoopR <code>season_type == 2</code> bug); restricted to Regular Season only</td>
+</tr>
+<tr class="odd">
+<td>v2.0</td>
+<td>April 2026</td>
+<td>Final model deployed — R² = 0.747, RMSE = 0.133, MAE = 0.100; Quarto website + Shiny dashboard published</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="round-1-initial-ideation-feedback" class="level2">
+<h2 class="anchored" data-anchor-id="round-1-initial-ideation-feedback">Round 1 — Initial Ideation Feedback</h2>
+<section id="feedback-1.1-too-few-injury-cases-broaden-scope" class="level3">
+<h3 class="anchored" data-anchor-id="feedback-1.1-too-few-injury-cases-broaden-scope">Feedback 1.1 — Too few injury cases; broaden scope</h3>
+<div class="revision-entry major">
+<p><strong>Status:</strong> 🟢 Resolved in v0.2</p>
+<p><strong>Feedback received:</strong></p>
+<p>Our supervisor challenged whether 45 NBA Achilles ruptures across a 30-year window was sufficient to learn meaningful patterns. With an ~0.8% positive class rate, even the best class-balancing techniques (SMOTE, ROSE, ADASYN) would essentially be amplifying noise rather than signal — and cross-validation folds would routinely contain zero positive examples.</p>
+<p><strong>Our response:</strong></p>
+<p>We broadened the dataset in two ways. First, we manually compiled 21 NCAA Achilles rupture cases (2008–2025) from ESPN, CBS Sports, Yahoo Sports, and official team sources, giving us a combined 66 confirmed rupture cases. Second, we restructured the project into two explicit analytical angles to avoid conflating them:</p>
+<ol type="1">
+<li><strong>Causal inference</strong> (<code>β̂</code>): A difference-in-differences model investigating whether high load and back-to-back scheduling have a measurable treatment effect on injury rates.</li>
+<li><strong>Predictive modelling</strong> (<code>ŷ</code>): A supervised classification framework (RF + XGBoost) to flag individual players at elevated risk.</li>
+</ol>
+<p>This separation was also the supervisor’s second point of feedback — see 1.2 below.</p>
+<p><strong>Code change:</strong> <code>Capstone_Vickraman_Tan_Said_FINAL.R</code> → NCAA data import and merge section; DiD model block (<code>model1</code>, <code>model2</code>).</p>
+</div>
+<hr>
+</section>
+<section id="feedback-1.2-clarify-the-two-analytical-angles" class="level3">
+<h3 class="anchored" data-anchor-id="feedback-1.2-clarify-the-two-analytical-angles">Feedback 1.2 — Clarify the two analytical angles</h3>
+<div class="revision-entry resolved">
+<p><strong>Status:</strong> 🟢 Resolved in v0.2</p>
+<p><strong>Feedback received:</strong></p>
+<p>The supervisor noted that the project was implicitly trying to answer two different questions — <em>why</em> ruptures happen (causal) and <em>who</em> is next (predictive) — but the framing in the proposal did not distinguish between them clearly. The ask was: <em>“If you want both angles, fine, but be explicit about which is which and what each can and cannot claim.”</em></p>
+<p><strong>Our response:</strong></p>
+<p>We formally separated the project into two parts with distinct methodological framing:</p>
+<ul>
+<li><strong>Part 1 (Causal):</strong> A difference-in-differences design using season-level NBA data, comparing high-load vs.&nbsp;low-load player-seasons before and after a treatment period. We explicitly disclaim that the DiD estimate is a first-pass approximation; the parallel trends assumption is imperfect given the rarity of the outcome, and a synthetic control would be more robust in future work.</li>
+<li><strong>Part 2 (Predictive):</strong> A supervised ML pipeline (RF + XGBoost) that produces player-level risk scores. We are clear that this is risk <em>prediction</em>, not causal attribution — the model says <em>who</em>, not <em>why</em>.</li>
+</ul>
+<p><strong>Code change:</strong> Project restructured into <code>Part1_Causal.R</code> and <code>Part2_Predictive.R</code>; website pages <code>part1_causal.qmd</code> and <code>part2_predictive.qmd</code> correspond directly to the two angles.</p>
+</div>
+<hr>
+</section>
+</section>
+<section id="round-2-submission-feedback" class="level2">
+<h2 class="anchored" data-anchor-id="round-2-submission-feedback">Round 2 — Submission Feedback</h2>
+<section id="feedback-2.1-rare-event-economics-false-positives-are-too-costly" class="level3">
+<h3 class="anchored" data-anchor-id="feedback-2.1-rare-event-economics-false-positives-are-too-costly">Feedback 2.1 — Rare event economics: false positives are too costly</h3>
+<div class="revision-entry major">
+<p><strong>Status:</strong> 🟢 Resolved in v1.0</p>
+<p><strong>Feedback received:</strong></p>
+<p>This was the pivotal feedback that redirected the entire Part 2 pipeline. The supervisor’s concern was not just statistical (class imbalance) but economic: in the NBA context, a <strong>False Positive</strong> — predicting a player will rupture their Achilles when they will not — has a prohibitively high cost. Benching a star player unnecessarily costs wins, affects salary negotiations, and erodes trust in the model. A binary classifier with a 0.8% positive class cannot produce False Positive rates that are operationally acceptable, regardless of threshold tuning.</p>
+<p>The ask was to rethink the target variable entirely: <em>“What information would actually be actionable for a coach or GM?”</em></p>
+<p><strong>Our response:</strong></p>
+<p>We pivoted the target from a binary Achilles flag to <code>pct_games_missed</code> — a continuous measure computed as:</p>
+<pre><code>pct_games_missed = games_missed / games_on_roster</code></pre>
+<p>This reframe resolved several problems simultaneously:</p>
+<ul>
+<li><strong>No class imbalance:</strong> Regression on a continuous [0, 1] target eliminates the rare-event problem structurally, not through sampling.</li>
+<li><strong>Actionable at any threshold:</strong> A GM can apply their own risk tolerance. Predicting 25% games missed is meaningfully different from 5% without forcing a binary alarm.</li>
+<li><strong>Broader injury spectrum:</strong> <code>pct_games_missed</code> captures all load-related absences (tendinitis, hamstrings, knee inflammation) — injuries sharing the same upstream risk factors as Achilles ruptures.</li>
+<li><strong>Avoids survivorship on the outcome side:</strong> Games missed is observable from roster records even when a player appears in no box scores.</li>
+</ul>
+<p>We also dropped NCAA data at this stage. Computing <code>pct_games_missed</code> requires game-level roster records that the Kaggle NCAA dataset (which is season-level only) cannot provide.</p>
+<p><strong>Code change:</strong> <code>00_Data_Setup.R</code> → target construction block; <code>Part2_Predictive.R</code> → recipe, model spec, and metric suite updated from <code>roc_auc/accuracy</code> to <code>rmse/mae/rsq</code>.</p>
+</div>
+<hr>
+</section>
+<section id="feedback-2.2-address-data-leakage-and-temporal-integrity" class="level3">
+<h3 class="anchored" data-anchor-id="feedback-2.2-address-data-leakage-and-temporal-integrity">Feedback 2.2 — Address data leakage and temporal integrity</h3>
+<div class="revision-entry resolved">
+<p><strong>Status:</strong> 🟢 Resolved in v1.3</p>
+<p><strong>Feedback received:</strong></p>
+<p>A deeper review of the feature engineering pipeline surfaced several sources of implicit data leakage — cases where the model had access to information that would not exist at prediction time in a real deployment.</p>
+<p><strong>Our response:</strong></p>
+<p>We identified and fixed three leakage sources:</p>
+<p><strong>1. Contemporaneous features used as predictors</strong></p>
+<p><code>ever_injured</code> and <code>cum_achilles_injuries</code> were constructed from the full injury history, including future observations within the dataset window. All cumulative and rolling features are now strictly lagged — they only aggregate data from prior time periods.</p>
+<p><strong>2. Random train/test split</strong></p>
+<p>An 80/20 random split allows future seasons to appear in the training set, making the model optimistically overfit to temporal patterns it would not have at deployment. We replaced this with a <strong>temporal split</strong>:</p>
+<ul>
+<li><strong>Train:</strong> 2018–2021</li>
+<li><strong>Test:</strong> 2022–2025</li>
+</ul>
+<p>This honestly simulates real-world deployment: predict next-season risk from prior seasons.</p>
+<p><strong>3. hoopR <code>season_type</code> is numeric, not a string</strong></p>
+<p><code>season_type == 2</code> means Regular Season in hoopR’s API. Filtering with <code>season_type == "Regular Season"</code> silently returned 0 rows — a critical bug that went undetected until we cross-checked row counts. We restricted the dataset to Regular Season only (<code>season_type == 2</code>) to eliminate playoff confounding.</p>
+<p><strong>Code change:</strong> <code>00_Data_Setup.R</code> → feature engineering block (all <code>lag()</code> wrappers); <code>Part2_Predictive.R</code> → replaced <code>initial_split()</code> with manual temporal filter; <code>season_type</code> filter corrected throughout.</p>
+</div>
+<hr>
+</section>
+</section>
+<section id="iterative-self-revisions-part-2-pipeline" class="level2">
+<h2 class="anchored" data-anchor-id="iterative-self-revisions-part-2-pipeline">Iterative Self-Revisions (Part 2 Pipeline)</h2>
+<p>These revisions were self-initiated after committing to <code>pct_games_missed</code>. They emerged from interrogating model behaviour and feature importance outputs rather than from direct supervisor feedback.</p>
+<hr>
+<section id="revision-a-survivorship-bias-in-load-features" class="level3">
+<h3 class="anchored" data-anchor-id="revision-a-survivorship-bias-in-load-features">Revision A — Survivorship bias in load features</h3>
+<div class="revision-entry resolved">
+<p><strong>Status:</strong> 🟢 Resolved in v1.1</p>
+<p><strong>Problem identified:</strong></p>
+<p>Our initial feature set included <code>total_minutes</code>, <code>back_to_back_games</code>, and <code>avg_days_rest</code> as load proxies. These all suffer from the same survivorship bias paradox: <strong>healthy players play more</strong>, so these values are naturally higher for players who do <em>not</em> get injured. When regressed against <code>pct_games_missed</code>, the model learned a perverse negative relationship — more minutes predicted fewer missed games — which is exactly backwards from our hypothesis and is an artefact of the data generating process.</p>
+<p><strong>What we changed:</strong></p>
+<p>Removed all three contemporaneous load features. Retained only:</p>
+<ul>
+<li><code>avg_rolling_minutes_3</code>: average minutes played in the 3 games <em>prior</em> to any given observation, lagged by one period. This captures pre-injury workload without contaminating the signal with same-period playing time that is mechanically high for healthy players.</li>
+</ul>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 36%">
+<col style="width: 32%">
+<col style="width: 32%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Feature</th>
+<th>Action</th>
+<th>Reason</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>total_minutes</code></td>
+<td>Removed</td>
+<td>Survivorship-biased</td>
+</tr>
+<tr class="even">
+<td><code>back_to_back_games</code></td>
+<td>Removed</td>
+<td>Survivorship-biased</td>
+</tr>
+<tr class="odd">
+<td><code>avg_days_rest</code></td>
+<td>Removed</td>
+<td>Injured players “rest” more because they’re inactive</td>
+</tr>
+<tr class="even">
+<td><code>avg_rolling_minutes_3</code></td>
+<td>Retained (lagged)</td>
+<td>Pre-injury load proxy; uses only prior-period data</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Code change:</strong> <code>00_Data_Setup.R</code> → <code>create_features()</code> function; <code>Part2_Predictive.R</code> → recipe <code>step_rm()</code> updated.</p>
+</div>
+<hr>
+</section>
+<section id="revision-b-dropping-the-hurdle-model" class="level3">
+<h3 class="anchored" data-anchor-id="revision-b-dropping-the-hurdle-model">Revision B — Dropping the hurdle model</h3>
+<div class="revision-entry resolved">
+<p><strong>Status:</strong> 🟢 Resolved in v1.2</p>
+<p><strong>Problem identified:</strong></p>
+<p>After moving to <code>pct_games_missed</code>, we initially adopted a two-stage hurdle model:</p>
+<ul>
+<li><strong>Stage A (Classification):</strong> Does this player miss any games? (binary)</li>
+<li><strong>Stage B (Regression):</strong> Given they miss games, what percentage? (continuous)</li>
+</ul>
+<p>The motivation was that <code>pct_games_missed</code> is zero-inflated — many player-seasons have zero missed games. A hurdle model seemed statistically principled.</p>
+<p>In practice, Stage A was uninformative. Approximately <strong>87–94% of player-seasons</strong> had <code>pct_games_missed &gt; 0</code>, meaning the zero hurdle was almost never triggered. Stage A learned to predict the majority class with high confidence and contributed nothing beyond what a direct regression model already captured. Adding it introduced substantial pipeline complexity (two separate model specs, two workflows, a prediction assembly step) for no performance gain.</p>
+<p><strong>What we changed:</strong></p>
+<p>Dropped the hurdle architecture entirely. Replaced with a single XGBoost regression model trained directly on <code>pct_games_missed</code>. This simplified the pipeline and improved interpretability.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Architecture</th>
+<th>Verdict</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Hurdle (Stage A classify → Stage B regress)</td>
+<td>Dropped — Stage A uninformative at ~87–94% non-zero rate</td>
+</tr>
+<tr class="even">
+<td>Direct XGBoost regression</td>
+<td>Adopted — cleaner, faster, better R²</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Code change:</strong> <code>Part2_Predictive.R</code> → removed <code>Part2_Predictive_Hurdle.R</code> dependency; single <code>xgb_workflow</code> fitted directly.</p>
+</div>
+<hr>
+</section>
+</section>
+<section id="self-identified-limitations" class="level2">
+<h2 class="anchored" data-anchor-id="self-identified-limitations">Self-Identified Limitations</h2>
+<p>Limitations the team identified independently — not raised by the supervisor — documented for transparency.</p>
+<section id="l1-scope-of-pct_games_missed" class="level3">
+<h3 class="anchored" data-anchor-id="l1-scope-of-pct_games_missed">L1 — Scope of <code>pct_games_missed</code></h3>
+<div class="revision-entry wontfix">
+<p><strong>Status:</strong> ⚪ Acknowledged / By design</p>
+<p><code>pct_games_missed</code> captures all absence reasons — including rest decisions and suspensions — not only injury-related absences. We document this explicitly in the Part 2 methodology section. The Achilles spike motivates the research question; the model answers it across the full spectrum of load-related unavailability. This is a deliberate design choice that trades specificity for tractability.</p>
+</div>
+<hr>
+</section>
+<section id="l2-no-biomechanical-or-training-load-data" class="level3">
+<h3 class="anchored" data-anchor-id="l2-no-biomechanical-or-training-load-data">L2 — No biomechanical or training load data</h3>
+<div class="revision-entry wontfix">
+<p><strong>Status:</strong> ⚪ Acknowledged / Out of scope</p>
+<p>Tendon stiffness, landing mechanics, and fatigue-induced movement compensations are among the strongest known predictors of Achilles ruptures <span class="citation" data-cites="Petway2022">[@Petway2022]</span> but are not captured in publicly available box score data. Our features are proxies. The NBA does collect this data internally (via second-spectrum tracking and wearables), but it is not publicly accessible. This is noted in the limitations sections of both the website and the submission draft.</p>
+</div>
+<hr>
+</section>
+<section id="l3-hoopr-data-reliability-before-2018" class="level3">
+<h3 class="anchored" data-anchor-id="l3-hoopr-data-reliability-before-2018">L3 — hoopR data reliability before 2018</h3>
+<div class="revision-entry resolved">
+<p><strong>Status:</strong> 🟢 Resolved in v1.3 (restriction applied)</p>
+<p>hoopR coverage before the 2018 season produces artificially low <code>pct_games_missed</code> values, likely due to incomplete roster transaction records in earlier API data. We restricted the full pipeline to 2018–2025 to ensure target variable integrity. Earlier seasons are retained in visualisations only (the injury spike charts) where they serve a descriptive rather than modelling role.</p>
+</div>
+<hr>
+</section>
+<section id="l4-no-positional-adjustment" class="level3">
+<h3 class="anchored" data-anchor-id="l4-no-positional-adjustment">L4 — No positional adjustment</h3>
+<div class="revision-entry pending">
+<p><strong>Status:</strong> 🟡 In Progress — planned for future work</p>
+<p>A centre and a point guard face different Achilles risk profiles at the same minute load, due to differences in movement patterns, jump frequency, and court positioning. Player position is not currently included as a feature. Adding <code>athlete_position_abbreviation</code> as a categorical variable in the recipe (via <code>step_dummy()</code>) is straightforward and is noted as a meaningful next step.</p>
+</div>
+<hr>
+</section>
+</section>
+<section id="reflection" class="level2">
+<h2 class="anchored" data-anchor-id="reflection">Reflection</h2>
+<p>The most significant revision in this project was the pivot from a binary Achilles injury classifier to <code>pct_games_missed</code> as a continuous regression target. What began as a statistical fix for class imbalance turned out to be a fundamental reframing of the research question — from <em>“did this player rupture their Achilles?”</em> to <em>“how available is this player likely to be?”</em>. That shift made the model genuinely more useful to a coaching or front-office audience, and it resolved the rare-event problem structurally rather than by papering over it with resampling. I think I fell in love with my model. Well, I mean, <strong>“there you go”</strong>… I learn, I learn…</p>
+<p>If I were starting again, I would build the target variable first and work backwards to the feature set, rather than inheriting features designed for binary classification and retrofitting them to a regression task. The survivorship bias in load features (where <code>total_minutes</code> perversely <em>negatively</em> predicted missed games) was a direct consequence of that mismatch, and it cost significant debugging time.</p>
+<p>The finding that surprised us most was how uninformative Stage A of the hurdle model turned out to be. Zero-inflated data is a textbook motivation for hurdle models, but in our data the “zero” class was rare enough (~6–13% of player-seasons) that the hurdle added complexity without signal. Sometimes the principled statistical solution and the practically correct one diverge — and interrogating model behaviour, rather than deferring to methodological convention, is what surfaced that.</p>
+<hr>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<p>Petway, A. J., Jordan, M. J., Epsley, S., &amp; Anloague, P. A. (2022). Mechanisms of Achilles tendon rupture in National Basketball Association players. <em>Journal of Applied Biomechanics, 38</em>(6), 398–403. <a href="https://doi.org/10.1123/jab.2022-0088" class="uri">https://doi.org/10.1123/jab.2022-0088</a></p>
+
+
+<!-- -->
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Revision Log"</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Documented Feedback, Responses &amp; Version History"</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "Transparent record of supervisor feedback and project iterations"</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="an">toc:</span><span class="co"> true</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="an">toc-depth:</span><span class="co"> 2</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="in">```{=html}</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;style&gt;</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="in">.revision-entry {</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="in">  border-left: 4px solid #ccc;</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="in">  padding: 1rem 1.2rem;</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="in">  margin: 1rem 0;</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="in">  border-radius: 0 6px 6px 0;</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="in">  background: #fafafa;</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="in">.revision-entry.major   { border-left-color: #CE1141; background: #fff8f8; }</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="in">.revision-entry.resolved { border-left-color: #17408B; background: #f5f8ff; }</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="in">.revision-entry.pending  { border-left-color: #f0a500; background: #fffdf0; }</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="in">.revision-entry.wontfix  { border-left-color: #888;    background: #f5f5f5; }</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/style&gt;</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="fu">## How to read this page</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>This log documents all substantive feedback received on the project, our</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>team's response to each point, and the version in which it was addressed.</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>Entries are grouped by feedback round and ordered chronologically.</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>**Status tags:** 🟢 Resolved · 🟡 In Progress · ⚪ Acknowledged / By design</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="fu">## Version History</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Version <span class="pp">|</span> Date <span class="pp">|</span> Summary of changes <span class="pp">|</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a><span class="pp">|---------|------|--------------------|</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> v0.1 <span class="pp">|</span> July 2025 <span class="pp">|</span> Initial proposal — NBA + NCAA data, binary <span class="in">`injured_achilles`</span> classifier, random 80/20 split, RF + XGB with SMOTE/ROSE/ADASYN · <span class="co">[</span><span class="ot">📄 Original Submission</span><span class="co">](Vickraman_Tan_Said_FINAL.html)</span> <span class="pp">|</span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> v0.2 <span class="pp">|</span> July 2025 <span class="pp">|</span> Added NCAA Achilles injury data (21 cases manually compiled); structured project into two explicit angles: DiD causal inference + ML classification <span class="pp">|</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> v1.0 <span class="pp">|</span> August 2025 <span class="pp">|</span> Pivoted target to <span class="in">`pct_games_missed`</span> (continuous regression); dropped NCAA; temporal train/test split (2018–2021 / 2022–2025); hurdle model explored <span class="pp">|</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> v1.1 <span class="pp">|</span> August 2025 <span class="pp">|</span> Removed survivorship-biased features (<span class="in">`total_minutes`</span>, <span class="in">`back_to_back_games`</span>, <span class="in">`avg_days_rest`</span>); retained lagged <span class="in">`avg_rolling_minutes_3`</span> only <span class="pp">|</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> v1.2 <span class="pp">|</span> August 2025 <span class="pp">|</span> Dropped hurdle model (Stage A uninformative at ~87–94% non-zero rate); pivoted to direct XGBoost regression <span class="pp">|</span></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> v1.3 <span class="pp">|</span> August 2025 <span class="pp">|</span> Fixed data leakage (temporal feature discipline, hoopR <span class="in">`season_type == 2`</span> bug); restricted to Regular Season only <span class="pp">|</span></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> v2.0 <span class="pp">|</span> April 2026 <span class="pp">|</span> Final model deployed — R² = 0.747, RMSE = 0.133, MAE = 0.100; Quarto website + Shiny dashboard published <span class="pp">|</span></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a><span class="fu">## Round 1 — Initial Ideation Feedback</span></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a><span class="fu">### Feedback 1.1 — Too few injury cases; broaden scope</span></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>::: {.revision-entry .major}</span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>**Status:** 🟢 Resolved in v0.2</span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>**Feedback received:**</span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>Our supervisor challenged whether 45 NBA Achilles ruptures across a</span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>30-year window was sufficient to learn meaningful patterns. With an</span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>~0.8% positive class rate, even the best class-balancing techniques</span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>(SMOTE, ROSE, ADASYN) would essentially be amplifying noise rather than</span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>signal — and cross-validation folds would routinely contain zero positive</span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>examples.</span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>**Our response:**</span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>We broadened the dataset in two ways. First, we manually compiled 21</span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>NCAA Achilles rupture cases (2008–2025) from ESPN, CBS Sports, Yahoo</span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>Sports, and official team sources, giving us a combined 66 confirmed</span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>rupture cases. Second, we restructured the project into two explicit</span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>analytical angles to avoid conflating them:</span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**Causal inference** (<span class="in">`β̂`</span>): A difference-in-differences model</span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>   investigating whether high load and back-to-back scheduling have a</span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>   measurable treatment effect on injury rates.</span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**Predictive modelling** (<span class="in">`ŷ`</span>): A supervised classification framework</span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a>   (RF + XGBoost) to flag individual players at elevated risk.</span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a>This separation was also the supervisor's second point of feedback — see</span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a>1.2 below.</span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a>**Code change:** <span class="in">`Capstone_Vickraman_Tan_Said_FINAL.R`</span> → NCAA data import</span>
+<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a>and merge section; DiD model block (<span class="in">`model1`</span>, <span class="in">`model2`</span>).</span>
+<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a><span class="fu">### Feedback 1.2 — Clarify the two analytical angles</span></span>
+<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a>::: {.revision-entry .resolved}</span>
+<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a>**Status:** 🟢 Resolved in v0.2</span>
+<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a>**Feedback received:**</span>
+<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a>The supervisor noted that the project was implicitly trying to answer</span>
+<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a>two different questions — *why* ruptures happen (causal) and *who* is</span>
+<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a>next (predictive) — but the framing in the proposal did not distinguish</span>
+<span id="cb2-99"><a href="#cb2-99" aria-hidden="true" tabindex="-1"></a>between them clearly. The ask was: *"If you want both angles, fine, but</span>
+<span id="cb2-100"><a href="#cb2-100" aria-hidden="true" tabindex="-1"></a>be explicit about which is which and what each can and cannot claim."*</span>
+<span id="cb2-101"><a href="#cb2-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-102"><a href="#cb2-102" aria-hidden="true" tabindex="-1"></a>**Our response:**</span>
+<span id="cb2-103"><a href="#cb2-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-104"><a href="#cb2-104" aria-hidden="true" tabindex="-1"></a>We formally separated the project into two parts with distinct</span>
+<span id="cb2-105"><a href="#cb2-105" aria-hidden="true" tabindex="-1"></a>methodological framing:</span>
+<span id="cb2-106"><a href="#cb2-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-107"><a href="#cb2-107" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Part 1 (Causal):** A difference-in-differences design using</span>
+<span id="cb2-108"><a href="#cb2-108" aria-hidden="true" tabindex="-1"></a>  season-level NBA data, comparing high-load vs. low-load player-seasons</span>
+<span id="cb2-109"><a href="#cb2-109" aria-hidden="true" tabindex="-1"></a>  before and after a treatment period. We explicitly disclaim that the DiD</span>
+<span id="cb2-110"><a href="#cb2-110" aria-hidden="true" tabindex="-1"></a>  estimate is a first-pass approximation; the parallel trends assumption</span>
+<span id="cb2-111"><a href="#cb2-111" aria-hidden="true" tabindex="-1"></a>  is imperfect given the rarity of the outcome, and a synthetic control</span>
+<span id="cb2-112"><a href="#cb2-112" aria-hidden="true" tabindex="-1"></a>  would be more robust in future work.</span>
+<span id="cb2-113"><a href="#cb2-113" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Part 2 (Predictive):** A supervised ML pipeline (RF + XGBoost) that</span>
+<span id="cb2-114"><a href="#cb2-114" aria-hidden="true" tabindex="-1"></a>  produces player-level risk scores. We are clear that this is risk</span>
+<span id="cb2-115"><a href="#cb2-115" aria-hidden="true" tabindex="-1"></a>  *prediction*, not causal attribution — the model says *who*, not *why*.</span>
+<span id="cb2-116"><a href="#cb2-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-117"><a href="#cb2-117" aria-hidden="true" tabindex="-1"></a>**Code change:** Project restructured into <span class="in">`Part1_Causal.R`</span> and</span>
+<span id="cb2-118"><a href="#cb2-118" aria-hidden="true" tabindex="-1"></a><span class="in">`Part2_Predictive.R`</span>; website pages <span class="in">`part1_causal.qmd`</span> and</span>
+<span id="cb2-119"><a href="#cb2-119" aria-hidden="true" tabindex="-1"></a><span class="in">`part2_predictive.qmd`</span> correspond directly to the two angles.</span>
+<span id="cb2-120"><a href="#cb2-120" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb2-121"><a href="#cb2-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-122"><a href="#cb2-122" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb2-123"><a href="#cb2-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-124"><a href="#cb2-124" aria-hidden="true" tabindex="-1"></a><span class="fu">## Round 2 — Submission Feedback</span></span>
+<span id="cb2-125"><a href="#cb2-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-126"><a href="#cb2-126" aria-hidden="true" tabindex="-1"></a><span class="fu">### Feedback 2.1 — Rare event economics: false positives are too costly</span></span>
+<span id="cb2-127"><a href="#cb2-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-128"><a href="#cb2-128" aria-hidden="true" tabindex="-1"></a>::: {.revision-entry .major}</span>
+<span id="cb2-129"><a href="#cb2-129" aria-hidden="true" tabindex="-1"></a>**Status:** 🟢 Resolved in v1.0</span>
+<span id="cb2-130"><a href="#cb2-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-131"><a href="#cb2-131" aria-hidden="true" tabindex="-1"></a>**Feedback received:**</span>
+<span id="cb2-132"><a href="#cb2-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-133"><a href="#cb2-133" aria-hidden="true" tabindex="-1"></a>This was the pivotal feedback that redirected the entire Part 2</span>
+<span id="cb2-134"><a href="#cb2-134" aria-hidden="true" tabindex="-1"></a>pipeline. The supervisor's concern was not just statistical (class</span>
+<span id="cb2-135"><a href="#cb2-135" aria-hidden="true" tabindex="-1"></a>imbalance) but economic: in the NBA context, a **False Positive** —</span>
+<span id="cb2-136"><a href="#cb2-136" aria-hidden="true" tabindex="-1"></a>predicting a player will rupture their Achilles when they will not — has</span>
+<span id="cb2-137"><a href="#cb2-137" aria-hidden="true" tabindex="-1"></a>a prohibitively high cost. Benching a star player unnecessarily costs</span>
+<span id="cb2-138"><a href="#cb2-138" aria-hidden="true" tabindex="-1"></a>wins, affects salary negotiations, and erodes trust in the model. A</span>
+<span id="cb2-139"><a href="#cb2-139" aria-hidden="true" tabindex="-1"></a>binary classifier with a 0.8% positive class cannot produce False</span>
+<span id="cb2-140"><a href="#cb2-140" aria-hidden="true" tabindex="-1"></a>Positive rates that are operationally acceptable, regardless of threshold</span>
+<span id="cb2-141"><a href="#cb2-141" aria-hidden="true" tabindex="-1"></a>tuning.</span>
+<span id="cb2-142"><a href="#cb2-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-143"><a href="#cb2-143" aria-hidden="true" tabindex="-1"></a>The ask was to rethink the target variable entirely: *"What information</span>
+<span id="cb2-144"><a href="#cb2-144" aria-hidden="true" tabindex="-1"></a>would actually be actionable for a coach or GM?"*</span>
+<span id="cb2-145"><a href="#cb2-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-146"><a href="#cb2-146" aria-hidden="true" tabindex="-1"></a>**Our response:**</span>
+<span id="cb2-147"><a href="#cb2-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-148"><a href="#cb2-148" aria-hidden="true" tabindex="-1"></a>We pivoted the target from a binary Achilles flag to <span class="in">`pct_games_missed`</span></span>
+<span id="cb2-149"><a href="#cb2-149" aria-hidden="true" tabindex="-1"></a>— a continuous measure computed as:</span>
+<span id="cb2-150"><a href="#cb2-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-151"><a href="#cb2-151" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-152"><a href="#cb2-152" aria-hidden="true" tabindex="-1"></a><span class="in">pct_games_missed = games_missed / games_on_roster</span></span>
+<span id="cb2-153"><a href="#cb2-153" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-154"><a href="#cb2-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-155"><a href="#cb2-155" aria-hidden="true" tabindex="-1"></a>This reframe resolved several problems simultaneously:</span>
+<span id="cb2-156"><a href="#cb2-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-157"><a href="#cb2-157" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**No class imbalance:** Regression on a continuous <span class="co">[</span><span class="ot">0, 1</span><span class="co">]</span> target</span>
+<span id="cb2-158"><a href="#cb2-158" aria-hidden="true" tabindex="-1"></a>  eliminates the rare-event problem structurally, not through sampling.</span>
+<span id="cb2-159"><a href="#cb2-159" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Actionable at any threshold:** A GM can apply their own risk</span>
+<span id="cb2-160"><a href="#cb2-160" aria-hidden="true" tabindex="-1"></a>  tolerance. Predicting 25% games missed is meaningfully different from</span>
+<span id="cb2-161"><a href="#cb2-161" aria-hidden="true" tabindex="-1"></a>  5% without forcing a binary alarm.</span>
+<span id="cb2-162"><a href="#cb2-162" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Broader injury spectrum:** <span class="in">`pct_games_missed`</span> captures all</span>
+<span id="cb2-163"><a href="#cb2-163" aria-hidden="true" tabindex="-1"></a>  load-related absences (tendinitis, hamstrings, knee inflammation) —</span>
+<span id="cb2-164"><a href="#cb2-164" aria-hidden="true" tabindex="-1"></a>  injuries sharing the same upstream risk factors as Achilles ruptures.</span>
+<span id="cb2-165"><a href="#cb2-165" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Avoids survivorship on the outcome side:** Games missed is</span>
+<span id="cb2-166"><a href="#cb2-166" aria-hidden="true" tabindex="-1"></a>  observable from roster records even when a player appears in no box</span>
+<span id="cb2-167"><a href="#cb2-167" aria-hidden="true" tabindex="-1"></a>  scores.</span>
+<span id="cb2-168"><a href="#cb2-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-169"><a href="#cb2-169" aria-hidden="true" tabindex="-1"></a>We also dropped NCAA data at this stage. Computing <span class="in">`pct_games_missed`</span></span>
+<span id="cb2-170"><a href="#cb2-170" aria-hidden="true" tabindex="-1"></a>requires game-level roster records that the Kaggle NCAA dataset (which is</span>
+<span id="cb2-171"><a href="#cb2-171" aria-hidden="true" tabindex="-1"></a>season-level only) cannot provide.</span>
+<span id="cb2-172"><a href="#cb2-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-173"><a href="#cb2-173" aria-hidden="true" tabindex="-1"></a>**Code change:** <span class="in">`00_Data_Setup.R`</span> → target construction block;</span>
+<span id="cb2-174"><a href="#cb2-174" aria-hidden="true" tabindex="-1"></a><span class="in">`Part2_Predictive.R`</span> → recipe, model spec, and metric suite updated from</span>
+<span id="cb2-175"><a href="#cb2-175" aria-hidden="true" tabindex="-1"></a><span class="in">`roc_auc/accuracy`</span> to <span class="in">`rmse/mae/rsq`</span>.</span>
+<span id="cb2-176"><a href="#cb2-176" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb2-177"><a href="#cb2-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-178"><a href="#cb2-178" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb2-179"><a href="#cb2-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-180"><a href="#cb2-180" aria-hidden="true" tabindex="-1"></a><span class="fu">### Feedback 2.2 — Address data leakage and temporal integrity</span></span>
+<span id="cb2-181"><a href="#cb2-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-182"><a href="#cb2-182" aria-hidden="true" tabindex="-1"></a>::: {.revision-entry .resolved}</span>
+<span id="cb2-183"><a href="#cb2-183" aria-hidden="true" tabindex="-1"></a>**Status:** 🟢 Resolved in v1.3</span>
+<span id="cb2-184"><a href="#cb2-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-185"><a href="#cb2-185" aria-hidden="true" tabindex="-1"></a>**Feedback received:**</span>
+<span id="cb2-186"><a href="#cb2-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-187"><a href="#cb2-187" aria-hidden="true" tabindex="-1"></a>A deeper review of the feature engineering pipeline surfaced several</span>
+<span id="cb2-188"><a href="#cb2-188" aria-hidden="true" tabindex="-1"></a>sources of implicit data leakage — cases where the model had access to</span>
+<span id="cb2-189"><a href="#cb2-189" aria-hidden="true" tabindex="-1"></a>information that would not exist at prediction time in a real deployment.</span>
+<span id="cb2-190"><a href="#cb2-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-191"><a href="#cb2-191" aria-hidden="true" tabindex="-1"></a>**Our response:**</span>
+<span id="cb2-192"><a href="#cb2-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-193"><a href="#cb2-193" aria-hidden="true" tabindex="-1"></a>We identified and fixed three leakage sources:</span>
+<span id="cb2-194"><a href="#cb2-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-195"><a href="#cb2-195" aria-hidden="true" tabindex="-1"></a>**1. Contemporaneous features used as predictors**</span>
+<span id="cb2-196"><a href="#cb2-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-197"><a href="#cb2-197" aria-hidden="true" tabindex="-1"></a><span class="in">`ever_injured`</span> and <span class="in">`cum_achilles_injuries`</span> were constructed from the</span>
+<span id="cb2-198"><a href="#cb2-198" aria-hidden="true" tabindex="-1"></a>full injury history, including future observations within the dataset</span>
+<span id="cb2-199"><a href="#cb2-199" aria-hidden="true" tabindex="-1"></a>window. All cumulative and rolling features are now strictly lagged —</span>
+<span id="cb2-200"><a href="#cb2-200" aria-hidden="true" tabindex="-1"></a>they only aggregate data from prior time periods.</span>
+<span id="cb2-201"><a href="#cb2-201" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-202"><a href="#cb2-202" aria-hidden="true" tabindex="-1"></a>**2. Random train/test split**</span>
+<span id="cb2-203"><a href="#cb2-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-204"><a href="#cb2-204" aria-hidden="true" tabindex="-1"></a>An 80/20 random split allows future seasons to appear in the training</span>
+<span id="cb2-205"><a href="#cb2-205" aria-hidden="true" tabindex="-1"></a>set, making the model optimistically overfit to temporal patterns it</span>
+<span id="cb2-206"><a href="#cb2-206" aria-hidden="true" tabindex="-1"></a>would not have at deployment. We replaced this with a **temporal split**:</span>
+<span id="cb2-207"><a href="#cb2-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-208"><a href="#cb2-208" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Train:** 2018–2021</span>
+<span id="cb2-209"><a href="#cb2-209" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Test:** 2022–2025</span>
+<span id="cb2-210"><a href="#cb2-210" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-211"><a href="#cb2-211" aria-hidden="true" tabindex="-1"></a>This honestly simulates real-world deployment: predict next-season risk</span>
+<span id="cb2-212"><a href="#cb2-212" aria-hidden="true" tabindex="-1"></a>from prior seasons.</span>
+<span id="cb2-213"><a href="#cb2-213" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-214"><a href="#cb2-214" aria-hidden="true" tabindex="-1"></a>**3. hoopR `season_type` is numeric, not a string**</span>
+<span id="cb2-215"><a href="#cb2-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-216"><a href="#cb2-216" aria-hidden="true" tabindex="-1"></a><span class="in">`season_type == 2`</span> means Regular Season in hoopR's API. Filtering with</span>
+<span id="cb2-217"><a href="#cb2-217" aria-hidden="true" tabindex="-1"></a><span class="in">`season_type == "Regular Season"`</span> silently returned 0 rows — a critical</span>
+<span id="cb2-218"><a href="#cb2-218" aria-hidden="true" tabindex="-1"></a>bug that went undetected until we cross-checked row counts. We restricted</span>
+<span id="cb2-219"><a href="#cb2-219" aria-hidden="true" tabindex="-1"></a>the dataset to Regular Season only (<span class="in">`season_type == 2`</span>) to eliminate</span>
+<span id="cb2-220"><a href="#cb2-220" aria-hidden="true" tabindex="-1"></a>playoff confounding.</span>
+<span id="cb2-221"><a href="#cb2-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-222"><a href="#cb2-222" aria-hidden="true" tabindex="-1"></a>**Code change:** <span class="in">`00_Data_Setup.R`</span> → feature engineering block (all</span>
+<span id="cb2-223"><a href="#cb2-223" aria-hidden="true" tabindex="-1"></a><span class="in">`lag()`</span> wrappers); <span class="in">`Part2_Predictive.R`</span> → replaced <span class="in">`initial_split()`</span> with</span>
+<span id="cb2-224"><a href="#cb2-224" aria-hidden="true" tabindex="-1"></a>manual temporal filter; <span class="in">`season_type`</span> filter corrected throughout.</span>
+<span id="cb2-225"><a href="#cb2-225" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb2-226"><a href="#cb2-226" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-227"><a href="#cb2-227" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb2-228"><a href="#cb2-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-229"><a href="#cb2-229" aria-hidden="true" tabindex="-1"></a><span class="fu">## Iterative Self-Revisions (Part 2 Pipeline)</span></span>
+<span id="cb2-230"><a href="#cb2-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-231"><a href="#cb2-231" aria-hidden="true" tabindex="-1"></a>These revisions were self-initiated after committing to <span class="in">`pct_games_missed`</span>.</span>
+<span id="cb2-232"><a href="#cb2-232" aria-hidden="true" tabindex="-1"></a>They emerged from interrogating model behaviour and feature importance</span>
+<span id="cb2-233"><a href="#cb2-233" aria-hidden="true" tabindex="-1"></a>outputs rather than from direct supervisor feedback.</span>
+<span id="cb2-234"><a href="#cb2-234" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-235"><a href="#cb2-235" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb2-236"><a href="#cb2-236" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-237"><a href="#cb2-237" aria-hidden="true" tabindex="-1"></a><span class="fu">### Revision A — Survivorship bias in load features</span></span>
+<span id="cb2-238"><a href="#cb2-238" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-239"><a href="#cb2-239" aria-hidden="true" tabindex="-1"></a>::: {.revision-entry .resolved}</span>
+<span id="cb2-240"><a href="#cb2-240" aria-hidden="true" tabindex="-1"></a>**Status:** 🟢 Resolved in v1.1</span>
+<span id="cb2-241"><a href="#cb2-241" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-242"><a href="#cb2-242" aria-hidden="true" tabindex="-1"></a>**Problem identified:**</span>
+<span id="cb2-243"><a href="#cb2-243" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-244"><a href="#cb2-244" aria-hidden="true" tabindex="-1"></a>Our initial feature set included <span class="in">`total_minutes`</span>, <span class="in">`back_to_back_games`</span>,</span>
+<span id="cb2-245"><a href="#cb2-245" aria-hidden="true" tabindex="-1"></a>and <span class="in">`avg_days_rest`</span> as load proxies. These all suffer from the same</span>
+<span id="cb2-246"><a href="#cb2-246" aria-hidden="true" tabindex="-1"></a>survivorship bias paradox: **healthy players play more**, so these values</span>
+<span id="cb2-247"><a href="#cb2-247" aria-hidden="true" tabindex="-1"></a>are naturally higher for players who do *not* get injured. When regressed</span>
+<span id="cb2-248"><a href="#cb2-248" aria-hidden="true" tabindex="-1"></a>against <span class="in">`pct_games_missed`</span>, the model learned a perverse negative</span>
+<span id="cb2-249"><a href="#cb2-249" aria-hidden="true" tabindex="-1"></a>relationship — more minutes predicted fewer missed games — which is</span>
+<span id="cb2-250"><a href="#cb2-250" aria-hidden="true" tabindex="-1"></a>exactly backwards from our hypothesis and is an artefact of the data</span>
+<span id="cb2-251"><a href="#cb2-251" aria-hidden="true" tabindex="-1"></a>generating process.</span>
+<span id="cb2-252"><a href="#cb2-252" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-253"><a href="#cb2-253" aria-hidden="true" tabindex="-1"></a>**What we changed:**</span>
+<span id="cb2-254"><a href="#cb2-254" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-255"><a href="#cb2-255" aria-hidden="true" tabindex="-1"></a>Removed all three contemporaneous load features. Retained only:</span>
+<span id="cb2-256"><a href="#cb2-256" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-257"><a href="#cb2-257" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`avg_rolling_minutes_3`</span>: average minutes played in the 3 games *prior*</span>
+<span id="cb2-258"><a href="#cb2-258" aria-hidden="true" tabindex="-1"></a>  to any given observation, lagged by one period. This captures</span>
+<span id="cb2-259"><a href="#cb2-259" aria-hidden="true" tabindex="-1"></a>  pre-injury workload without contaminating the signal with same-period</span>
+<span id="cb2-260"><a href="#cb2-260" aria-hidden="true" tabindex="-1"></a>  playing time that is mechanically high for healthy players.</span>
+<span id="cb2-261"><a href="#cb2-261" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-262"><a href="#cb2-262" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Feature <span class="pp">|</span> Action <span class="pp">|</span> Reason <span class="pp">|</span></span>
+<span id="cb2-263"><a href="#cb2-263" aria-hidden="true" tabindex="-1"></a><span class="pp">|---------|--------|--------|</span></span>
+<span id="cb2-264"><a href="#cb2-264" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`total_minutes`</span> <span class="pp">|</span> Removed <span class="pp">|</span> Survivorship-biased <span class="pp">|</span></span>
+<span id="cb2-265"><a href="#cb2-265" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`back_to_back_games`</span> <span class="pp">|</span> Removed <span class="pp">|</span> Survivorship-biased <span class="pp">|</span></span>
+<span id="cb2-266"><a href="#cb2-266" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`avg_days_rest`</span> <span class="pp">|</span> Removed <span class="pp">|</span> Injured players "rest" more because they're inactive <span class="pp">|</span></span>
+<span id="cb2-267"><a href="#cb2-267" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`avg_rolling_minutes_3`</span> <span class="pp">|</span> Retained (lagged) <span class="pp">|</span> Pre-injury load proxy; uses only prior-period data <span class="pp">|</span></span>
+<span id="cb2-268"><a href="#cb2-268" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-269"><a href="#cb2-269" aria-hidden="true" tabindex="-1"></a>**Code change:** <span class="in">`00_Data_Setup.R`</span> → <span class="in">`create_features()`</span> function;</span>
+<span id="cb2-270"><a href="#cb2-270" aria-hidden="true" tabindex="-1"></a><span class="in">`Part2_Predictive.R`</span> → recipe <span class="in">`step_rm()`</span> updated.</span>
+<span id="cb2-271"><a href="#cb2-271" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb2-272"><a href="#cb2-272" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-273"><a href="#cb2-273" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb2-274"><a href="#cb2-274" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-275"><a href="#cb2-275" aria-hidden="true" tabindex="-1"></a><span class="fu">### Revision B — Dropping the hurdle model</span></span>
+<span id="cb2-276"><a href="#cb2-276" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-277"><a href="#cb2-277" aria-hidden="true" tabindex="-1"></a>::: {.revision-entry .resolved}</span>
+<span id="cb2-278"><a href="#cb2-278" aria-hidden="true" tabindex="-1"></a>**Status:** 🟢 Resolved in v1.2</span>
+<span id="cb2-279"><a href="#cb2-279" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-280"><a href="#cb2-280" aria-hidden="true" tabindex="-1"></a>**Problem identified:**</span>
+<span id="cb2-281"><a href="#cb2-281" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-282"><a href="#cb2-282" aria-hidden="true" tabindex="-1"></a>After moving to <span class="in">`pct_games_missed`</span>, we initially adopted a two-stage</span>
+<span id="cb2-283"><a href="#cb2-283" aria-hidden="true" tabindex="-1"></a>hurdle model:</span>
+<span id="cb2-284"><a href="#cb2-284" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-285"><a href="#cb2-285" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Stage A (Classification):** Does this player miss any games? (binary)</span>
+<span id="cb2-286"><a href="#cb2-286" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Stage B (Regression):** Given they miss games, what percentage? (continuous)</span>
+<span id="cb2-287"><a href="#cb2-287" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-288"><a href="#cb2-288" aria-hidden="true" tabindex="-1"></a>The motivation was that <span class="in">`pct_games_missed`</span> is zero-inflated — many</span>
+<span id="cb2-289"><a href="#cb2-289" aria-hidden="true" tabindex="-1"></a>player-seasons have zero missed games. A hurdle model seemed statistically</span>
+<span id="cb2-290"><a href="#cb2-290" aria-hidden="true" tabindex="-1"></a>principled.</span>
+<span id="cb2-291"><a href="#cb2-291" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-292"><a href="#cb2-292" aria-hidden="true" tabindex="-1"></a>In practice, Stage A was uninformative. Approximately **87–94% of</span>
+<span id="cb2-293"><a href="#cb2-293" aria-hidden="true" tabindex="-1"></a>player-seasons** had <span class="in">`pct_games_missed &gt; 0`</span>, meaning the zero hurdle was</span>
+<span id="cb2-294"><a href="#cb2-294" aria-hidden="true" tabindex="-1"></a>almost never triggered. Stage A learned to predict the majority class</span>
+<span id="cb2-295"><a href="#cb2-295" aria-hidden="true" tabindex="-1"></a>with high confidence and contributed nothing beyond what a direct</span>
+<span id="cb2-296"><a href="#cb2-296" aria-hidden="true" tabindex="-1"></a>regression model already captured. Adding it introduced substantial</span>
+<span id="cb2-297"><a href="#cb2-297" aria-hidden="true" tabindex="-1"></a>pipeline complexity (two separate model specs, two workflows, a</span>
+<span id="cb2-298"><a href="#cb2-298" aria-hidden="true" tabindex="-1"></a>prediction assembly step) for no performance gain.</span>
+<span id="cb2-299"><a href="#cb2-299" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-300"><a href="#cb2-300" aria-hidden="true" tabindex="-1"></a>**What we changed:**</span>
+<span id="cb2-301"><a href="#cb2-301" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-302"><a href="#cb2-302" aria-hidden="true" tabindex="-1"></a>Dropped the hurdle architecture entirely. Replaced with a single</span>
+<span id="cb2-303"><a href="#cb2-303" aria-hidden="true" tabindex="-1"></a>XGBoost regression model trained directly on <span class="in">`pct_games_missed`</span>. This</span>
+<span id="cb2-304"><a href="#cb2-304" aria-hidden="true" tabindex="-1"></a>simplified the pipeline and improved interpretability.</span>
+<span id="cb2-305"><a href="#cb2-305" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-306"><a href="#cb2-306" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Architecture <span class="pp">|</span> Verdict <span class="pp">|</span></span>
+<span id="cb2-307"><a href="#cb2-307" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|</span></span>
+<span id="cb2-308"><a href="#cb2-308" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Hurdle (Stage A classify → Stage B regress) <span class="pp">|</span> Dropped — Stage A uninformative at ~87–94% non-zero rate <span class="pp">|</span></span>
+<span id="cb2-309"><a href="#cb2-309" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Direct XGBoost regression <span class="pp">|</span> Adopted — cleaner, faster, better R² <span class="pp">|</span></span>
+<span id="cb2-310"><a href="#cb2-310" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-311"><a href="#cb2-311" aria-hidden="true" tabindex="-1"></a>**Code change:** <span class="in">`Part2_Predictive.R`</span> → removed <span class="in">`Part2_Predictive_Hurdle.R`</span></span>
+<span id="cb2-312"><a href="#cb2-312" aria-hidden="true" tabindex="-1"></a>dependency; single <span class="in">`xgb_workflow`</span> fitted directly.</span>
+<span id="cb2-313"><a href="#cb2-313" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb2-314"><a href="#cb2-314" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-315"><a href="#cb2-315" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb2-316"><a href="#cb2-316" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-317"><a href="#cb2-317" aria-hidden="true" tabindex="-1"></a><span class="fu">## Self-Identified Limitations</span></span>
+<span id="cb2-318"><a href="#cb2-318" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-319"><a href="#cb2-319" aria-hidden="true" tabindex="-1"></a>Limitations the team identified independently — not raised by the</span>
+<span id="cb2-320"><a href="#cb2-320" aria-hidden="true" tabindex="-1"></a>supervisor — documented for transparency.</span>
+<span id="cb2-321"><a href="#cb2-321" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-322"><a href="#cb2-322" aria-hidden="true" tabindex="-1"></a><span class="fu">### L1 — Scope of `pct_games_missed`</span></span>
+<span id="cb2-323"><a href="#cb2-323" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-324"><a href="#cb2-324" aria-hidden="true" tabindex="-1"></a>::: {.revision-entry .wontfix}</span>
+<span id="cb2-325"><a href="#cb2-325" aria-hidden="true" tabindex="-1"></a>**Status:** ⚪ Acknowledged / By design</span>
+<span id="cb2-326"><a href="#cb2-326" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-327"><a href="#cb2-327" aria-hidden="true" tabindex="-1"></a><span class="in">`pct_games_missed`</span> captures all absence reasons — including rest</span>
+<span id="cb2-328"><a href="#cb2-328" aria-hidden="true" tabindex="-1"></a>decisions and suspensions — not only injury-related absences. We</span>
+<span id="cb2-329"><a href="#cb2-329" aria-hidden="true" tabindex="-1"></a>document this explicitly in the Part 2 methodology section. The Achilles</span>
+<span id="cb2-330"><a href="#cb2-330" aria-hidden="true" tabindex="-1"></a>spike motivates the research question; the model answers it across the</span>
+<span id="cb2-331"><a href="#cb2-331" aria-hidden="true" tabindex="-1"></a>full spectrum of load-related unavailability. This is a deliberate</span>
+<span id="cb2-332"><a href="#cb2-332" aria-hidden="true" tabindex="-1"></a>design choice that trades specificity for tractability.</span>
+<span id="cb2-333"><a href="#cb2-333" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb2-334"><a href="#cb2-334" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-335"><a href="#cb2-335" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb2-336"><a href="#cb2-336" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-337"><a href="#cb2-337" aria-hidden="true" tabindex="-1"></a><span class="fu">### L2 — No biomechanical or training load data</span></span>
+<span id="cb2-338"><a href="#cb2-338" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-339"><a href="#cb2-339" aria-hidden="true" tabindex="-1"></a>::: {.revision-entry .wontfix}</span>
+<span id="cb2-340"><a href="#cb2-340" aria-hidden="true" tabindex="-1"></a>**Status:** ⚪ Acknowledged / Out of scope</span>
+<span id="cb2-341"><a href="#cb2-341" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-342"><a href="#cb2-342" aria-hidden="true" tabindex="-1"></a>Tendon stiffness, landing mechanics, and fatigue-induced movement</span>
+<span id="cb2-343"><a href="#cb2-343" aria-hidden="true" tabindex="-1"></a>compensations are among the strongest known predictors of Achilles</span>
+<span id="cb2-344"><a href="#cb2-344" aria-hidden="true" tabindex="-1"></a>ruptures <span class="co">[</span><span class="ot">@Petway2022</span><span class="co">]</span> but are not captured in publicly available box</span>
+<span id="cb2-345"><a href="#cb2-345" aria-hidden="true" tabindex="-1"></a>score data. Our features are proxies. The NBA does collect this data</span>
+<span id="cb2-346"><a href="#cb2-346" aria-hidden="true" tabindex="-1"></a>internally (via second-spectrum tracking and wearables), but it is not</span>
+<span id="cb2-347"><a href="#cb2-347" aria-hidden="true" tabindex="-1"></a>publicly accessible. This is noted in the limitations sections of both</span>
+<span id="cb2-348"><a href="#cb2-348" aria-hidden="true" tabindex="-1"></a>the website and the submission draft.</span>
+<span id="cb2-349"><a href="#cb2-349" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb2-350"><a href="#cb2-350" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-351"><a href="#cb2-351" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb2-352"><a href="#cb2-352" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-353"><a href="#cb2-353" aria-hidden="true" tabindex="-1"></a><span class="fu">### L3 — hoopR data reliability before 2018</span></span>
+<span id="cb2-354"><a href="#cb2-354" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-355"><a href="#cb2-355" aria-hidden="true" tabindex="-1"></a>::: {.revision-entry .resolved}</span>
+<span id="cb2-356"><a href="#cb2-356" aria-hidden="true" tabindex="-1"></a>**Status:** 🟢 Resolved in v1.3 (restriction applied)</span>
+<span id="cb2-357"><a href="#cb2-357" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-358"><a href="#cb2-358" aria-hidden="true" tabindex="-1"></a>hoopR coverage before the 2018 season produces artificially low</span>
+<span id="cb2-359"><a href="#cb2-359" aria-hidden="true" tabindex="-1"></a><span class="in">`pct_games_missed`</span> values, likely due to incomplete roster transaction</span>
+<span id="cb2-360"><a href="#cb2-360" aria-hidden="true" tabindex="-1"></a>records in earlier API data. We restricted the full pipeline to</span>
+<span id="cb2-361"><a href="#cb2-361" aria-hidden="true" tabindex="-1"></a>2018–2025 to ensure target variable integrity. Earlier seasons are</span>
+<span id="cb2-362"><a href="#cb2-362" aria-hidden="true" tabindex="-1"></a>retained in visualisations only (the injury spike charts) where they</span>
+<span id="cb2-363"><a href="#cb2-363" aria-hidden="true" tabindex="-1"></a>serve a descriptive rather than modelling role.</span>
+<span id="cb2-364"><a href="#cb2-364" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb2-365"><a href="#cb2-365" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-366"><a href="#cb2-366" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb2-367"><a href="#cb2-367" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-368"><a href="#cb2-368" aria-hidden="true" tabindex="-1"></a><span class="fu">### L4 — No positional adjustment</span></span>
+<span id="cb2-369"><a href="#cb2-369" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-370"><a href="#cb2-370" aria-hidden="true" tabindex="-1"></a>::: {.revision-entry .pending}</span>
+<span id="cb2-371"><a href="#cb2-371" aria-hidden="true" tabindex="-1"></a>**Status:** 🟡 In Progress — planned for future work</span>
+<span id="cb2-372"><a href="#cb2-372" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-373"><a href="#cb2-373" aria-hidden="true" tabindex="-1"></a>A centre and a point guard face different Achilles risk profiles at the</span>
+<span id="cb2-374"><a href="#cb2-374" aria-hidden="true" tabindex="-1"></a>same minute load, due to differences in movement patterns, jump</span>
+<span id="cb2-375"><a href="#cb2-375" aria-hidden="true" tabindex="-1"></a>frequency, and court positioning. Player position is not currently</span>
+<span id="cb2-376"><a href="#cb2-376" aria-hidden="true" tabindex="-1"></a>included as a feature. Adding <span class="in">`athlete_position_abbreviation`</span> as a</span>
+<span id="cb2-377"><a href="#cb2-377" aria-hidden="true" tabindex="-1"></a>categorical variable in the recipe (via <span class="in">`step_dummy()`</span>) is</span>
+<span id="cb2-378"><a href="#cb2-378" aria-hidden="true" tabindex="-1"></a>straightforward and is noted as a meaningful next step.</span>
+<span id="cb2-379"><a href="#cb2-379" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb2-380"><a href="#cb2-380" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-381"><a href="#cb2-381" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb2-382"><a href="#cb2-382" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-383"><a href="#cb2-383" aria-hidden="true" tabindex="-1"></a><span class="fu">## Reflection</span></span>
+<span id="cb2-384"><a href="#cb2-384" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-385"><a href="#cb2-385" aria-hidden="true" tabindex="-1"></a>The most significant revision in this project was the pivot from a</span>
+<span id="cb2-386"><a href="#cb2-386" aria-hidden="true" tabindex="-1"></a>binary Achilles injury classifier to <span class="in">`pct_games_missed`</span> as a continuous</span>
+<span id="cb2-387"><a href="#cb2-387" aria-hidden="true" tabindex="-1"></a>regression target. What began as a statistical fix for class imbalance</span>
+<span id="cb2-388"><a href="#cb2-388" aria-hidden="true" tabindex="-1"></a>turned out to be a fundamental reframing of the research question — from</span>
+<span id="cb2-389"><a href="#cb2-389" aria-hidden="true" tabindex="-1"></a>*"did this player rupture their Achilles?"* to *"how available is this</span>
+<span id="cb2-390"><a href="#cb2-390" aria-hidden="true" tabindex="-1"></a>player likely to be?"*. That shift made the model genuinely more useful</span>
+<span id="cb2-391"><a href="#cb2-391" aria-hidden="true" tabindex="-1"></a>to a coaching or front-office audience, and it resolved the rare-event</span>
+<span id="cb2-392"><a href="#cb2-392" aria-hidden="true" tabindex="-1"></a>problem structurally rather than by papering over it with resampling. I think I fell in love with my model. Well, I mean, **"there you go"**... I learn, I learn...</span>
+<span id="cb2-393"><a href="#cb2-393" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-394"><a href="#cb2-394" aria-hidden="true" tabindex="-1"></a>If I were starting again, I would build the target variable first and</span>
+<span id="cb2-395"><a href="#cb2-395" aria-hidden="true" tabindex="-1"></a>work backwards to the feature set, rather than inheriting features</span>
+<span id="cb2-396"><a href="#cb2-396" aria-hidden="true" tabindex="-1"></a>designed for binary classification and retrofitting them to a regression</span>
+<span id="cb2-397"><a href="#cb2-397" aria-hidden="true" tabindex="-1"></a>task. The survivorship bias in load features (where <span class="in">`total_minutes`</span></span>
+<span id="cb2-398"><a href="#cb2-398" aria-hidden="true" tabindex="-1"></a>perversely *negatively* predicted missed games) was a direct consequence</span>
+<span id="cb2-399"><a href="#cb2-399" aria-hidden="true" tabindex="-1"></a>of that mismatch, and it cost significant debugging time.</span>
+<span id="cb2-400"><a href="#cb2-400" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-401"><a href="#cb2-401" aria-hidden="true" tabindex="-1"></a>The finding that surprised us most was how uninformative Stage A of the</span>
+<span id="cb2-402"><a href="#cb2-402" aria-hidden="true" tabindex="-1"></a>hurdle model turned out to be. Zero-inflated data is a textbook</span>
+<span id="cb2-403"><a href="#cb2-403" aria-hidden="true" tabindex="-1"></a>motivation for hurdle models, but in our data the "zero" class was rare</span>
+<span id="cb2-404"><a href="#cb2-404" aria-hidden="true" tabindex="-1"></a>enough (~6–13% of player-seasons) that the hurdle added complexity</span>
+<span id="cb2-405"><a href="#cb2-405" aria-hidden="true" tabindex="-1"></a>without signal. Sometimes the principled statistical solution and the</span>
+<span id="cb2-406"><a href="#cb2-406" aria-hidden="true" tabindex="-1"></a>practically correct one diverge — and interrogating model behaviour,</span>
+<span id="cb2-407"><a href="#cb2-407" aria-hidden="true" tabindex="-1"></a>rather than deferring to methodological convention, is what surfaced</span>
+<span id="cb2-408"><a href="#cb2-408" aria-hidden="true" tabindex="-1"></a>that.</span>
+<span id="cb2-409"><a href="#cb2-409" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-410"><a href="#cb2-410" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb2-411"><a href="#cb2-411" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-412"><a href="#cb2-412" aria-hidden="true" tabindex="-1"></a><span class="fu">## References</span></span>
+<span id="cb2-413"><a href="#cb2-413" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-414"><a href="#cb2-414" aria-hidden="true" tabindex="-1"></a>Petway, A. J., Jordan, M. J., Epsley, S., &amp; Anloague, P. A. (2022).</span>
+<span id="cb2-415"><a href="#cb2-415" aria-hidden="true" tabindex="-1"></a>Mechanisms of Achilles tendon rupture in National Basketball Association</span>
+<span id="cb2-416"><a href="#cb2-416" aria-hidden="true" tabindex="-1"></a>players. *Journal of Applied Biomechanics, 38*(6), 398–403.</span>
+<span id="cb2-417"><a href="#cb2-417" aria-hidden="true" tabindex="-1"></a><span class="ot">&lt;https://doi.org/10.1123/jab.2022-0088&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Keziah Vickraman · Capstone 2025</p>
+</div>   
+    <div class="nav-footer-center">
+<p><em>We know load caused the spike. Now we know who’s next.</em></p>
+</div>
+    <div class="nav-footer-right">
+<p>Built with <a href="https://quarto.org">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

@@ -1,0 +1,163 @@
+---
+title: "The Dashboard"
+subtitle: "Bench the Instinct — NBA Player Risk Tool for Coaches & GMs"
+description: "An interactive load management dashboard predicting which NBA players are at risk of missing significant game time"
+toc: false
+page-layout: full
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+::: {.hero-banner}
+# Bench the Instinct 🏀
+
+::: {.badge-red}
+INTERACTIVE TOOL
+:::
+
+<br>
+
+*"We know load caused the spike. Now we know who's next. The question is whether
+the league acts on data — or waits for the next Tatum."*
+
+<br>
+
+Built for **coaches, GMs, and medical staff** who need a data-backed answer to
+the question they have been asking on instinct for years: *should we rest this player?*
+:::
+
+---
+
+## What the Dashboard Does
+
+::: {.grid}
+
+::: {.g-col-4}
+::: {.part-card}
+### 🦵 The Spike
+Visual context for why this tool exists. The 2024–25 rupture spike, load trends over time, and the confirmed injury record since 1990.
+:::
+:::
+
+::: {.g-col-4}
+::: {.part-card .red}
+### 🔮 Who's Next?
+Filterable risk table of 2024 NBA players ranked by predicted % of next season's games missed. Restricted to meaningful contributors (≥20 rolling minutes).
+:::
+:::
+
+::: {.g-col-4}
+::: {.part-card}
+### ⚡ Bench the Instinct
+The load simulator. Enter a player's rolling minutes, prior absence history, and career tenure. Get a predicted risk score. Compare scenarios before making the call.
+:::
+:::
+
+:::
+
+---
+
+## Launch the Dashboard
+
+::: {.text-center style="padding: 40px 0;"}
+
+[🏀 Open Full Dashboard](https://7tmnpt-keziah-vickraman.shinyapps.io/nba-achilles/){.btn .btn-danger .btn-lg target="_blank" style="font-size: 1.2rem; padding: 16px 40px; margin-right: 16px;"}
+
+[📄 Download Academic Paper](submission_final_042026.pdf){.btn .btn-primary .btn-lg target="_blank" style="font-size: 1.2rem; padding: 16px 40px;"}
+
+:::
+
+::: {.callout-note}
+## Running the dashboard locally
+If you have R installed, you can run the dashboard locally:
+```r
+# Install dependencies
+pacman::p_load(shiny, tidyverse, scales, ggthemes, DT, glue, vip)
+
+# Load the pre-computed model results
+load("Part2_Predictive_Results.RData")
+load("Part1_Causal_Results.RData")
+source("00_Data_Setup.R")
+
+# Launch
+shiny::runApp("Capstone_Shiny_PREDICTION.R")
+```
+:::
+
+---
+
+## In-Page Preview {#preview}
+
+::: {.callout-tip}
+## Tip
+The embedded preview below may take 10–15 seconds to load. For the best experience
+use the **Open Full Dashboard** button above.
+:::
+
+```{=html}
+<div style="border: 2px solid #17408B; border-radius: 8px; overflow: hidden; margin: 20px 0;">
+  <div style="background: #17408B; padding: 8px 16px; color: white; font-family: 'Roboto Condensed', sans-serif; font-weight: 700;">
+    🏀 Bench the Instinct — NBA Risk Dashboard
+    <span style="float:right; font-size: 0.85rem; font-weight: 400; opacity: 0.8;">
+      Powered by R Shiny
+    </span>
+  </div>
+  <iframe 
+    src="https://7tmnpt-keziah-vickraman.shinyapps.io/nba-achilles/" 
+    width="100%" 
+    height="800px" 
+    frameborder="0"
+    style="display: block;">
+  </iframe>
+</div>
+```
+
+---
+
+## Model at a Glance
+
+```{r model-summary}
+#| label: tbl-model-summary
+#| tbl-cap: "Model performance on held-out test set (2022–2025)"
+
+tibble::tribble(
+  ~Metric,  ~Value,   ~`Plain English`,
+  "R²",     "0.747",  "Explains 74.7% of variance in games missed",
+  "RMSE",   "0.133",  "Average prediction error ~11 games on 82-game scale",
+  "MAE",    "0.100",  "Median prediction error ~8 games on 82-game scale"
+) |>
+  knitr::kable(align = c("l", "r", "l"))
+```
+
+::: {.callout-important}
+## Honest limitations
+`pct_games_missed` captures **all** absence reasons — Achilles injuries, other injuries,
+rest decisions, and suspensions. The model predicts load-related game unavailability
+as a proxy for injury burden. It does not diagnose specific injury types.
+
+`back_to_back_games` and `total_minutes` were removed from the model after PDP
+analysis revealed survivorship bias — healthy players accumulate more of both,
+so the features had inverted relationships with the outcome. The primary load
+predictor is `avg_rolling_minutes_3` (lagged 3-game rolling average minutes),
+which correctly shows a positive monotonic relationship with games missed.
+
+Full methodology in the [academic paper](submission.qmd).
+:::
+
+---
+
+## Who Should Use This
+
+| Role | How to use it |
+|---|---|
+| **Head coach** | Run the what-if simulator before a heavy road trip — see how reduced minutes changes predicted risk |
+| **GM / front office** | Filter the risk table before contract decisions — who is likely to miss 20+ games next season? |
+| **Medical / performance staff** | Flag high-risk players for targeted prehabilitation or biomechanical screening |
+| **League operations** | Aggregate risk scores by team to identify scheduling interventions |
+
+---
+
+*Dashboard built in R Shiny · Model: XGBoost regression · Data: hoopR (2018–2025)*
+*Keziah Vickraman · Capstone 2025*
