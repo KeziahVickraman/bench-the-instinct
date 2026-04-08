@@ -347,7 +347,9 @@ feature_imp_VIZ <-
     ),
     caption  = "Model: XGBoost V3 | Train: 2018-2021 | Test: 2022-2025"
   ) +
-  theme_nba()
+  theme_nba()+
+  theme(axis.text.y = element_text(size = 10, color = "black"))
+
 
 feature_imp_VIZ
 
@@ -513,7 +515,8 @@ risk_table_VIZ <-
     fill     = "Risk tier",
     caption  = "Model: XGBoost V3 | Excludes confirmed 2024-25 injured players"
   ) +
-  theme_nba()
+  theme_nba()+
+  theme(axis.text.y = element_text(size = 10, color = "black"))
 
 risk_table_VIZ
 

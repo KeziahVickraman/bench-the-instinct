@@ -3,3 +3,6 @@ all_seasons_NBA_2002_2025.csv
 *_cache/
 *.rdb
 *.rds
+
+/.quarto/
+**/*.quarto_ipynb
