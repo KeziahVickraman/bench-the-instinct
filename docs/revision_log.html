@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Transparent record of supervisor feedback and project iterations">
+<meta name="description" content="Transparent record of Prof’s feedback and project iterations">
 
 <title>Revision Log – Bench the Instinct</title>
 <style>
@@ -196,7 +196,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div>
   <div class="description">
-    Transparent record of supervisor feedback and project iterations
+    Transparent record of Prof’s feedback and project iterations
   </div>
 </div>
 
@@ -236,7 +236,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>This log documents all substantive feedback received on the project, our team’s response to each point, and the version in which it was addressed. Entries are grouped by feedback round and ordered chronologically.</p>
+<p>This log documents all substantive feedback received on the project, the team’s response to each point, and the version in which it was addressed. Entries are grouped by feedback round and ordered chronologically.</p>
 <p><strong>Status tags:</strong> 🟢 Resolved · 🟡 In Progress · ⚪ Acknowledged / By design</p>
 </div>
 </div>
@@ -255,31 +255,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="odd">
 <td>v0.1</td>
 <td>July 2025</td>
-<td>Initial proposal — NBA + NCAA data, binary <code>injured_achilles</code> classifier, random 80/20 split, RF + XGB with SMOTE/ROSE/ADASYN · <a href="Vickraman_Tan_Said_FINAL.html">📄 Original Submission</a></td>
+<td>Initial proposal — NBA + NCAA data, binary <code>injured_achilles</code> classifier, random 80/20 split, RF + XGB with SMOTE/ROSE/ADASYN</td>
 </tr>
 <tr class="even">
 <td>v0.2</td>
 <td>July 2025</td>
-<td>Added NCAA Achilles injury data (21 cases manually compiled); structured project into two explicit angles: DiD causal inference + ML classification</td>
+<td>Added NCAA Achilles injury data (21 cases manually compiled); structured project into two explicit angles: DiD causal inference + ML classification · <a href="Vickraman_Tan_Said_FINAL.html">📄 Original Submission</a></td>
 </tr>
 <tr class="odd">
 <td>v1.0</td>
-<td>August 2025</td>
+<td>September 2025</td>
 <td>Pivoted target to <code>pct_games_missed</code> (continuous regression); dropped NCAA; temporal train/test split (2018–2021 / 2022–2025); hurdle model explored</td>
 </tr>
 <tr class="even">
 <td>v1.1</td>
-<td>August 2025</td>
+<td>November 2025</td>
 <td>Removed survivorship-biased features (<code>total_minutes</code>, <code>back_to_back_games</code>, <code>avg_days_rest</code>); retained lagged <code>avg_rolling_minutes_3</code> only</td>
 </tr>
 <tr class="odd">
 <td>v1.2</td>
-<td>August 2025</td>
+<td>November 2025</td>
 <td>Dropped hurdle model (Stage A uninformative at ~87–94% non-zero rate); pivoted to direct XGBoost regression</td>
 </tr>
 <tr class="even">
 <td>v1.3</td>
-<td>August 2025</td>
+<td>December 2025</td>
 <td>Fixed data leakage (temporal feature discipline, hoopR <code>season_type == 2</code> bug); restricted to Regular Season only</td>
 </tr>
 <tr class="odd">
@@ -509,9 +509,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="reflection" class="level2">
 <h2 class="anchored" data-anchor-id="reflection">Reflection</h2>
-<p>The most significant revision in this project was the pivot from a binary Achilles injury classifier to <code>pct_games_missed</code> as a continuous regression target. What began as a statistical fix for class imbalance turned out to be a fundamental reframing of the research question — from <em>“did this player rupture their Achilles?”</em> to <em>“how available is this player likely to be?”</em>. That shift made the model genuinely more useful to a coaching or front-office audience, and it resolved the rare-event problem structurally rather than by papering over it with resampling. I think I fell in love with my model. Well, I mean, <strong>“there you go”</strong>… I learn, I learn…</p>
-<p>If I were starting again, I would build the target variable first and work backwards to the feature set, rather than inheriting features designed for binary classification and retrofitting them to a regression task. The survivorship bias in load features (where <code>total_minutes</code> perversely <em>negatively</em> predicted missed games) was a direct consequence of that mismatch, and it cost significant debugging time.</p>
-<p>The finding that surprised us most was how uninformative Stage A of the hurdle model turned out to be. Zero-inflated data is a textbook motivation for hurdle models, but in our data the “zero” class was rare enough (~6–13% of player-seasons) that the hurdle added complexity without signal. Sometimes the principled statistical solution and the practically correct one diverge — and interrogating model behaviour, rather than deferring to methodological convention, is what surfaced that.</p>
+<p>When everyone else chose safer, more predictable capstone topics, I chose this one. Partly because sports analytics has been a lifelong goal — but also because of something more personal.</p>
+<p>The day I joined the CDA(R) class, I tore my extensor digitorum longus playing handball, a sport I love. In and out of MRI scans during our first session. Reading about Achilles ruptures in the news while navigating my own injury, on top of job rejections and university setbacks that year. The question that kept surfacing was simple: could I have seen this coming?</p>
+<p>Gathering my own sports data was difficult and costly — but what if I tried it on NBA players instead? That was the seed of this entire study. It also reflected something Prof said early on — about taking control not just in our professional lives, but using data to <strong>guide our personal ones too</strong>. I wasn’t going to do a project I knew would work off the cuff. It had to be slightly impossible. Rare cases, sparse data, a problem the literature hadn’t cleanly solved. That was the point.</p>
+<p>The most significant revision was the pivot from a binary Achilles injury classifier to <code>pct_games_missed</code> as a continuous regression target. What began as a statistical fix for class imbalance turned out to be a fundamental reframing of the research question — from “did this player rupture their Achilles?” to “how available is this player likely to be?” That shift made the model genuinely more useful to a coaching or front-office audience, and it resolved the rare-event problem structurally rather than by papering over it with resampling. <strong>I think I fell in love with my model. Well I mean— “there you go”. I learn, I learn.</strong></p>
+<p>If I were starting again, I would build the target variable first and work backwards to the feature set, rather than inheriting features designed for binary classification and retrofitting them to a regression task. The survivorship bias in load features — where total_minutes perversely negatively predicted missed games — was a direct consequence of that mismatch, and it cost significant debugging time. Too much of a perfectionist with too many changes along the way.</p>
+<p>The finding that surprised me most was how uninformative Stage A of the hurdle model turned out to be. Zero-inflated data is a textbook motivation for hurdle models — but in our data the “zero” class was rare enough (~6–13% of player-seasons) that the hurdle added complexity without signal. Sometimes the principled statistical solution and the practically correct one diverge. Interrogating model behaviour, rather than deferring to methodological convention, is what surfaced that. And <strong>learning when to reframe — rather than force a technique that wasn’t working</strong> — turned out to be the most important lesson of all.</p>
 <hr>
 </section>
 <section id="references" class="level2">
@@ -978,7 +981,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Revision Log"</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Documented Feedback, Responses &amp; Version History"</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "Transparent record of supervisor feedback and project iterations"</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "Transparent record of Prof's feedback and project iterations"</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="an">toc:</span><span class="co"> true</span></span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="an">toc-depth:</span><span class="co"> 2</span></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
@@ -1001,7 +1004,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
 <span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="fu">## How to read this page</span></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>This log documents all substantive feedback received on the project, our</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>This log documents all substantive feedback received on the project, the</span>
 <span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>team's response to each point, and the version in which it was addressed.</span>
 <span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>Entries are grouped by feedback round and ordered chronologically.</span>
 <span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a></span>
@@ -1014,12 +1017,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Version <span class="pp">|</span> Date <span class="pp">|</span> Summary of changes <span class="pp">|</span></span>
 <span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a><span class="pp">|---------|------|--------------------|</span></span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> v0.1 <span class="pp">|</span> July 2025 <span class="pp">|</span> Initial proposal — NBA + NCAA data, binary <span class="in">`injured_achilles`</span> classifier, random 80/20 split, RF + XGB with SMOTE/ROSE/ADASYN · <span class="co">[</span><span class="ot">📄 Original Submission</span><span class="co">](Vickraman_Tan_Said_FINAL.html)</span> <span class="pp">|</span></span>
-<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> v0.2 <span class="pp">|</span> July 2025 <span class="pp">|</span> Added NCAA Achilles injury data (21 cases manually compiled); structured project into two explicit angles: DiD causal inference + ML classification <span class="pp">|</span></span>
-<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> v1.0 <span class="pp">|</span> August 2025 <span class="pp">|</span> Pivoted target to <span class="in">`pct_games_missed`</span> (continuous regression); dropped NCAA; temporal train/test split (2018–2021 / 2022–2025); hurdle model explored <span class="pp">|</span></span>
-<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> v1.1 <span class="pp">|</span> August 2025 <span class="pp">|</span> Removed survivorship-biased features (<span class="in">`total_minutes`</span>, <span class="in">`back_to_back_games`</span>, <span class="in">`avg_days_rest`</span>); retained lagged <span class="in">`avg_rolling_minutes_3`</span> only <span class="pp">|</span></span>
-<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> v1.2 <span class="pp">|</span> August 2025 <span class="pp">|</span> Dropped hurdle model (Stage A uninformative at ~87–94% non-zero rate); pivoted to direct XGBoost regression <span class="pp">|</span></span>
-<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> v1.3 <span class="pp">|</span> August 2025 <span class="pp">|</span> Fixed data leakage (temporal feature discipline, hoopR <span class="in">`season_type == 2`</span> bug); restricted to Regular Season only <span class="pp">|</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> v0.1 <span class="pp">|</span> July 2025 <span class="pp">|</span> Initial proposal — NBA + NCAA data, binary <span class="in">`injured_achilles`</span> classifier, random 80/20 split, RF + XGB with SMOTE/ROSE/ADASYN  <span class="pp">|</span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> v0.2 <span class="pp">|</span> July 2025 <span class="pp">|</span> Added NCAA Achilles injury data (21 cases manually compiled); structured project into two explicit angles: DiD causal inference + ML classification · <span class="co">[</span><span class="ot">📄 Original Submission</span><span class="co">](Vickraman_Tan_Said_FINAL.html)</span><span class="pp">|</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> v1.0 <span class="pp">|</span> September 2025 <span class="pp">|</span> Pivoted target to <span class="in">`pct_games_missed`</span> (continuous regression); dropped NCAA; temporal train/test split (2018–2021 / 2022–2025); hurdle model explored <span class="pp">|</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> v1.1 <span class="pp">|</span> November 2025 <span class="pp">|</span> Removed survivorship-biased features (<span class="in">`total_minutes`</span>, <span class="in">`back_to_back_games`</span>, <span class="in">`avg_days_rest`</span>); retained lagged <span class="in">`avg_rolling_minutes_3`</span> only <span class="pp">|</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> v1.2 <span class="pp">|</span> November 2025 <span class="pp">|</span> Dropped hurdle model (Stage A uninformative at ~87–94% non-zero rate); pivoted to direct XGBoost regression <span class="pp">|</span></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> v1.3 <span class="pp">|</span> December 2025 <span class="pp">|</span> Fixed data leakage (temporal feature discipline, hoopR <span class="in">`season_type == 2`</span> bug); restricted to Regular Season only <span class="pp">|</span></span>
 <span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> v2.0 <span class="pp">|</span> April 2026 <span class="pp">|</span> Final model deployed — R² = 0.747, RMSE = 0.133, MAE = 0.100; Quarto website + Shiny dashboard published <span class="pp">|</span></span>
 <span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>---</span>
@@ -1359,39 +1362,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-382"><a href="#cb2-382" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-383"><a href="#cb2-383" aria-hidden="true" tabindex="-1"></a><span class="fu">## Reflection</span></span>
 <span id="cb2-384"><a href="#cb2-384" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-385"><a href="#cb2-385" aria-hidden="true" tabindex="-1"></a>The most significant revision in this project was the pivot from a</span>
-<span id="cb2-386"><a href="#cb2-386" aria-hidden="true" tabindex="-1"></a>binary Achilles injury classifier to <span class="in">`pct_games_missed`</span> as a continuous</span>
-<span id="cb2-387"><a href="#cb2-387" aria-hidden="true" tabindex="-1"></a>regression target. What began as a statistical fix for class imbalance</span>
-<span id="cb2-388"><a href="#cb2-388" aria-hidden="true" tabindex="-1"></a>turned out to be a fundamental reframing of the research question — from</span>
-<span id="cb2-389"><a href="#cb2-389" aria-hidden="true" tabindex="-1"></a>*"did this player rupture their Achilles?"* to *"how available is this</span>
-<span id="cb2-390"><a href="#cb2-390" aria-hidden="true" tabindex="-1"></a>player likely to be?"*. That shift made the model genuinely more useful</span>
-<span id="cb2-391"><a href="#cb2-391" aria-hidden="true" tabindex="-1"></a>to a coaching or front-office audience, and it resolved the rare-event</span>
-<span id="cb2-392"><a href="#cb2-392" aria-hidden="true" tabindex="-1"></a>problem structurally rather than by papering over it with resampling. I think I fell in love with my model. Well, I mean, **"there you go"**... I learn, I learn...</span>
+<span id="cb2-385"><a href="#cb2-385" aria-hidden="true" tabindex="-1"></a>When everyone else chose safer, more predictable capstone topics, I chose this one. Partly because sports analytics has been a lifelong goal — but also because of something more personal.</span>
+<span id="cb2-386"><a href="#cb2-386" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-387"><a href="#cb2-387" aria-hidden="true" tabindex="-1"></a>The day I joined the CDA(R) class, I tore my extensor digitorum longus playing handball, a sport I love. In and out of MRI scans during our first session. Reading about Achilles ruptures in the news while navigating my own injury, on top of job rejections and university setbacks that year. The question that kept surfacing was simple: could I have seen this coming?</span>
+<span id="cb2-388"><a href="#cb2-388" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-389"><a href="#cb2-389" aria-hidden="true" tabindex="-1"></a>Gathering my own sports data was difficult and costly — but what if I tried it on NBA players instead? That was the seed of this entire study.</span>
+<span id="cb2-390"><a href="#cb2-390" aria-hidden="true" tabindex="-1"></a>It also reflected something Prof said early on — about taking control not just in our professional lives, but using data to **guide our personal ones too**. I wasn't going to do a project I knew would work off the cuff. It had to be slightly impossible. Rare cases, sparse data, a problem the literature hadn't cleanly solved. That was the point.</span>
+<span id="cb2-391"><a href="#cb2-391" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-392"><a href="#cb2-392" aria-hidden="true" tabindex="-1"></a>The most significant revision was the pivot from a binary Achilles injury classifier to <span class="in">`pct_games_missed`</span> as a continuous regression target. What began as a statistical fix for class imbalance turned out to be a fundamental reframing of the research question — from "did this player rupture their Achilles?" to "how available is this player likely to be?" That shift made the model genuinely more useful to a coaching or front-office audience, and it resolved the rare-event problem structurally rather than by papering over it with resampling. **I think I fell in love with my model. Well I mean— "there you go". I learn, I learn.**</span>
 <span id="cb2-393"><a href="#cb2-393" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-394"><a href="#cb2-394" aria-hidden="true" tabindex="-1"></a>If I were starting again, I would build the target variable first and</span>
-<span id="cb2-395"><a href="#cb2-395" aria-hidden="true" tabindex="-1"></a>work backwards to the feature set, rather than inheriting features</span>
-<span id="cb2-396"><a href="#cb2-396" aria-hidden="true" tabindex="-1"></a>designed for binary classification and retrofitting them to a regression</span>
-<span id="cb2-397"><a href="#cb2-397" aria-hidden="true" tabindex="-1"></a>task. The survivorship bias in load features (where <span class="in">`total_minutes`</span></span>
-<span id="cb2-398"><a href="#cb2-398" aria-hidden="true" tabindex="-1"></a>perversely *negatively* predicted missed games) was a direct consequence</span>
-<span id="cb2-399"><a href="#cb2-399" aria-hidden="true" tabindex="-1"></a>of that mismatch, and it cost significant debugging time.</span>
-<span id="cb2-400"><a href="#cb2-400" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-401"><a href="#cb2-401" aria-hidden="true" tabindex="-1"></a>The finding that surprised us most was how uninformative Stage A of the</span>
-<span id="cb2-402"><a href="#cb2-402" aria-hidden="true" tabindex="-1"></a>hurdle model turned out to be. Zero-inflated data is a textbook</span>
-<span id="cb2-403"><a href="#cb2-403" aria-hidden="true" tabindex="-1"></a>motivation for hurdle models, but in our data the "zero" class was rare</span>
-<span id="cb2-404"><a href="#cb2-404" aria-hidden="true" tabindex="-1"></a>enough (~6–13% of player-seasons) that the hurdle added complexity</span>
-<span id="cb2-405"><a href="#cb2-405" aria-hidden="true" tabindex="-1"></a>without signal. Sometimes the principled statistical solution and the</span>
-<span id="cb2-406"><a href="#cb2-406" aria-hidden="true" tabindex="-1"></a>practically correct one diverge — and interrogating model behaviour,</span>
-<span id="cb2-407"><a href="#cb2-407" aria-hidden="true" tabindex="-1"></a>rather than deferring to methodological convention, is what surfaced</span>
-<span id="cb2-408"><a href="#cb2-408" aria-hidden="true" tabindex="-1"></a>that.</span>
-<span id="cb2-409"><a href="#cb2-409" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-410"><a href="#cb2-410" aria-hidden="true" tabindex="-1"></a>---</span>
-<span id="cb2-411"><a href="#cb2-411" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-412"><a href="#cb2-412" aria-hidden="true" tabindex="-1"></a><span class="fu">## References</span></span>
-<span id="cb2-413"><a href="#cb2-413" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-414"><a href="#cb2-414" aria-hidden="true" tabindex="-1"></a>Petway, A. J., Jordan, M. J., Epsley, S., &amp; Anloague, P. A. (2022).</span>
-<span id="cb2-415"><a href="#cb2-415" aria-hidden="true" tabindex="-1"></a>Mechanisms of Achilles tendon rupture in National Basketball Association</span>
-<span id="cb2-416"><a href="#cb2-416" aria-hidden="true" tabindex="-1"></a>players. *Journal of Applied Biomechanics, 38*(6), 398–403.</span>
-<span id="cb2-417"><a href="#cb2-417" aria-hidden="true" tabindex="-1"></a><span class="ot">&lt;https://doi.org/10.1123/jab.2022-0088&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb2-394"><a href="#cb2-394" aria-hidden="true" tabindex="-1"></a>If I were starting again, I would build the target variable first and work backwards to the feature set, rather than inheriting features designed for binary classification and retrofitting them to a regression task. The survivorship bias in load features — where total_minutes perversely negatively predicted missed games — was a direct consequence of that mismatch, and it cost significant debugging time. Too much of a perfectionist with too many changes along the way.</span>
+<span id="cb2-395"><a href="#cb2-395" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-396"><a href="#cb2-396" aria-hidden="true" tabindex="-1"></a>The finding that surprised me most was how uninformative Stage A of the hurdle model turned out to be. Zero-inflated data is a textbook motivation for hurdle models — but in our data the "zero" class was rare enough (~6–13% of player-seasons) that the hurdle added complexity without signal. Sometimes the principled statistical solution and the practically correct one diverge. Interrogating model behaviour, rather than deferring to methodological convention, is what surfaced that. And **learning when to reframe — rather than force a technique that wasn't working** — turned out to be the most important lesson of all.</span>
+<span id="cb2-397"><a href="#cb2-397" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-398"><a href="#cb2-398" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb2-399"><a href="#cb2-399" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-400"><a href="#cb2-400" aria-hidden="true" tabindex="-1"></a><span class="fu">## References</span></span>
+<span id="cb2-401"><a href="#cb2-401" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-402"><a href="#cb2-402" aria-hidden="true" tabindex="-1"></a>Petway, A. J., Jordan, M. J., Epsley, S., &amp; Anloague, P. A. (2022).</span>
+<span id="cb2-403"><a href="#cb2-403" aria-hidden="true" tabindex="-1"></a>Mechanisms of Achilles tendon rupture in National Basketball Association</span>
+<span id="cb2-404"><a href="#cb2-404" aria-hidden="true" tabindex="-1"></a>players. *Journal of Applied Biomechanics, 38*(6), 398–403.</span>
+<span id="cb2-405"><a href="#cb2-405" aria-hidden="true" tabindex="-1"></a><span class="ot">&lt;https://doi.org/10.1123/jab.2022-0088&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">

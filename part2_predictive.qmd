@@ -69,11 +69,53 @@ window (2018–2025) involve at least some missed games. With such a high positi
 rate, the binary Stage A classification is uninformative. A single-stage direct
 XGBoost regression on `pct_games_missed` is more appropriate.
 
+```{r}
+#| label: xgb-spec
+#| echo: true
+#| eval: false
+#| code-fold: true
+#| code-summary: "Show model specification"
+
+recipe_v2 %>% 
+  step_rm(player_name, season, any_games_missed) %>%
+  step_zv(all_predictors()) %>%
+  step_impute_median(all_numeric_predictors()) %>%
+  step_normalize(all_numeric_predictors())
+
+xgb_spec_v2 %>% 
+  set_engine("xgboost") %>%
+  set_mode("regression")
+
+wf_v2 %>% 
+  add_recipe(recipe_v2) %>%
+  add_model(xgb_spec_v2)
+```
+
 Partial dependence plot (PDP) analysis further revealed survivorship bias in three
 features — `total_minutes`, `back_to_back_games`, and `avg_days_rest` — which
 showed negative relationships with games missed because healthy players accumulate
 more of all three. These were removed. `avg_rolling_minutes_3` (lagged) was retained
 as the primary load predictor, showing a clean positive monotonic relationship.
+```{r}
+#| label: pdp-survivorship
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show survivorship bias correction"
+
+# Features removed due to survivorship bias
+removed_features <- tibble(
+  Feature   = c("total_minutes", "back_to_back_games", "avg_days_rest"),
+  Direction = c("Negative", "Negative", "Negative"),
+  Reason    = c(
+    "Healthy players accumulate more total minutes — injured players appear lower",
+    "Healthy players play more B2B games — same survivorship logic",
+    "Injured players 'rest' more because they are inactive, not because they recovered"
+  )
+)
+
+knitr::kable(removed_features,
+             col.names = c("Feature Removed", "PDP Direction", "Reason"))
+```
 ---
 
 ## 3. Features
@@ -114,6 +156,20 @@ The refactored split is a **hard temporal cutoff**:
 
 The test window includes the exact conditions the model needs to generalise to.
 This is the hardest and most honest evaluation possible.
+```{r{}
+#| label: train-test-split
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show temporal train/test split"
+
+# Temporal split — respects time ordering
+train_v2 <- nba_MODEL_READY_CLEAN %>% filter(season <= 2021)
+test_v2  <- nba_MODEL_READY_CLEAN %>% filter(season >= 2022)
+
+glue("Train: {nrow(train_v2)} player-seasons (2018–2021)")
+glue("Test:  {nrow(test_v2)} player-seasons (2022–2025)")
+
+```
 :::
 
 ```{r split-summary, echo=FALSE}

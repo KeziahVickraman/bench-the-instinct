@@ -337,9 +337,9 @@ ui <- fluidPage(
             " based on their 2024 load profile and injury history.",
             " Restricted to players averaging ≥20 rolling minutes — meaningful contributors only.",
             br(),
-            strong("High Risk (>50%):"), " expected to miss 41+ games.",
-            strong(" Moderate Risk (25–50%):"), " expected to miss 20–41 games.",
-            strong(" Low Risk (<25%):"), " likely to be available."
+            strong("High Risk (>30%):"), " expected to miss 24+ games.",
+            strong(" Moderate Risk (10–30%):"), " expected to miss 8–24 games.",
+            strong(" Low Risk (<10%):"), " likely to be available."
           )
         )
       ),
@@ -351,7 +351,7 @@ ui <- fluidPage(
 
             sliderInput("risk_threshold",
                         "Min predicted % games missed:",
-                        min = 0, max = 1, value = 0.25, step = 0.05),
+                        min = 0, max = 1, value = 0.10, step = 0.05),
 
             selectInput("risk_tier_filter",
                         "Risk tier:",
@@ -622,9 +622,9 @@ server <- function(input, output, session) {
         geom_col(width = 0.75) +
         geom_text(aes(label = paste0(round(pct_games_missed_predicted * 100), "%")),
                   hjust = -0.15, size = 3.2, fontface = "bold") +
-        geom_vline(xintercept = 0.25, linetype = "dashed",
+        geom_vline(xintercept = 0.10, linetype = "dashed", 
                    color = "#FF8C00", linewidth = 0.9) +
-        geom_vline(xintercept = 0.50, linetype = "dashed",
+        geom_vline(xintercept = 0.30, linetype = "dashed",
                    color = "#CE1141", linewidth = 0.9) +
         scale_fill_manual(
           values = c("High Risk"     = "#CE1141",
@@ -636,7 +636,7 @@ server <- function(input, output, session) {
                            expand = c(0, 0)) +
         labs(
           title    = "Predicted % Games Missed — Top At-Risk Players (2024 Season)",
-          subtitle = "25% threshold = moderate | 50% threshold = high | Labels show predicted %",
+          subtitle = "10% threshold = moderate (>8 games) | 30% threshold = high (>24 games) | Labels show predicted %",
           x        = "Predicted % of next season's games missed",
           y        = NULL,
           fill     = "Risk tier",

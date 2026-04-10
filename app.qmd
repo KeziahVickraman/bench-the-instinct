@@ -69,23 +69,6 @@ The load simulator. Enter a player's rolling minutes, prior absence history, and
 
 :::
 
-::: {.callout-note}
-## Running the dashboard locally
-If you have R installed, you can run the dashboard locally:
-```r
-# Install dependencies
-pacman::p_load(shiny, tidyverse, scales, ggthemes, DT, glue, vip)
-
-# Load the pre-computed model results
-load("Part2_Predictive_Results.RData")
-load("Part1_Causal_Results.RData")
-source("00_Data_Setup.R")
-
-# Launch
-shiny::runApp("Capstone_Shiny_PREDICTION.R")
-```
-:::
-
 ---
 
 ## In-Page Preview {#preview}

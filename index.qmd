@@ -173,16 +173,6 @@ source("Part2_Predictive_Hurdle.R") # 3. Predictive model
 shiny::runApp("Capstone_Shiny.R")  # 4. Interactive dashboard
 ```
 
-::: callout-tip
-## Render this website locally
-
-``` bash
-quarto render            # renders all pages into /docs
-quarto preview           # live preview with hot reload
-quarto publish gh-pages  # deploy to GitHub Pages
-```
-:::
-
 ------------------------------------------------------------------------
 
 ## Author

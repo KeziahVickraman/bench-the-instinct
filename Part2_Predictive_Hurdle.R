@@ -33,6 +33,9 @@
 ###--------------------------------------------------------------------------###
 
 source("00_Data_Setup.R")
+load("00_Shared_Data.RData")
+load("Part1_Causal_Results.RData")
+load("Part2_Predictive_Results.RData")
 
 ###==========================================================================###
 ###  SECTION 1: BUILD pct_games_missed                                        ###

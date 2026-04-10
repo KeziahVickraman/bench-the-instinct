@@ -94,6 +94,22 @@ NBA Commissioner Adam Silver convened an expert panel in response, stating the l
 is taking a serious look at Achilles tears and pointing specifically to workload
 intensity and scheduling density as primary investigative targets (Silver, 2025;
 Reynolds, 2025). This study is our analytical response to that question.
+```{r}
+#| label: rupture-curation
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show data curation code"
+
+achilles_ruptures_FULL %>%
+  select(player_name, injury_date, injury_type, injury_severity) %>%
+  mutate(injury_date = format(as.Date(injury_date), "%B %Y")) %>%
+  arrange(injury_date) %>%
+  rename(Player = player_name,
+         Date = injury_date,
+         Type = injury_type,
+         Severity = injury_severity) %>%
+  knitr::kable()
+```
 
 ::: {.callout-note}
 ## Data note
@@ -207,6 +223,8 @@ rate of ~0.29%, a single rupture in a season-load group moves the mean materiall
 ### Regression Table
 
 ```{r regression-table, results='asis'}
+#| code-fold: true
+#| code-summary: "Show DiD model results"
 jtools::export_summs(
   model_did_1, model_did_2, model_did_3,
   model.names  = c("Model 1\nLoad × Post",
