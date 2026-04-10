@@ -384,7 +384,9 @@ straightforward and is noted as a meaningful next step.
 
 When everyone else chose safer, more predictable capstone topics, I chose this one. Partly because sports analytics has been a lifelong goal — but also because of something more personal.
 
-The day I joined the CDA(R) class, I tore my extensor digitorum longus playing handball, a sport I love. In and out of MRI scans during our first session. Reading about Achilles ruptures in the news while navigating my own injury, on top of job rejections and university setbacks that year. The question that kept surfacing was simple: could I have seen this coming?
+The day I joined the cdaR class, I tore my extensor digitorum longus playing handball— a sport I love. In and out of MRI scans during our first session. Reading about Achilles ruptures in the news while navigating my own injury, on top of job rejections and university setbacks that year. The question that kept surfacing was simple: could I have seen this coming?
+
+![cdaR Module 1 Day 1 Class — right after my MRI](injury_image.jpg){fig-align="center" width="70%"}
 
 Gathering my own sports data was difficult and costly — but what if I tried it on NBA players instead? That was the seed of this entire study.
 It also reflected something Prof said early on — about taking control not just in our professional lives, but using data to **guide our personal ones too**. I wasn't going to do a project I knew would work off the cuff. It had to be slightly impossible. Rare cases, sparse data, a problem the literature hadn't cleanly solved. That was the point.
