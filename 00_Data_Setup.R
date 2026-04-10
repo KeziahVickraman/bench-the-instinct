@@ -76,7 +76,7 @@ font_add_google("Roboto Condensed", "roboto")
 showtext_auto()
 
 theme_nba <- function() {
-  theme_minimal(base_family = "roboto") +
+  theme_minimal(base_family = "sans") +
     theme(
       plot.background  = element_rect(fill = "#FFFFFF", color = NA),
       panel.grid.major = element_line(color = "#E0E0E0"),
