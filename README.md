@@ -30,7 +30,3 @@ git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO.git
 git push -u origin main
 # GitHub → Settings → Pages → Branch: main, Folder: /docs
 ```
-
-## Before going live, update two placeholders:
-1. `YOUR_USERNAME/YOUR_REPO_NAME` in `_quarto.yml`
-2. `YOUR_USERNAME.shinyapps.io/nba-achilles/` in `app.qmd`
