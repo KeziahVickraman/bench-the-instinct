@@ -56,7 +56,7 @@ Entries are grouped by feedback round and ordered chronologically.
 
 **Feedback received:**
 
-Our supervisor challenged whether 45 NBA Achilles ruptures across a
+Professor challenged whether 45 NBA Achilles ruptures across a
 30-year window was sufficient to learn meaningful patterns. With an
 ~0.8% positive class rate, even the best class-balancing techniques
 (SMOTE, ROSE, ADASYN) would essentially be amplifying noise rather than
@@ -93,7 +93,7 @@ and merge section; DiD model block (`model1`, `model2`).
 
 **Feedback received:**
 
-The supervisor noted that the project was implicitly trying to answer
+Professor noted that the project was implicitly trying to answer
 two different questions — *why* ruptures happen (causal) and *who* is
 next (predictive) — but the framing in the proposal did not distinguish
 between them clearly. The ask was: *"If you want both angles, fine, but
@@ -386,7 +386,7 @@ When everyone else chose safer, more predictable capstone topics, I chose this o
 
 The day I joined the cdaR class, I tore my extensor digitorum longus playing handball— a sport I love. In and out of MRI scans during our first session. Reading about Achilles ruptures in the news while navigating my own injury, on top of job rejections and university setbacks that year. The question that kept surfacing was simple: could I have seen this coming?
 
-![cdaR Module 1 Day 1 Class — right after my MRI](injury_image.jpg){fig-align="center" width="70%"}
+![cdaR Module 1 Day 1 Class — there's a first for everything... ](injury_image.jpg){fig-align="center" width="70%"}
 
 Gathering my own sports data was difficult and costly — but what if I tried it on NBA players instead? That was the seed of this entire study.
 It also reflected something Prof said early on — about taking control not just in our professional lives, but using data to **guide our personal ones too**. I wasn't going to do a project I knew would work off the cuff. It had to be slightly impossible. Rare cases, sparse data, a problem the literature hadn't cleanly solved. That was the point.
