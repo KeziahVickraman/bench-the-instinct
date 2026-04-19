@@ -1,6 +1,7 @@
 ###--------------------------------------------------------------------------###
 ###   Part1_Causal_DiD.R                                                     ###
-###   "We DiD that" — Causal Analysis of Load Management & Achilles Injuries ###
+###   "DiD load kill the Achilles" — Causal Analysis of Load Management      ###
+###                                  & Achilles Injuries                     ###
 ###                                                                          ###
 ###   Author: Keziah Vickraman                                               ###
 ###                                                                          ###
@@ -13,12 +14,9 @@
 ###     Outcome   = achilles_rupture_binary (confirmed ruptures only)        ###
 ###     Moderator = back-to-back game frequency                              ###
 ###                                                                          ###
-###   This part answers WHY. Part 2 answers WHO.                             ###
-###   The features that explain the spike are the same features that         ###
-###   power the prediction — load is the bridge.                             ###
 ###--------------------------------------------------------------------------###
 
-source("00_Data_Setup.R")
+load("00_Shared_Data.RData")
 
 ###==========================================================================###
 ###  SECTION 1: MOTIVATING CONTEXT — THE SPIKE                                ###
@@ -124,10 +122,10 @@ spike_VIZ
 ###==========================================================================###
 
 # The DiD outcome is the confirmed Achilles rupture binary flag.
-# We merge injury cases onto player-season aggregates so each player-season
+# Merge injury cases onto player-season aggregates so each player-season
 # has: features (load, B2B, rest) + outcome (did they rupture that season?).
 #
-# Design note: we keep only seasons where the player appeared in at least
+# Design note: keep only seasons where the player appeared in at least
 # 10 games — this avoids contaminating the "no rupture" group with players
 # who barely played (and therefore had low measured load regardless).
 
@@ -519,28 +517,6 @@ The bridge to Part 2:
 ###  SECTION 9: SAVE                                                          ###
 ###==========================================================================###
 
-# Objects needed by the Shiny app
-save(
-  # Data
-  achilles_ruptures_FULL,
-  ruptures_by_year,
-  did_data,
-  parallel_trends_data,
-  did_model_tidy,
-  # Models
-  model_did_1,
-  model_did_2,
-  model_did_3,
-  # Plots
-  spike_VIZ,
-  did_parallel_trends_VIZ,
-  did_coef_VIZ,
-  load_trend_VIZ,
-  file = "Part1_Causal_Results.RData"
-)
-
-message("✓ Part 1 complete — causal results saved to Part1_Causal_Results.RData")
-
 strip_font <- function(p) {
   p + theme_minimal(base_family = "") +
     theme(text = element_text(family = ""))
@@ -552,26 +528,6 @@ did_parallel_trends_VIZ_plain <- strip_font(did_parallel_trends_VIZ)
 did_coef_VIZ_plain            <- strip_font(did_coef_VIZ)
 load_trend_VIZ_plain          <- strip_font(load_trend_VIZ)
 
-# Save both versions — originals untouched
-save(
-  achilles_ruptures_FULL,
-  ruptures_by_year,
-  did_data,
-  parallel_trends_data,
-  did_model_tidy,
-  model_did_1, model_did_2, model_did_3,
-  spike_VIZ,                        # original with Roboto
-  did_parallel_trends_VIZ,          # original with Roboto
-  did_coef_VIZ,                     # original with Roboto
-  load_trend_VIZ,                   # original with Roboto
-  spike_VIZ_plain,                  # plain for submission
-  did_parallel_trends_VIZ_plain,    # plain for submission
-  did_coef_VIZ_plain,               # plain for submission
-  load_trend_VIZ_plain,             # plain for submission
-  file = "Part1_Causal_Results.RData"
-)
-
-message("✓ Both versions saved")
 
 save(
   achilles_ruptures_FULL,
@@ -596,3 +552,9 @@ save(
   load_trend_VIZ_plain,
   file = "Part1_Causal_Results.RData"
 )
+
+message("✓ Both versions saved")
+###==========================================================================###
+###  SECTION 10: Report Dependencies                                                           ###
+###==========================================================================###
+sessionInfo()

@@ -1,18 +1,16 @@
 ###--------------------------------------------------------------------------###
-###   00_Data_Setup.R                                                         ###
+###   00_Data_Setup.R                                                        ###
 ###   Shared data foundation — sourced by both Part 1 and Part 2             ###
-###                                                                           ###
-###   Authors: Keziah Vickraman                ###
+###                                                                          ###
+###   Author: Keziah Vickraman                                               ###
 ###   Capstone: NBA Achilles Load Management Study                           ###
-###                                                                           ###
+###                                                                          ###
 ###   This file does four things and nothing else:                           ###
-###     1. Load packages                                                      ###
+###     1. Load packages                                                     ###
 ###     2. Import raw data (hoopR + injury CSV + ESPN scrape)                ###
-###     3. Build shared clean objects used by both Part 1 and Part 2        ###
-###     4. Define theme_nba() used in all visualisations                    ###
-###                                                                           ###
-###   Run this first. Both Part 1 and Part 2 begin with:                    ###
-###     source("00_Data_Setup.R")                                            ###
+###     3. Build shared clean objects used by both Part 1 and Part 2         ###
+###     4. Define theme_nba() used in all visualisations                     ###
+###                                                                          ###
 ###--------------------------------------------------------------------------###
 
 rm(list = ls()
@@ -28,14 +26,9 @@ pacman::p_load(
   lubridate,
   glue,
   zoo,
-
   # NBA data
   hoopR,
-
-  # Web scraping
   rvest,
-
-  # Modelling (loaded here so both parts have access)
   tidymodels,
   ranger,
   xgboost,
@@ -50,11 +43,9 @@ pacman::p_load(
   yardstick,
   rsample,
   broom,
-
   # Causal / regression tables
   jtools,
   huxtable,
-
   # Visualisation
   showtext,
   scales,

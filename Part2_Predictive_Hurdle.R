@@ -700,3 +700,8 @@ save(
   file = "Part2_Predictive_Results.RData"
 )
 message("✓ Part 2 plain versions saved")
+
+###==========================================================================###
+###  SECTION 16: REPORT DEPENDENCIES                                                          ###
+###==========================================================================###
+sessionInfo()
