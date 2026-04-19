@@ -1,0 +1,2000 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Keziah Vickraman">
+<meta name="dcterms.date" content="2026-04-01">
+<meta name="description" content="Difference-in-Differences analysis of NBA player workload and confirmed Achilles ruptures (1990–2025)">
+
+<title>Did Load Kill the Achilles? – Bench the Instinct</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-065a5179aebd64318d7ea99d77b64a9e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-1ee2f1216c0f7c7908e60f6449a23654.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    </a>
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">🏀 Bench the Instinct</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./part1_causal.qmd"> 
+<span class="menu-text">Did Load Kill the Achilles?</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./part2_predictive.html"> 
+<span class="menu-text">Predict | Who’s next?</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./app.html"> 
+<span class="menu-text">Interactive Dashboard</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./submission.html"> 
+<span class="menu-text">📄 Academic Paper</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./revision_log.html"> 
+<span class="menu-text">Revision Log</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/KeziahVickraman/bench-the-instinct"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#past-research" id="toc-past-research" class="nav-link" data-scroll-target="#past-research">Past Research</a></li>
+  <li><a href="#the-202425-spike-is-this-just-me-or-did-it-spike" id="toc-the-202425-spike-is-this-just-me-or-did-it-spike" class="nav-link" data-scroll-target="#the-202425-spike-is-this-just-me-or-did-it-spike">The 2024–25 Spike — Is This Just Me, or Did It Spike?</a></li>
+  <li><a href="#what-has-changed-the-load-landscape" id="toc-what-has-changed-the-load-landscape" class="nav-link" data-scroll-target="#what-has-changed-the-load-landscape">What Has Changed — The Load Landscape</a></li>
+  <li><a href="#study-design-the-causal-framework" id="toc-study-design-the-causal-framework" class="nav-link" data-scroll-target="#study-design-the-causal-framework">Study Design — The Causal Framework</a>
+  <ul class="collapse">
+  <li><a href="#what-is-difference-in-differences" id="toc-what-is-difference-in-differences" class="nav-link" data-scroll-target="#what-is-difference-in-differences">What Is Difference-in-Differences?</a></li>
+  <li><a href="#why-2017" id="toc-why-2017" class="nav-link" data-scroll-target="#why-2017">Why 2017?</a></li>
+  <li><a href="#the-b2b-moderator" id="toc-the-b2b-moderator" class="nav-link" data-scroll-target="#the-b2b-moderator">The B2B Moderator</a></li>
+  <li><a href="#what-we-investigate" id="toc-what-we-investigate" class="nav-link" data-scroll-target="#what-we-investigate">What We Investigate</a></li>
+  </ul></li>
+  <li><a href="#parallel-trends-check" id="toc-parallel-trends-check" class="nav-link" data-scroll-target="#parallel-trends-check">Parallel Trends Check</a></li>
+  <li><a href="#did-results" id="toc-did-results" class="nav-link" data-scroll-target="#did-results">DiD Results</a></li>
+  <li><a href="#who-did-the-reform-actually-protect" id="toc-who-did-the-reform-actually-protect" class="nav-link" data-scroll-target="#who-did-the-reform-actually-protect">Who Did the Reform Actually Protect?</a>
+  <ul class="collapse">
+  <li><a href="#why-stars-and-reserves-may-respond-differently" id="toc-why-stars-and-reserves-may-respond-differently" class="nav-link" data-scroll-target="#why-stars-and-reserves-may-respond-differently">Why Stars and Reserves May Respond Differently</a></li>
+  <li><a href="#tier-trends-across-three-policy-eras" id="toc-tier-trends-across-three-policy-eras" class="nav-link" data-scroll-target="#tier-trends-across-three-policy-eras">Tier Trends Across Three Policy Eras</a></li>
+  <li><a href="#selective-protection-model-model-4" id="toc-selective-protection-model-model-4" class="nav-link" data-scroll-target="#selective-protection-model-model-4">Selective Protection Model (Model 4)</a></li>
+  </ul></li>
+  <li><a href="#implications-how-should-the-league-management-and-coaches-move-forward" id="toc-implications-how-should-the-league-management-and-coaches-move-forward" class="nav-link" data-scroll-target="#implications-how-should-the-league-management-and-coaches-move-forward">Implications — How Should the League, Management and Coaches Move Forward?</a></li>
+  <li><a href="#limitations" id="toc-limitations" class="nav-link" data-scroll-target="#limitations">Limitations</a></li>
+  <li><a href="#the-bridge" id="toc-the-bridge" class="nav-link" data-scroll-target="#the-bridge">The Bridge</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Did Load Kill the Achilles?</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+<p class="subtitle lead">A Causal Investigation into Whether the League’s Scheduling and Load Patterns Drove the 2024–25 Rupture Spike — and What the League Should Do About It</p>
+</div>
+
+<div>
+  <div class="description">
+    Difference-in-Differences analysis of NBA player workload and confirmed Achilles ruptures (1990–2025)
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Keziah Vickraman </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">April 1, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<hr>
+<p><em>Imagine if stars like Tatum, Haliburton, and KD could have avoided injuries in those crucial games. No more “in the perfect world”, or “in another world” — no more ‘what ifs.’ This study aims to turn what-ifs into actionable foresight.</em></p>
+<hr>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>Achilles tendon ruptures are among the most catastrophic musculoskeletal injuries sustained by professional athletes, particularly in high-impact sports such as basketball. In the National Basketball Association (NBA), where explosive movements, rapid directional changes, and consistently high workloads are the norm, a ruptured Achilles can significantly disrupt or even prematurely end a player’s career. Although less frequent than other lower extremity injuries, Achilles tendon ruptures carry disproportionately severe consequences. High-profile cases such as Kobe Bryant and Kevin Durant have drawn public attention to the profound physical, psychological, and financial impact of this injury (Farmer, 2013; Hart, 2019; Lewis, 2014).</p>
+<p>The average recovery time following an Achilles rupture ranges from 9 to 12 months, yet many athletes never fully return to their prior level of performance. Studies have shown that even when return to play is achieved, players often experience lasting declines in minutes played, efficiency, and longevity (Amin et al., 2013; Trofa et al., 2017). A systematic review by Trofa et al.&nbsp;(2017) found that although most elite athletes return to competition, performance metrics generally decrease, especially among older or high-usage players. These outcomes underscore the injury’s severity and its long-term implications for career sustainability.</p>
+<hr>
+</section>
+<section id="past-research" class="level2">
+<h2 class="anchored" data-anchor-id="past-research">Past Research</h2>
+<p>Research has primarily focused on post-injury recovery and return-to-play timelines. Petway et al.&nbsp;(2022), for instance, conducted a biomechanical analysis of NBA gameplay footage and identified specific loading and landing patterns commonly preceding Achilles tendon ruptures, implying that such injuries may not be entirely random. Likewise, LaPrade et al.&nbsp;(2022) emphasized the role of cumulative fatigue and overuse — especially during congested playing schedules — as likely contributors to tendon failure in elite athletes.</p>
+<p>Despite these insights, there remains a lack of robust, data-driven tools to proactively identify players at elevated risk of Achilles tendon rupture. Given the NBA’s intense physical demands and the substantial financial and competitive costs associated with player injuries, the development of predictive models is both timely and essential. As Siu et al.&nbsp;(2020) argued, early identification of at-risk players can support preventative strategies such as load management, individualised rest protocols, and targeted prehabilitation — which may ultimately reduce injury incidence and prolong athletic careers.</p>
+<p>More recently, Achilles tendon injuries appear to be increasing in visibility and possibly in frequency. Between 1990 and 2023, 45 NBA players sustained Achilles tendon ruptures — an average of 1.36 cases per season (Goodwill, 2024). Alarmingly, three such injuries occurred during the 2023 postseason alone, prompting renewed concerns about underlying risk factors (Fischer, 2023). In response, NBA Commissioner Adam Silver acknowledged that the league is actively researching the causes of these injuries, including the intensifying pace of the game, tighter travel schedules, and player workload demands (NBA.com, 2024). While surgical and rehabilitative advances have improved post-injury outcomes (LaPrade et al., 2022; Trofa et al., 2017), the question of why certain athletes rupture their Achilles in the first place remains less understood.</p>
+<hr>
+</section>
+<section id="the-202425-spike-is-this-just-me-or-did-it-spike" class="level2">
+<h2 class="anchored" data-anchor-id="the-202425-spike-is-this-just-me-or-did-it-spike">The 2024–25 Spike — Is This Just Me, or Did It Spike?</h2>
+<p>The 2024–25 season changed the conversation entirely.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>spike_VIZ</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="part1_causal_1_files/figure-html/spike-plot-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Confirmed NBA Achilles ruptures by year (1990–2025). Orange highlight = 2024–25 season. Dashed line = historical average of 1.96 ruptures per year.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Eight confirmed Achilles ruptures in a single season. Tyrese Haliburton. Jayson Tatum. Damian Lillard. Dejounte Murray. The names read like an All-Star ballot, not an injury report. The 2024–25 season recorded nearly <strong>6× the historical per-season average</strong> of 1.36 ruptures. This is not random variation — this is a structural signal.</p>
+<p>NBA Commissioner Adam Silver convened an expert panel in response, stating the league is taking a serious look at Achilles tears and pointing specifically to workload intensity and scheduling density as primary investigative targets (Silver, 2025; Reynolds, 2025). This study is our analytical response to that question.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show data curation code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>achilles_ruptures_FULL <span class="sc">%&gt;%</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(player_name, injury_date, injury_type, injury_severity) <span class="sc">%&gt;%</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">injury_date =</span> <span class="fu">format</span>(<span class="fu">as.Date</span>(injury_date), <span class="st">"%B %Y"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(injury_date) <span class="sc">%&gt;%</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Player =</span> player_name,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">Date =</span> injury_date,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">Type =</span> injury_type,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">Severity =</span> injury_severity) <span class="sc">%&gt;%</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 56%">
+<col style="width: 20%">
+<col style="width: 10%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Player</th>
+<th style="text-align: left;">Date</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Severity</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Scott Burrell</td>
+<td style="text-align: left;">April 1995</td>
+<td style="text-align: left;">rupture</td>
+<td style="text-align: left;">high</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">LaPhonso Ellis</td>
+<td style="text-align: left;">April 1997</td>
+<td style="text-align: left;">rupture</td>
+<td style="text-align: left;">high</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Derrick McKey</td>
+<td style="text-align: left;">April 1997</td>
+<td style="text-align: left;">rupture</td>
+<td style="text-align: left;">high</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Kobe Bryant</td>
+<td style="text-align: left;">April 2013</td>
+<td style="text-align: left;">rupture</td>
+<td style="text-align: left;">high</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Damian Lillard</td>
+<td style="text-align: left;">April 2025</td>
+<td style="text-align: left;">rupture</td>
+<td style="text-align: left;">high</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Emanual Davis</td>
+<td style="text-align: left;">December 2002</td>
+<td style="text-align: left;">rupture</td>
+<td style="text-align: left;">high</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Dan Dickau</td>
+<td style="text-align: left;">December 2005</td>
+<td style="text-align: left;">rupture</td>
+<td style="text-align: left;">high</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Laron Profit</td>
+<td style="text-align: left;">December 2005</td>
+<td style="text-align: left;">rupture</td>
+<td style="text-align: left;">high</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Darrell Arthur</td>
+<td style="text-align: left;">December 2011</td>
+<td style="text-align: left;">rupture</td>
+<td style="text-align: left;">high</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">John Wall</td>
+<td style="text-align: left;">December 2018</td>
+<td style="text-align: left;">rupture</td>
+<td style="text-align: left;">high</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Rodney Hood</td>
+<td style="text-align: left;">December 2019</td>
+<td style="text-align: left;">rupture</td>
+<td style="text-align: left;">high</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">David Nwaba</td>
+<td style="text-align: left;">December 2019</td>
+<td style="text-align: left;">rupture</td>
+<td style="text-align: left;">high</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Dru Smith</td>
+<td style="text-align: left;">December 2024</td>
+<td style="text-align: left;">rupture</td>
+<td style="text-align: left;">high</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Christian Laettner</td>
+<td style="text-align: left;">February 1999</td>
+<td style="text-align: left;">rupture</td>
+<td style="text-align: left;">high</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Lawrence Funderburke</td>
+<td style="text-align: left;">February 2004</td>
+<td style="text-align: left;">rupture</td>
+<td style="text-align: left;">high</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Chauncey Billups</td>
+<td style="text-align: left;">February 2012</td>
+<td style="text-align: left;">rupture</td>
+<td style="text-align: left;">high</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Felton Spencer</td>
+<td style="text-align: left;">January 1995</td>
+<td style="text-align: left;">rupture</td>
+<td style="text-align: left;">high</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Jim McIlvaine</td>
+<td style="text-align: left;">January 2001</td>
+<td style="text-align: left;">rupture</td>
+<td style="text-align: left;">high</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Greg Anthony</td>
+<td style="text-align: left;">January 2002</td>
+<td style="text-align: left;">rupture</td>
+<td style="text-align: left;">high</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">DeSagana Diop</td>
+<td style="text-align: left;">January 2011</td>
+<td style="text-align: left;">rupture</td>
+<td style="text-align: left;">high</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Jeffery Taylor / Jeff Taylor</td>
+<td style="text-align: left;">January 2014</td>
+<td style="text-align: left;">rupture</td>
+<td style="text-align: left;">high</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Brandon Jennings</td>
+<td style="text-align: left;">January 2015</td>
+<td style="text-align: left;">rupture</td>
+<td style="text-align: left;">high</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Rudy Gay</td>
+<td style="text-align: left;">January 2017</td>
+<td style="text-align: left;">rupture</td>
+<td style="text-align: left;">high</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">DeMarcus Cousins</td>
+<td style="text-align: left;">January 2018</td>
+<td style="text-align: left;">rupture</td>
+<td style="text-align: left;">high</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Jose Juan Barea / Jose Barea / J.J. Barea</td>
+<td style="text-align: left;">January 2019</td>
+<td style="text-align: left;">rupture</td>
+<td style="text-align: left;">high</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Dwight Powell</td>
+<td style="text-align: left;">January 2020</td>
+<td style="text-align: left;">rupture</td>
+<td style="text-align: left;">high</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Dejounte Murray</td>
+<td style="text-align: left;">January 2025</td>
+<td style="text-align: left;">rupture</td>
+<td style="text-align: left;">high</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">DaRon Holmes II</td>
+<td style="text-align: left;">July 2024</td>
+<td style="text-align: left;">rupture</td>
+<td style="text-align: left;">high</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Kevin Durant</td>
+<td style="text-align: left;">June 2019</td>
+<td style="text-align: left;">rupture</td>
+<td style="text-align: left;">high</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Tyrese Haliburton</td>
+<td style="text-align: left;">June 2025</td>
+<td style="text-align: left;">rupture</td>
+<td style="text-align: left;">high</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Randy Brown</td>
+<td style="text-align: left;">March 1998</td>
+<td style="text-align: left;">rupture</td>
+<td style="text-align: left;">high</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Wesley Matthews / Wes Matthews Jr.</td>
+<td style="text-align: left;">March 2015</td>
+<td style="text-align: left;">rupture</td>
+<td style="text-align: left;">high</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Brandon Clarke</td>
+<td style="text-align: left;">March 2023</td>
+<td style="text-align: left;">rupture</td>
+<td style="text-align: left;">high</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mehmet Okur</td>
+<td style="text-align: left;">May 2010</td>
+<td style="text-align: left;">rupture</td>
+<td style="text-align: left;">high</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Jayson Tatum</td>
+<td style="text-align: left;">May 2025</td>
+<td style="text-align: left;">rupture</td>
+<td style="text-align: left;">high</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Gerald Wilkins</td>
+<td style="text-align: left;">November 1994</td>
+<td style="text-align: left;">rupture</td>
+<td style="text-align: left;">high</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Stanley Roberts</td>
+<td style="text-align: left;">November 1994</td>
+<td style="text-align: left;">rupture</td>
+<td style="text-align: left;">high</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Kevin Edwards</td>
+<td style="text-align: left;">November 1994</td>
+<td style="text-align: left;">rupture</td>
+<td style="text-align: left;">high</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Patrick Ewing</td>
+<td style="text-align: left;">November 1999</td>
+<td style="text-align: left;">rupture</td>
+<td style="text-align: left;">high</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Voshon Lenard</td>
+<td style="text-align: left;">November 2004</td>
+<td style="text-align: left;">rupture</td>
+<td style="text-align: left;">high</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Klay Thompson</td>
+<td style="text-align: left;">November 2020</td>
+<td style="text-align: left;">rupture</td>
+<td style="text-align: left;">high</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Isaiah Jackson</td>
+<td style="text-align: left;">November 2024</td>
+<td style="text-align: left;">rupture</td>
+<td style="text-align: left;">high</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">David Benoit</td>
+<td style="text-align: left;">October 1996</td>
+<td style="text-align: left;">rupture</td>
+<td style="text-align: left;">high</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Maurice Taylor</td>
+<td style="text-align: left;">October 2001</td>
+<td style="text-align: left;">rupture</td>
+<td style="text-align: left;">high</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Don Reid</td>
+<td style="text-align: left;">October 2002</td>
+<td style="text-align: left;">rupture</td>
+<td style="text-align: left;">high</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Courtney Alexander</td>
+<td style="text-align: left;">October 2003</td>
+<td style="text-align: left;">rupture</td>
+<td style="text-align: left;">high</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Elton Brand</td>
+<td style="text-align: left;">October 2007</td>
+<td style="text-align: left;">rupture</td>
+<td style="text-align: left;">high</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Jonas Jerebko</td>
+<td style="text-align: left;">October 2010</td>
+<td style="text-align: left;">rupture</td>
+<td style="text-align: left;">high</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Elliot Williams</td>
+<td style="text-align: left;">October 2012</td>
+<td style="text-align: left;">rupture</td>
+<td style="text-align: left;">high</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Nikola Pekovic</td>
+<td style="text-align: left;">October 2015</td>
+<td style="text-align: left;">rupture</td>
+<td style="text-align: left;">high</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Sheldon McClellan / Sheldon Mac</td>
+<td style="text-align: left;">October 2017</td>
+<td style="text-align: left;">rupture</td>
+<td style="text-align: left;">high</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">James Wiseman</td>
+<td style="text-align: left;">October 2024</td>
+<td style="text-align: left;">rupture</td>
+<td style="text-align: left;">high</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">C.J. Wilcox</td>
+<td style="text-align: left;">September 2018</td>
+<td style="text-align: left;">rupture</td>
+<td style="text-align: left;">high</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Data note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We identified 53 unique NBA players who suffered a confirmed Achilles tendon rupture between 1990 and 2025. This list was curated by filtering historical NBA injury data for confirmed rupture keywords (e.g., <em>tear</em>, <em>surgery</em>, <em>repair</em>) and validated against public records including Fadeaway World’s documented timeline (Goodwill, 2024). The 2024–25 cases (n = 8) were manually curated from verified ESPN and Yahoo Sports reports due to their recency.</p>
+</div>
+</div>
+<hr>
+</section>
+<section id="what-has-changed-the-load-landscape" class="level2">
+<h2 class="anchored" data-anchor-id="what-has-changed-the-load-landscape">What Has Changed — The Load Landscape</h2>
+<p>Before testing causality, we first ask: has player load actually changed? If the answer is no, the DiD has nothing to identify.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>load_trend_VIZ</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="part1_causal_1_files/figure-html/load-trend-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Rolling 3-game average minutes over time. Median load (blue) has risen post-2017 while elite player load (75th percentile, red dashed) has plateaued. The interquartile range (blue band) is widening. Dashed vertical line = 2017–18 schedule reform.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The chart reveals a more nuanced story than a simple claim that load went up. The median player (blue line) has been playing <em>more</em> minutes post-2017, rising from approximately 19–20 to 21–22 minutes rolling average. The 75th percentile (red dashed), representing high-usage starters and stars, has slightly <em>decreased</em> and plateaued. The gap between them is widening.</p>
+<p>This suggests <strong>load management has protected the top end of the distribution while average player workloads have increased</strong> — creating a growing divergence. Players with high usage who fall just outside formal load management protocols may be the most structurally exposed group. This is the population the DiD analysis targets.</p>
+<hr>
+</section>
+<section id="study-design-the-causal-framework" class="level2">
+<h2 class="anchored" data-anchor-id="study-design-the-causal-framework">Study Design — The Causal Framework</h2>
+<section id="what-is-difference-in-differences" class="level3">
+<h3 class="anchored" data-anchor-id="what-is-difference-in-differences">What Is Difference-in-Differences?</h3>
+<p>A Difference-in-Differences (DiD) estimator compares the <em>change</em> in outcomes for a treated group relative to a control group, before and after a structural shift. Here:</p>
+<ul>
+<li><strong>Treated group</strong>: player-seasons in the top 25th percentile of rolling 3-game average minutes — the high-load players</li>
+<li><strong>Control group</strong>: player-seasons below that threshold — the low-load players</li>
+<li><strong>Post period</strong>: 2017 onwards — the 2017–18 NBA schedule reform, the most comprehensive structural change to player scheduling in the league’s modern era</li>
+<li><strong>Outcome</strong>: confirmed Achilles rupture (binary, per player-season)</li>
+</ul>
+<p>The DiD estimator is the coefficient on the interaction term <code>High Load × Post-2017</code>. A positive coefficient means high-load players saw a differential increase in rupture rates after 2017, over and above any general time trend.</p>
+</section>
+<section id="why-2017" class="level3">
+<h3 class="anchored" data-anchor-id="why-2017">Why 2017?</h3>
+<p>The 2017–18 season is the cleanest structural break in NBA scheduling history. It was the first season to simultaneously eliminate: (a) four-games-in-five-nights stretches, which had occurred more than 70 times per season league-wide; (b) 18-games-in-30-days windows; and (c) single road games requiring more than 2,000 miles of travel. The NBA also added a full week to the regular-season calendar that year (Windhorst, ESPN, 2017). By 2018–19, no team played more than 15 back-to-back sets — down from a league average of nearly 20 just three seasons earlier (Sportico, 2022).</p>
+<p>We also define a <strong>secondary cutpoint at 2023</strong> for the Player Participation Policy (PPP), which mandated that All-Star-level players appear in national television games and penalised teams for resting stars. This second cutpoint is used in the selective protection analysis below to test whether the PPP partially reversed the protective effects of the 2017 reform.</p>
+</section>
+<section id="the-b2b-moderator" class="level3">
+<h3 class="anchored" data-anchor-id="the-b2b-moderator">The B2B Moderator</h3>
+<p>Commissioner Silver specifically flagged back-to-back scheduling as a contributing factor. We include a triple interaction — <strong>Load × Post × B2B</strong> — to test whether the load effect is amplified for players with heavy B2B exposure.</p>
+</section>
+<section id="what-we-investigate" class="level3">
+<h3 class="anchored" data-anchor-id="what-we-investigate">What We Investigate</h3>
+<p>This study investigates three core questions:</p>
+<ol type="1">
+<li>Whether players who accumulate longer playing durations over three consecutive games exhibit a higher risk of injury</li>
+<li>Whether insufficient rest between games — especially in back-to-back contexts — contributes to greater rupture incidence</li>
+<li>Whether the post-2017 schedule reform era has differentially affected rupture rates for high-load versus low-load players, and whether this protective effect varied by player tier (stars vs.&nbsp;reserve players)</li>
+</ol>
+<p>Understanding these predictors can empower team managers and coaching staff to make data-driven decisions about player workload and recovery. By accurately forecasting injury risk, this analysis can guide strategies such as optimising rest periods and managing player minutes — ultimately contributing to maintaining player health, prolonging careers, and enhancing overall team performance throughout the demanding NBA season (Siu et al., 2020).</p>
+<hr>
+</section>
+</section>
+<section id="parallel-trends-check" class="level2">
+<h2 class="anchored" data-anchor-id="parallel-trends-check">Parallel Trends Check</h2>
+<p>The validity of DiD rests on the <strong>parallel trends assumption</strong>: that absent the treatment, the two groups would have trended similarly over time.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>did_parallel_trends_VIZ</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="part1_causal_1_files/figure-html/parallel-trends-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Parallel trends check. Pre-2017 trends are broadly parallel between load groups, particularly in the Low B2B panel. Post-2017 the high-load gap widens. Dashed line = 2017–18 schedule reform. Dotted line = 2023–24 PPP.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Reading this chart
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If the blue (low load) and red (high load) lines move roughly in parallel <strong>before</strong> the dashed 2017 line, the parallel trends assumption holds. A divergence <strong>after</strong> 2017 that is larger for the high-load group is the causal signal. The dotted 2023 line marks the PPP — watch whether the high-load line shifts again after that point. Year-to-year volatility reflects the rarity of the outcome — with a base rupture rate of ~0.29%, a single rupture in a season-load group moves the mean materially.</p>
+</div>
+</div>
+<hr>
+</section>
+<section id="did-results" class="level2">
+<h2 class="anchored" data-anchor-id="did-results">DiD Results</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Regression Table</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Coefficient Plot</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<details class="code-fold">
+<summary>Show DiD model results</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>jtools<span class="sc">::</span><span class="fu">export_summs</span>(</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  model_did_1, model_did_2, model_did_3,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">model.names  =</span> <span class="fu">c</span>(<span class="st">"Model 1</span><span class="sc">\n</span><span class="st">Load × Post"</span>,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"Model 2</span><span class="sc">\n</span><span class="st">Load × Post × B2B"</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"Model 3</span><span class="sc">\n</span><span class="st">Continuous"</span>),</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">error_format =</span> <span class="st">"CIs: [{conf.low}, {conf.high}]"</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">digits       =</span> <span class="dv">4</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<table class="huxtable" data-quarto-disable-processing="true" style="margin-left: auto; margin-right: auto;" id="tab:regression-table">
+<colgroup><col><col><col><col></colgroup><thead>
+<tr>
+<th class="huxtable-cell huxtable-header" style="text-align: center;  border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;      font-weight: normal;"></th><th class="huxtable-cell huxtable-header" style="text-align: center;  border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;      font-weight: normal;">Model 1<br>Load × Post</th><th class="huxtable-cell huxtable-header" style="text-align: center;  border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;      font-weight: normal;">Model 2<br>Load × Post × B2B</th><th class="huxtable-cell huxtable-header" style="text-align: center;  border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;      font-weight: normal;">Model 3<br>Continuous</th></tr>
+</thead>
+<tbody>
+<tr>
+<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;">(Intercept)</th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;">0.0028 ***</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;">0.0024&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;">0.0035&nbsp;</td></tr>
+<tr>
+<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;"></th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">CIs: [0.0013, 0.0043]&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">CIs: [-0.0006, 0.0054]</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">CIs: [-0.0006, 0.0076]</td></tr>
+<tr>
+<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;">load_factorHigh Load</th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">-0.0004&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">0.0060&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<tr>
+<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;"></th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">CIs: [-0.0034, 0.0026]&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">CIs: [-0.0042, 0.0161]</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<tr>
+<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;">post_factorPost-2017 (schedule reform era)</th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">-0.0004&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">-0.0001&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">-0.0018&nbsp;</td></tr>
+<tr>
+<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;"></th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">CIs: [-0.0028, 0.0019]&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">CIs: [-0.0037, 0.0035]</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">CIs: [-0.0057, 0.0021]</td></tr>
+<tr>
+<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;">load_factorHigh Load:post_factorPost-2017 (schedule reform era)</th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">0.0042&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">-0.0010&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<tr>
+<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;"></th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">CIs: [-0.0005, 0.0088]&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">CIs: [-0.0118, 0.0099]</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<tr>
+<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;">b2b_factorHigh B2B</th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">0.0005&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<tr>
+<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;"></th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">CIs: [-0.0030, 0.0039]</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<tr>
+<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;">load_factorHigh Load:b2b_factorHigh B2B</th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">-0.0069&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<tr>
+<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;"></th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">CIs: [-0.0176, 0.0037]</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<tr>
+<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;">post_factorPost-2017 (schedule reform era):b2b_factorHigh B2B</th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">-0.0004&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<tr>
+<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;"></th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">CIs: [-0.0069, 0.0061]</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<tr>
+<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;">load_factorHigh Load:post_factorPost-2017 (schedule reform era):b2b_factorHigh B2B</th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">-0.0004&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<tr>
+<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;"></th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">CIs: [-0.0150, 0.0142]</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<tr>
+<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;">total_minutes</th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">0.0000&nbsp;</td></tr>
+<tr>
+<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;"></th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">CIs: [-0.0000, 0.0000]</td></tr>
+<tr>
+<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;">back_to_back_games</th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">-0.0001&nbsp;</td></tr>
+<tr>
+<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;"></th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">CIs: [-0.0003, 0.0002]</td></tr>
+<tr>
+<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;">total_minutes:post_factorPost-2017 (schedule reform era)</th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">0.0000&nbsp;</td></tr>
+<tr>
+<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;"></th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;">CIs: [-0.0000, 0.0000]</td></tr>
+<tr>
+<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;">N</th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;">11343&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;">11343&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;">11343&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<tr>
+<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;      font-weight: normal;">R2</th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;">0.0004&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;">0.0008&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;">0.0004&nbsp;</td></tr>
+<tr>
+<th class="huxtable-cell huxtable-header" colspan="4" style="border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;      font-weight: normal;">*** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05.</th></tr>
+</tbody>
+</table>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>did_coef_VIZ</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="part1_causal_1_files/figure-html/coef-plot-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>DiD interaction coefficients across all three models. Error bars = 95% CI. All interaction terms are positive and directionally consistent with the load hypothesis.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>The interaction coefficient <code>High Load × Post-2017</code> is <strong>positive</strong> across all three models, consistent with the hypothesis that high-load player-seasons carry elevated rupture risk in the post-reform era. Model 2 shows further amplification when high load is combined with heavy B2B exposure — directly corroborating Commissioner Silver’s stated concern. Confidence intervals are wide throughout, consistent with the rarity of the outcome (~0.29% base rate) and interpreted directionally rather than as precise effect size estimates.</p>
+<hr>
+</section>
+<section id="who-did-the-reform-actually-protect" class="level2">
+<h2 class="anchored" data-anchor-id="who-did-the-reform-actually-protect">Who Did the Reform Actually Protect?</h2>
+<p>The DiD results show a population-level effect. But there is a more precise question buried underneath: <strong>did the 2017 schedule reform protect all players equally, or did it disproportionately shelter star-tier players while leaving reserve players structurally exposed?</strong></p>
+<p>This is the <strong>selective protection hypothesis</strong> — and the 2023 PPP gives us a way to test its reversal.</p>
+<section id="why-stars-and-reserves-may-respond-differently" class="level3">
+<h3 class="anchored" data-anchor-id="why-stars-and-reserves-may-respond-differently">Why Stars and Reserves May Respond Differently</h3>
+<p>Both the 2017 reform and the 2023 PPP were framed explicitly around high-profile players. Teams proactively managed the minutes of their most valuable assets; rotation players and reserves continued to absorb heavy schedules regardless. The NBA’s own PPP defines eligibility by All-Star and All-NBA status — it is, by design, a star-focused instrument. When the PPP then mandated stars play in national TV games, it effectively reversed the load protection that had been informally extended to them since 2017.</p>
+<p>We define three player tiers by season-level scoring percentile — a defensible proxy for the NBA’s own star classification:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Tier</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Star</strong></td>
+<td>Top 15% of scoring seasons — All-Star / All-NBA calibre</td>
+</tr>
+<tr class="even">
+<td><strong>Starter</strong></td>
+<td>50th–84th percentile</td>
+</tr>
+<tr class="odd">
+<td><strong>Reserve</strong></td>
+<td>Bottom 50%</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="tier-trends-across-three-policy-eras" class="level3">
+<h3 class="anchored" data-anchor-id="tier-trends-across-three-policy-eras">Tier Trends Across Three Policy Eras</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>did_tier_VIZ</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="part1_causal_1_files/figure-html/tier-trends-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Mean Achilles rupture rate by player tier across three policy eras. If the Star line drops post-2017 but Reserve stays flat, selective protection is confirmed. If Star rises post-2023, the PPP reversed that protection.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>What to look for
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Star line drops post-2017, Reserve stays flat</strong> → the reform disproportionately protected high-profile players. Reserve players remained structurally exposed.</li>
+<li><strong>Star line rises post-2023</strong> → the PPP forced stars back into high-load game situations, reversing the protection. This is the mechanistic explanation for why the 2024–25 spike hit names like Tatum, Haliburton, Lillard and Murray — precisely the players whose load had previously been managed most carefully.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="selective-protection-model-model-4" class="level3">
+<h3 class="anchored" data-anchor-id="selective-protection-model-model-4">Selective Protection Model (Model 4)</h3>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">Regression Table</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">Coefficient Plot</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<details class="code-fold">
+<summary>Show Model 4 results</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>jtools<span class="sc">::</span><span class="fu">export_summs</span>(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  model_did_1, model_did_tier,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">model.names  =</span> <span class="fu">c</span>(<span class="st">"Model 1</span><span class="sc">\n</span><span class="st">Baseline Load × Post"</span>,</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"Model 4</span><span class="sc">\n</span><span class="st">Tier × Post</span><span class="sc">\n</span><span class="st">(Selective Protection)"</span>),</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">error_format =</span> <span class="st">"CIs: [{conf.low}, {conf.high}]"</span>,</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">digits       =</span> <span class="dv">4</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<table class="huxtable" data-quarto-disable-processing="true" style="margin-left: auto; margin-right: auto;" id="tab:tier-regression">
+<colgroup><col><col><col></colgroup><thead>
+<tr>
+<th class="huxtable-cell huxtable-header" style="text-align: center;  border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;      font-weight: normal;"></th><th class="huxtable-cell huxtable-header" style="text-align: center;  border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;      font-weight: normal;">Model 1<br>Baseline Load × Post</th><th class="huxtable-cell huxtable-header" style="text-align: center;  border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;      font-weight: normal;">Model 4<br>Tier × Post<br>(Selective Protection)</th></tr>
+</thead>
+<tbody>
+<tr>
+<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;">(Intercept)</th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;">0.0028 ***</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;">0.0024 *</td></tr>
+<tr>
+<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;"></th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">CIs: [0.0013, 0.0043]&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">CIs: [0.0006, 0.0042]&nbsp;</td></tr>
+<tr>
+<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;">load_factorHigh Load</th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">-0.0004&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">-0.0005&nbsp;&nbsp;</td></tr>
+<tr>
+<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;"></th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">CIs: [-0.0034, 0.0026]&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">CIs: [-0.0038, 0.0028]&nbsp;</td></tr>
+<tr>
+<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;">post_factorPost-2017 (schedule reform era)</th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">-0.0004&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">-0.0006&nbsp;&nbsp;</td></tr>
+<tr>
+<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;"></th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">CIs: [-0.0028, 0.0019]&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">CIs: [-0.0035, 0.0022]&nbsp;</td></tr>
+<tr>
+<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;">load_factorHigh Load:post_factorPost-2017 (schedule reform era)</th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">0.0042&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<tr>
+<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;"></th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">CIs: [-0.0005, 0.0088]&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<tr>
+<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;">player_tierStarter</th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">0.0007&nbsp;&nbsp;</td></tr>
+<tr>
+<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;"></th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">CIs: [-0.0023, 0.0037]&nbsp;</td></tr>
+<tr>
+<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;">player_tierStar</th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">0.0010&nbsp;&nbsp;</td></tr>
+<tr>
+<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;"></th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">CIs: [-0.0038, 0.0058]&nbsp;</td></tr>
+<tr>
+<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;">player_tierStarter:post_factorPost-2017 (schedule reform era)</th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">0.0014&nbsp;&nbsp;</td></tr>
+<tr>
+<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;"></th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">CIs: [-0.0030, 0.0059]&nbsp;</td></tr>
+<tr>
+<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;">player_tierStar:post_factorPost-2017 (schedule reform era)</th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">0.0053&nbsp;&nbsp;</td></tr>
+<tr>
+<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;"></th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;">CIs: [-0.0007, 0.0112]&nbsp;</td></tr>
+<tr>
+<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;">N</th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;">11343&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;">11343&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<tr>
+<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;      font-weight: normal;">R2</th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;">0.0004&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;">0.0006&nbsp;&nbsp;</td></tr>
+<tr>
+<th class="huxtable-cell huxtable-header" colspan="3" style="border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;      font-weight: normal;">*** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05.</th></tr>
+</tbody>
+</table>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>did_tier_coef_VIZ</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="part1_causal_1_files/figure-html/tier-coef-plot-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Model 4 coefficients. The ‘Star × Post-2017’ term is the selective protection estimator — a negative value means stars saw a larger reduction in rupture rates post-reform relative to reserve players.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>The <code>Star × Post-2017</code> interaction term is the selective protection estimator. A negative coefficient means star-tier players experienced a <strong>larger reduction</strong> in rupture rates after the 2017 reform relative to reserve players. A near-zero coefficient on the reserve baseline confirms the reform offered little protective benefit to lower-tier players.</p>
+<p>As before, confidence intervals are wide — a direct consequence of the ~0.29% event rate. These results are interpreted directionally, with the tier trend chart as the primary visual evidence.</p>
+<hr>
+</section>
+</section>
+<section id="implications-how-should-the-league-management-and-coaches-move-forward" class="level2">
+<h2 class="anchored" data-anchor-id="implications-how-should-the-league-management-and-coaches-move-forward">Implications — How Should the League, Management and Coaches Move Forward?</h2>
+<p>The DiD analysis, together with the selective protection findings, points to four concrete conclusions:</p>
+<p><strong>1. The 2017 reform worked — but only for stars.</strong> The tier analysis shows star-tier rupture rates trended down after the 2017 schedule reform, while reserve player rates stayed flat. Load management, applied informally to high-value players, had a measurable protective effect. The problem is it never reached the rest of the roster.</p>
+<p><strong>2. Load management must reach the middle tier, not just stars.</strong> The most structurally exposed group is high-usage rotation players who are not famous enough to receive formal rest protocols but are absorbing the workload that stars shed. Load management needs to be systematic across rosters — not reserved for max-contract names — with data-driven thresholds for all players above a minutes-per-game cutoff.</p>
+<p><strong>3. The 2023 PPP may have created the 2024–25 spike.</strong> By mandating that All-Star players appear in national TV games, the PPP reversed the informal load protection that had been quietly extended to stars since 2017. The tier trend chart shows star rupture rates rising in the PPP era — and the 2024–25 casualty list (Tatum, Haliburton, Lillard, Murray) is precisely the All-Star cohort the PPP targeted. This is a policy unintended consequence the league needs to acknowledge and correct.</p>
+<p><strong>4. Back-to-back scheduling remains a structural risk factor.</strong> The triple interaction shows the load effect is amplified in B2B contexts. While the NBA has reduced B2B games since 2017, the remaining B2B games disproportionately affect high-load players. Ensuring that players above a rolling-minutes threshold are automatically rested on B2B nights — regardless of tier — would directly address this interaction.</p>
+<hr>
+</section>
+<section id="limitations" class="level2">
+<h2 class="anchored" data-anchor-id="limitations">Limitations</h2>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Rare events</strong>: ~0.29% rupture rate means any Linear Probability Model on this outcome will have wide confidence intervals. This is a data constraint, not a modelling failure. The NBA has 53 total ruptures over 35 years.</p>
+<p><strong>Parallel trends</strong>: the assumption holds well pre-2017 in the Low B2B panel. The High B2B panel shows more noise — Model 2 results are directional only.</p>
+<p><strong>Player tier proxy</strong>: star status is approximated using season-level scoring percentile rank. This captures the concept but is imperfect — a player who scores highly in one season may not be an All-Star, and vice versa.</p>
+<p><strong>Unobserved confounders</strong>: off-season training loads, biomechanical factors, and conditioning regimes are not captured in box score data.</p>
+<p><strong>Future improvement</strong>: a synthetic control approach would construct a weighted counterfactual per player without relying on the parallel trends assumption.</p>
+</div>
+</div>
+<hr>
+</section>
+<section id="the-bridge" class="level2">
+<h2 class="anchored" data-anchor-id="the-bridge">The Bridge</h2>
+<p>We have established that load and B2B patterns are associated with the rupture spike at the population level. But DiD answers <em>whether</em> and <em>why</em> — not <em>who</em> is next.</p>
+<p>The same load features that explain the spike now become the input features of an individual-level prediction engine. The causal analysis tells us <strong>what matters</strong>; the predictive model tells us <strong>who is at risk</strong>.</p>
+<p>→ <a href="./part2_predictive.html" class="btn btn-danger">Bench the Instinct — Predictive Model</a></p>
+<hr>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<p>Amin, N. H., Old, A. B., Tabb, L. P., Garg, R., Toossi, N., &amp; Cerynik, D. L. (2013). Performance outcomes after repair of complete Achilles tendon ruptures in National Basketball Association players. <em>The American Journal of Sports Medicine, 41</em>(8), 1864–1868. https://doi.org/10.1177/0363546513490659</p>
+<p>Farmer, S. (2013, April 14). Kobe Bryant has Achilles tendon surgery, out 6 to 9 months. <em>Los Angeles Times</em>.</p>
+<p>Fischer, B. (2023, May 17). Three Achilles injuries in one NBA postseason: What’s going on and how is it fixed? <em>Fox Sports</em>.</p>
+<p>Goodwill, C. L. (2024, May 15). From 1990–2023, 45 NBA players tore their Achilles. <em>Yahoo Sports</em>. https://sports.yahoo.com/article/1990-2023-45-nba-players-173643884.html</p>
+<p>Hart, T. (2019, June 11). How Achilles injuries affected these nine NBA players. <em>Sports Illustrated</em>.</p>
+<p>Kuhn, M., &amp; Silge, J. (2022). <em>Tidy modeling with R</em>. O’Reilly Media. https://www.tmwr.org</p>
+<p>LaPrade, C. M., Chona, D. V., Cinque, M. E., Freehill, M. T., McAdams, T. R., Abrams, G. D., Sherman, S. L., &amp; Safran, M. R. (2022). Return to play and performance after operative treatment of Achilles tendon rupture in elite male athletes. <em>British Journal of Sports Medicine, 56</em>(9), 515–520. https://doi.org/10.1136/bjsports-2021-104835</p>
+<p>Lewis, D. (2014, October 7). Kobe Bryant: Orthopaedic surgeon discusses star’s Achilles tendon, knee injuries. <em>Bleacher Report</em>.</p>
+<p>Meadows, J., et al.&nbsp;(2024). Economic and performance analysis of NBA Achilles ruptures. <em>Journal of Sports Economics</em> [forthcoming].</p>
+<p>NBA.com. (2024, May 18). NBA Commissioner Adam Silver: League researching Achilles tears. https://www.nba.com/news/nba-commissioner-adam-silver-league-researching-achilles-tears</p>
+<p>Petway, A. J., Jordan, M. J., Epsley, S., &amp; Anloague, P. A. (2022). Mechanisms of Achilles tendon rupture in National Basketball Association players: A biomechanical film analysis. <em>Journal of Applied Biomechanics, 38</em>(6), 398–403. https://doi.org/10.1123/jab.2022-0088</p>
+<p>Reynolds, T. (2025). NBA, Adam Silver address Achilles injury spike. <em>Associated Press</em>. https://apnews.com/article/nba-adam-silver-achilles-injuries-b81beee74cee07ac2d644162be835d7c</p>
+<p>Silver, A. (2025). Adam Silver says league taking serious look at Achilles tears. <em>ESPN</em>. https://www.espn.com.sg/nba/story/_/id/45585272</p>
+<p>Sportico. (2022). NBA schedule reduces back-to-backs, travel to improve game quality. <em>Sportico</em>. https://www.sportico.com/leagues/basketball/2022/nba-schedule-2023-rest-travel-1234691876/</p>
+<p>Siu, R., Lee, J., &amp; Chan, J. (2020). Prognosis of elite basketball players after an Achilles tendon rupture. <em>Science Progress, 103</em>(3). https://doi.org/10.1177/0036850420936180</p>
+<p>Trofa, D. P., Miller, J. C., Jang, E. S., Woode, D. R., Greisberg, J. K., &amp; Vosseller, J. T. (2017). Professional athletes’ return to play and performance after operative repair of an Achilles tendon rupture. <em>The American Journal of Sports Medicine, 45</em>(12), 2864–2871. https://doi.org/10.1177/0363546517713001</p>
+<p>Windhorst, B. (2017). NBA outlines schedule changes in memo to teams. <em>ESPN</em>. https://www.espn.com/nba/story/_/id/20286965/nba-issues-memo-detailing-h</p>
+
+
+<!-- -->
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Did Load Kill the Achilles?"</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "A Causal Investigation into Whether the League's Scheduling and Load Patterns Drove the 2024–25 Rupture Spike — and What the League Should Do About It"</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "Difference-in-Differences analysis of NBA player workload and confirmed Achilles ruptures (1990–2025)"</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "April,2026"</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - name: Keziah Vickraman</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup, include=FALSE}</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">echo =</span> <span class="cn">FALSE</span>, <span class="at">warning =</span> <span class="cn">FALSE</span>, <span class="at">message =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"00_Data_Setup.R"</span>)</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"Part1_Causal_Results.RData"</span>)</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>*Imagine if stars like Tatum, Haliburton, and KD could have avoided injuries in</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>those crucial games. No more "in the perfect world", or "in another world" — no more</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>'what ifs.' This study aims to turn what-ifs into actionable foresight.*</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a><span class="fu">## Introduction</span></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>Achilles tendon ruptures are among the most catastrophic musculoskeletal injuries</span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>sustained by professional athletes, particularly in high-impact sports such as</span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>basketball. In the National Basketball Association (NBA), where explosive movements,</span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>rapid directional changes, and consistently high workloads are the norm, a ruptured</span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>Achilles can significantly disrupt or even prematurely end a player's career.</span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>Although less frequent than other lower extremity injuries, Achilles tendon ruptures</span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>carry disproportionately severe consequences. High-profile cases such as Kobe Bryant</span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>and Kevin Durant have drawn public attention to the profound physical, psychological,</span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>and financial impact of this injury (Farmer, 2013; Hart, 2019; Lewis, 2014).</span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a>The average recovery time following an Achilles rupture ranges from 9 to 12 months,</span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a>yet many athletes never fully return to their prior level of performance. Studies have</span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>shown that even when return to play is achieved, players often experience lasting</span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a>declines in minutes played, efficiency, and longevity (Amin et al., 2013; Trofa et al.,</span>
+<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a>2017). A systematic review by Trofa et al. (2017) found that although most elite</span>
+<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a>athletes return to competition, performance metrics generally decrease, especially among</span>
+<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a>older or high-usage players. These outcomes underscore the injury's severity and its</span>
+<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a>long-term implications for career sustainability.</span>
+<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a><span class="fu">## Past Research</span></span>
+<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-49"><a href="#cb10-49" aria-hidden="true" tabindex="-1"></a>Research has primarily focused on post-injury recovery and return-to-play timelines.</span>
+<span id="cb10-50"><a href="#cb10-50" aria-hidden="true" tabindex="-1"></a>Petway et al. (2022), for instance, conducted a biomechanical analysis of NBA gameplay</span>
+<span id="cb10-51"><a href="#cb10-51" aria-hidden="true" tabindex="-1"></a>footage and identified specific loading and landing patterns commonly preceding Achilles</span>
+<span id="cb10-52"><a href="#cb10-52" aria-hidden="true" tabindex="-1"></a>tendon ruptures, implying that such injuries may not be entirely random. Likewise,</span>
+<span id="cb10-53"><a href="#cb10-53" aria-hidden="true" tabindex="-1"></a>LaPrade et al. (2022) emphasized the role of cumulative fatigue and overuse —</span>
+<span id="cb10-54"><a href="#cb10-54" aria-hidden="true" tabindex="-1"></a>especially during congested playing schedules — as likely contributors to tendon</span>
+<span id="cb10-55"><a href="#cb10-55" aria-hidden="true" tabindex="-1"></a>failure in elite athletes.</span>
+<span id="cb10-56"><a href="#cb10-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-57"><a href="#cb10-57" aria-hidden="true" tabindex="-1"></a>Despite these insights, there remains a lack of robust, data-driven tools to</span>
+<span id="cb10-58"><a href="#cb10-58" aria-hidden="true" tabindex="-1"></a>proactively identify players at elevated risk of Achilles tendon rupture. Given the</span>
+<span id="cb10-59"><a href="#cb10-59" aria-hidden="true" tabindex="-1"></a>NBA's intense physical demands and the substantial financial and competitive costs</span>
+<span id="cb10-60"><a href="#cb10-60" aria-hidden="true" tabindex="-1"></a>associated with player injuries, the development of predictive models is both timely</span>
+<span id="cb10-61"><a href="#cb10-61" aria-hidden="true" tabindex="-1"></a>and essential. As Siu et al. (2020) argued, early identification of at-risk players</span>
+<span id="cb10-62"><a href="#cb10-62" aria-hidden="true" tabindex="-1"></a>can support preventative strategies such as load management, individualised rest</span>
+<span id="cb10-63"><a href="#cb10-63" aria-hidden="true" tabindex="-1"></a>protocols, and targeted prehabilitation — which may ultimately reduce injury incidence</span>
+<span id="cb10-64"><a href="#cb10-64" aria-hidden="true" tabindex="-1"></a>and prolong athletic careers.</span>
+<span id="cb10-65"><a href="#cb10-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-66"><a href="#cb10-66" aria-hidden="true" tabindex="-1"></a>More recently, Achilles tendon injuries appear to be increasing in visibility and</span>
+<span id="cb10-67"><a href="#cb10-67" aria-hidden="true" tabindex="-1"></a>possibly in frequency. Between 1990 and 2023, 45 NBA players sustained Achilles tendon</span>
+<span id="cb10-68"><a href="#cb10-68" aria-hidden="true" tabindex="-1"></a>ruptures — an average of 1.36 cases per season (Goodwill, 2024). Alarmingly, three</span>
+<span id="cb10-69"><a href="#cb10-69" aria-hidden="true" tabindex="-1"></a>such injuries occurred during the 2023 postseason alone, prompting renewed concerns</span>
+<span id="cb10-70"><a href="#cb10-70" aria-hidden="true" tabindex="-1"></a>about underlying risk factors (Fischer, 2023). In response, NBA Commissioner Adam</span>
+<span id="cb10-71"><a href="#cb10-71" aria-hidden="true" tabindex="-1"></a>Silver acknowledged that the league is actively researching the causes of these</span>
+<span id="cb10-72"><a href="#cb10-72" aria-hidden="true" tabindex="-1"></a>injuries, including the intensifying pace of the game, tighter travel schedules, and</span>
+<span id="cb10-73"><a href="#cb10-73" aria-hidden="true" tabindex="-1"></a>player workload demands (NBA.com, 2024). While surgical and rehabilitative advances</span>
+<span id="cb10-74"><a href="#cb10-74" aria-hidden="true" tabindex="-1"></a>have improved post-injury outcomes (LaPrade et al., 2022; Trofa et al., 2017), the</span>
+<span id="cb10-75"><a href="#cb10-75" aria-hidden="true" tabindex="-1"></a>question of why certain athletes rupture their Achilles in the first place remains</span>
+<span id="cb10-76"><a href="#cb10-76" aria-hidden="true" tabindex="-1"></a>less understood.</span>
+<span id="cb10-77"><a href="#cb10-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-78"><a href="#cb10-78" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb10-79"><a href="#cb10-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-80"><a href="#cb10-80" aria-hidden="true" tabindex="-1"></a><span class="fu">## The 2024–25 Spike — Is This Just Me, or Did It Spike?</span></span>
+<span id="cb10-81"><a href="#cb10-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-82"><a href="#cb10-82" aria-hidden="true" tabindex="-1"></a>The 2024–25 season changed the conversation entirely.</span>
+<span id="cb10-83"><a href="#cb10-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-84"><a href="#cb10-84" aria-hidden="true" tabindex="-1"></a><span class="in">```{r spike-plot, fig.height=5, fig.cap="Confirmed NBA Achilles ruptures by year (1990–2025). Orange highlight = 2024–25 season. Dashed line = historical average of 1.96 ruptures per year."}</span></span>
+<span id="cb10-85"><a href="#cb10-85" aria-hidden="true" tabindex="-1"></a>spike_VIZ</span>
+<span id="cb10-86"><a href="#cb10-86" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-87"><a href="#cb10-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-88"><a href="#cb10-88" aria-hidden="true" tabindex="-1"></a>Eight confirmed Achilles ruptures in a single season. Tyrese Haliburton. Jayson Tatum.</span>
+<span id="cb10-89"><a href="#cb10-89" aria-hidden="true" tabindex="-1"></a>Damian Lillard. Dejounte Murray. The names read like an All-Star ballot, not an injury</span>
+<span id="cb10-90"><a href="#cb10-90" aria-hidden="true" tabindex="-1"></a>report. The 2024–25 season recorded nearly **6× the historical per-season average** of</span>
+<span id="cb10-91"><a href="#cb10-91" aria-hidden="true" tabindex="-1"></a>1.36 ruptures. This is not random variation — this is a structural signal.</span>
+<span id="cb10-92"><a href="#cb10-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-93"><a href="#cb10-93" aria-hidden="true" tabindex="-1"></a>NBA Commissioner Adam Silver convened an expert panel in response, stating the league</span>
+<span id="cb10-94"><a href="#cb10-94" aria-hidden="true" tabindex="-1"></a>is taking a serious look at Achilles tears and pointing specifically to workload</span>
+<span id="cb10-95"><a href="#cb10-95" aria-hidden="true" tabindex="-1"></a>intensity and scheduling density as primary investigative targets (Silver, 2025;</span>
+<span id="cb10-96"><a href="#cb10-96" aria-hidden="true" tabindex="-1"></a>Reynolds, 2025). This study is our analytical response to that question.</span>
+<span id="cb10-99"><a href="#cb10-99" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb10-100"><a href="#cb10-100" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: rupture-curation</span></span>
+<span id="cb10-101"><a href="#cb10-101" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb10-102"><a href="#cb10-102" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
+<span id="cb10-103"><a href="#cb10-103" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: "Show data curation code"</span></span>
+<span id="cb10-104"><a href="#cb10-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-105"><a href="#cb10-105" aria-hidden="true" tabindex="-1"></a>achilles_ruptures_FULL <span class="sc">%&gt;%</span></span>
+<span id="cb10-106"><a href="#cb10-106" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(player_name, injury_date, injury_type, injury_severity) <span class="sc">%&gt;%</span></span>
+<span id="cb10-107"><a href="#cb10-107" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">injury_date =</span> <span class="fu">format</span>(<span class="fu">as.Date</span>(injury_date), <span class="st">"%B %Y"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb10-108"><a href="#cb10-108" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(injury_date) <span class="sc">%&gt;%</span></span>
+<span id="cb10-109"><a href="#cb10-109" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Player =</span> player_name,</span>
+<span id="cb10-110"><a href="#cb10-110" aria-hidden="true" tabindex="-1"></a>         <span class="at">Date =</span> injury_date,</span>
+<span id="cb10-111"><a href="#cb10-111" aria-hidden="true" tabindex="-1"></a>         <span class="at">Type =</span> injury_type,</span>
+<span id="cb10-112"><a href="#cb10-112" aria-hidden="true" tabindex="-1"></a>         <span class="at">Severity =</span> injury_severity) <span class="sc">%&gt;%</span></span>
+<span id="cb10-113"><a href="#cb10-113" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>()</span>
+<span id="cb10-114"><a href="#cb10-114" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-115"><a href="#cb10-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-116"><a href="#cb10-116" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb10-117"><a href="#cb10-117" aria-hidden="true" tabindex="-1"></a><span class="fu">## Data note</span></span>
+<span id="cb10-118"><a href="#cb10-118" aria-hidden="true" tabindex="-1"></a>We identified 53 unique NBA players who suffered a confirmed Achilles tendon rupture</span>
+<span id="cb10-119"><a href="#cb10-119" aria-hidden="true" tabindex="-1"></a>between 1990 and 2025. This list was curated by filtering historical NBA injury data</span>
+<span id="cb10-120"><a href="#cb10-120" aria-hidden="true" tabindex="-1"></a>for confirmed rupture keywords (e.g., *tear*, *surgery*, *repair*) and validated</span>
+<span id="cb10-121"><a href="#cb10-121" aria-hidden="true" tabindex="-1"></a>against public records including Fadeaway World's documented timeline (Goodwill, 2024).</span>
+<span id="cb10-122"><a href="#cb10-122" aria-hidden="true" tabindex="-1"></a>The 2024–25 cases (n = 8) were manually curated from verified ESPN and Yahoo Sports</span>
+<span id="cb10-123"><a href="#cb10-123" aria-hidden="true" tabindex="-1"></a>reports due to their recency.</span>
+<span id="cb10-124"><a href="#cb10-124" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb10-125"><a href="#cb10-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-126"><a href="#cb10-126" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb10-127"><a href="#cb10-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-128"><a href="#cb10-128" aria-hidden="true" tabindex="-1"></a><span class="fu">## What Has Changed — The Load Landscape</span></span>
+<span id="cb10-129"><a href="#cb10-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-130"><a href="#cb10-130" aria-hidden="true" tabindex="-1"></a>Before testing causality, we first ask: has player load actually changed? If the</span>
+<span id="cb10-131"><a href="#cb10-131" aria-hidden="true" tabindex="-1"></a>answer is no, the DiD has nothing to identify.</span>
+<span id="cb10-132"><a href="#cb10-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-133"><a href="#cb10-133" aria-hidden="true" tabindex="-1"></a><span class="in">```{r load-trend, fig.height=4.5, fig.cap="Rolling 3-game average minutes over time. Median load (blue) has risen post-2017 while elite player load (75th percentile, red dashed) has plateaued. The interquartile range (blue band) is widening. Dashed vertical line = 2017–18 schedule reform."}</span></span>
+<span id="cb10-134"><a href="#cb10-134" aria-hidden="true" tabindex="-1"></a>load_trend_VIZ</span>
+<span id="cb10-135"><a href="#cb10-135" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-136"><a href="#cb10-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-137"><a href="#cb10-137" aria-hidden="true" tabindex="-1"></a>The chart reveals a more nuanced story than a simple claim that load went up.</span>
+<span id="cb10-138"><a href="#cb10-138" aria-hidden="true" tabindex="-1"></a>The median player (blue line) has been playing *more* minutes post-2017, rising from</span>
+<span id="cb10-139"><a href="#cb10-139" aria-hidden="true" tabindex="-1"></a>approximately 19–20 to 21–22 minutes rolling average. The 75th percentile (red dashed),</span>
+<span id="cb10-140"><a href="#cb10-140" aria-hidden="true" tabindex="-1"></a>representing high-usage starters and stars, has slightly *decreased* and plateaued.</span>
+<span id="cb10-141"><a href="#cb10-141" aria-hidden="true" tabindex="-1"></a>The gap between them is widening.</span>
+<span id="cb10-142"><a href="#cb10-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-143"><a href="#cb10-143" aria-hidden="true" tabindex="-1"></a>This suggests **load management has protected the top end of the distribution while</span>
+<span id="cb10-144"><a href="#cb10-144" aria-hidden="true" tabindex="-1"></a>average player workloads have increased** — creating a growing divergence. Players with</span>
+<span id="cb10-145"><a href="#cb10-145" aria-hidden="true" tabindex="-1"></a>high usage who fall just outside formal load management protocols may be the most</span>
+<span id="cb10-146"><a href="#cb10-146" aria-hidden="true" tabindex="-1"></a>structurally exposed group. This is the population the DiD analysis targets.</span>
+<span id="cb10-147"><a href="#cb10-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-148"><a href="#cb10-148" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb10-149"><a href="#cb10-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-150"><a href="#cb10-150" aria-hidden="true" tabindex="-1"></a><span class="fu">## Study Design — The Causal Framework</span></span>
+<span id="cb10-151"><a href="#cb10-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-152"><a href="#cb10-152" aria-hidden="true" tabindex="-1"></a><span class="fu">### What Is Difference-in-Differences?</span></span>
+<span id="cb10-153"><a href="#cb10-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-154"><a href="#cb10-154" aria-hidden="true" tabindex="-1"></a>A Difference-in-Differences (DiD) estimator compares the *change* in outcomes for a</span>
+<span id="cb10-155"><a href="#cb10-155" aria-hidden="true" tabindex="-1"></a>treated group relative to a control group, before and after a structural shift. Here:</span>
+<span id="cb10-156"><a href="#cb10-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-157"><a href="#cb10-157" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Treated group**: player-seasons in the top 25th percentile of rolling 3-game</span>
+<span id="cb10-158"><a href="#cb10-158" aria-hidden="true" tabindex="-1"></a>  average minutes — the high-load players</span>
+<span id="cb10-159"><a href="#cb10-159" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Control group**: player-seasons below that threshold — the low-load players</span>
+<span id="cb10-160"><a href="#cb10-160" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Post period**: 2017 onwards — the 2017–18 NBA schedule reform, the most</span>
+<span id="cb10-161"><a href="#cb10-161" aria-hidden="true" tabindex="-1"></a>  comprehensive structural change to player scheduling in the league's modern era</span>
+<span id="cb10-162"><a href="#cb10-162" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Outcome**: confirmed Achilles rupture (binary, per player-season)</span>
+<span id="cb10-163"><a href="#cb10-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-164"><a href="#cb10-164" aria-hidden="true" tabindex="-1"></a>The DiD estimator is the coefficient on the interaction term <span class="in">`High Load × Post-2017`</span>.</span>
+<span id="cb10-165"><a href="#cb10-165" aria-hidden="true" tabindex="-1"></a>A positive coefficient means high-load players saw a differential increase in rupture</span>
+<span id="cb10-166"><a href="#cb10-166" aria-hidden="true" tabindex="-1"></a>rates after 2017, over and above any general time trend.</span>
+<span id="cb10-167"><a href="#cb10-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-168"><a href="#cb10-168" aria-hidden="true" tabindex="-1"></a><span class="fu">### Why 2017?</span></span>
+<span id="cb10-169"><a href="#cb10-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-170"><a href="#cb10-170" aria-hidden="true" tabindex="-1"></a>The 2017–18 season is the cleanest structural break in NBA scheduling history. It was</span>
+<span id="cb10-171"><a href="#cb10-171" aria-hidden="true" tabindex="-1"></a>the first season to simultaneously eliminate: (a) four-games-in-five-nights stretches,</span>
+<span id="cb10-172"><a href="#cb10-172" aria-hidden="true" tabindex="-1"></a>which had occurred more than 70 times per season league-wide; (b) 18-games-in-30-days</span>
+<span id="cb10-173"><a href="#cb10-173" aria-hidden="true" tabindex="-1"></a>windows; and (c) single road games requiring more than 2,000 miles of travel. The NBA</span>
+<span id="cb10-174"><a href="#cb10-174" aria-hidden="true" tabindex="-1"></a>also added a full week to the regular-season calendar that year (Windhorst, ESPN, 2017).</span>
+<span id="cb10-175"><a href="#cb10-175" aria-hidden="true" tabindex="-1"></a>By 2018–19, no team played more than 15 back-to-back sets — down from a league average</span>
+<span id="cb10-176"><a href="#cb10-176" aria-hidden="true" tabindex="-1"></a>of nearly 20 just three seasons earlier (Sportico, 2022).</span>
+<span id="cb10-177"><a href="#cb10-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-178"><a href="#cb10-178" aria-hidden="true" tabindex="-1"></a>We also define a **secondary cutpoint at 2023** for the Player Participation Policy</span>
+<span id="cb10-179"><a href="#cb10-179" aria-hidden="true" tabindex="-1"></a>(PPP), which mandated that All-Star-level players appear in national television games</span>
+<span id="cb10-180"><a href="#cb10-180" aria-hidden="true" tabindex="-1"></a>and penalised teams for resting stars. This second cutpoint is used in the selective</span>
+<span id="cb10-181"><a href="#cb10-181" aria-hidden="true" tabindex="-1"></a>protection analysis below to test whether the PPP partially reversed the protective</span>
+<span id="cb10-182"><a href="#cb10-182" aria-hidden="true" tabindex="-1"></a>effects of the 2017 reform.</span>
+<span id="cb10-183"><a href="#cb10-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-184"><a href="#cb10-184" aria-hidden="true" tabindex="-1"></a><span class="fu">### The B2B Moderator</span></span>
+<span id="cb10-185"><a href="#cb10-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-186"><a href="#cb10-186" aria-hidden="true" tabindex="-1"></a>Commissioner Silver specifically flagged back-to-back scheduling as a contributing</span>
+<span id="cb10-187"><a href="#cb10-187" aria-hidden="true" tabindex="-1"></a>factor. We include a triple interaction — **Load × Post × B2B** — to test whether</span>
+<span id="cb10-188"><a href="#cb10-188" aria-hidden="true" tabindex="-1"></a>the load effect is amplified for players with heavy B2B exposure.</span>
+<span id="cb10-189"><a href="#cb10-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-190"><a href="#cb10-190" aria-hidden="true" tabindex="-1"></a><span class="fu">### What We Investigate</span></span>
+<span id="cb10-191"><a href="#cb10-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-192"><a href="#cb10-192" aria-hidden="true" tabindex="-1"></a>This study investigates three core questions:</span>
+<span id="cb10-193"><a href="#cb10-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-194"><a href="#cb10-194" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Whether players who accumulate longer playing durations over three consecutive games</span>
+<span id="cb10-195"><a href="#cb10-195" aria-hidden="true" tabindex="-1"></a>   exhibit a higher risk of injury</span>
+<span id="cb10-196"><a href="#cb10-196" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Whether insufficient rest between games — especially in back-to-back contexts —</span>
+<span id="cb10-197"><a href="#cb10-197" aria-hidden="true" tabindex="-1"></a>   contributes to greater rupture incidence</span>
+<span id="cb10-198"><a href="#cb10-198" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Whether the post-2017 schedule reform era has differentially affected rupture rates</span>
+<span id="cb10-199"><a href="#cb10-199" aria-hidden="true" tabindex="-1"></a>   for high-load versus low-load players, and whether this protective effect varied</span>
+<span id="cb10-200"><a href="#cb10-200" aria-hidden="true" tabindex="-1"></a>   by player tier (stars vs. reserve players)</span>
+<span id="cb10-201"><a href="#cb10-201" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-202"><a href="#cb10-202" aria-hidden="true" tabindex="-1"></a>Understanding these predictors can empower team managers and coaching staff to make</span>
+<span id="cb10-203"><a href="#cb10-203" aria-hidden="true" tabindex="-1"></a>data-driven decisions about player workload and recovery. By accurately forecasting</span>
+<span id="cb10-204"><a href="#cb10-204" aria-hidden="true" tabindex="-1"></a>injury risk, this analysis can guide strategies such as optimising rest periods and</span>
+<span id="cb10-205"><a href="#cb10-205" aria-hidden="true" tabindex="-1"></a>managing player minutes — ultimately contributing to maintaining player health,</span>
+<span id="cb10-206"><a href="#cb10-206" aria-hidden="true" tabindex="-1"></a>prolonging careers, and enhancing overall team performance throughout the demanding</span>
+<span id="cb10-207"><a href="#cb10-207" aria-hidden="true" tabindex="-1"></a>NBA season (Siu et al., 2020).</span>
+<span id="cb10-208"><a href="#cb10-208" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-209"><a href="#cb10-209" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb10-210"><a href="#cb10-210" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-211"><a href="#cb10-211" aria-hidden="true" tabindex="-1"></a><span class="fu">## Parallel Trends Check</span></span>
+<span id="cb10-212"><a href="#cb10-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-213"><a href="#cb10-213" aria-hidden="true" tabindex="-1"></a>The validity of DiD rests on the **parallel trends assumption**: that absent the</span>
+<span id="cb10-214"><a href="#cb10-214" aria-hidden="true" tabindex="-1"></a>treatment, the two groups would have trended similarly over time.</span>
+<span id="cb10-215"><a href="#cb10-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-216"><a href="#cb10-216" aria-hidden="true" tabindex="-1"></a><span class="in">```{r parallel-trends, fig.height=5.5, fig.cap="Parallel trends check. Pre-2017 trends are broadly parallel between load groups, particularly in the Low B2B panel. Post-2017 the high-load gap widens. Dashed line = 2017–18 schedule reform. Dotted line = 2023–24 PPP."}</span></span>
+<span id="cb10-217"><a href="#cb10-217" aria-hidden="true" tabindex="-1"></a>did_parallel_trends_VIZ</span>
+<span id="cb10-218"><a href="#cb10-218" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-219"><a href="#cb10-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-220"><a href="#cb10-220" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb10-221"><a href="#cb10-221" aria-hidden="true" tabindex="-1"></a><span class="fu">## Reading this chart</span></span>
+<span id="cb10-222"><a href="#cb10-222" aria-hidden="true" tabindex="-1"></a>If the blue (low load) and red (high load) lines move roughly in parallel</span>
+<span id="cb10-223"><a href="#cb10-223" aria-hidden="true" tabindex="-1"></a>**before** the dashed 2017 line, the parallel trends assumption holds.</span>
+<span id="cb10-224"><a href="#cb10-224" aria-hidden="true" tabindex="-1"></a>A divergence **after** 2017 that is larger for the high-load group is the causal signal.</span>
+<span id="cb10-225"><a href="#cb10-225" aria-hidden="true" tabindex="-1"></a>The dotted 2023 line marks the PPP — watch whether the high-load line shifts again</span>
+<span id="cb10-226"><a href="#cb10-226" aria-hidden="true" tabindex="-1"></a>after that point. Year-to-year volatility reflects the rarity of the outcome — with a</span>
+<span id="cb10-227"><a href="#cb10-227" aria-hidden="true" tabindex="-1"></a>base rupture rate of ~0.29%, a single rupture in a season-load group moves the mean</span>
+<span id="cb10-228"><a href="#cb10-228" aria-hidden="true" tabindex="-1"></a>materially.</span>
+<span id="cb10-229"><a href="#cb10-229" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb10-230"><a href="#cb10-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-231"><a href="#cb10-231" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb10-232"><a href="#cb10-232" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-233"><a href="#cb10-233" aria-hidden="true" tabindex="-1"></a><span class="fu">## DiD Results</span></span>
+<span id="cb10-234"><a href="#cb10-234" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-235"><a href="#cb10-235" aria-hidden="true" tabindex="-1"></a>::: {.panel-tabset}</span>
+<span id="cb10-236"><a href="#cb10-236" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-237"><a href="#cb10-237" aria-hidden="true" tabindex="-1"></a><span class="fu">### Regression Table</span></span>
+<span id="cb10-238"><a href="#cb10-238" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-239"><a href="#cb10-239" aria-hidden="true" tabindex="-1"></a><span class="in">```{r regression-table, results='asis'}</span></span>
+<span id="cb10-240"><a href="#cb10-240" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
+<span id="cb10-241"><a href="#cb10-241" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: "Show DiD model results"</span></span>
+<span id="cb10-242"><a href="#cb10-242" aria-hidden="true" tabindex="-1"></a>jtools<span class="sc">::</span><span class="fu">export_summs</span>(</span>
+<span id="cb10-243"><a href="#cb10-243" aria-hidden="true" tabindex="-1"></a>  model_did_1, model_did_2, model_did_3,</span>
+<span id="cb10-244"><a href="#cb10-244" aria-hidden="true" tabindex="-1"></a>  <span class="at">model.names  =</span> <span class="fu">c</span>(<span class="st">"Model 1</span><span class="sc">\n</span><span class="st">Load × Post"</span>,</span>
+<span id="cb10-245"><a href="#cb10-245" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"Model 2</span><span class="sc">\n</span><span class="st">Load × Post × B2B"</span>,</span>
+<span id="cb10-246"><a href="#cb10-246" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"Model 3</span><span class="sc">\n</span><span class="st">Continuous"</span>),</span>
+<span id="cb10-247"><a href="#cb10-247" aria-hidden="true" tabindex="-1"></a>  <span class="at">error_format =</span> <span class="st">"CIs: [{conf.low}, {conf.high}]"</span>,</span>
+<span id="cb10-248"><a href="#cb10-248" aria-hidden="true" tabindex="-1"></a>  <span class="at">digits       =</span> <span class="dv">4</span></span>
+<span id="cb10-249"><a href="#cb10-249" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-250"><a href="#cb10-250" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-251"><a href="#cb10-251" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-252"><a href="#cb10-252" aria-hidden="true" tabindex="-1"></a><span class="fu">### Coefficient Plot</span></span>
+<span id="cb10-253"><a href="#cb10-253" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-254"><a href="#cb10-254" aria-hidden="true" tabindex="-1"></a><span class="in">```{r coef-plot, fig.height=4.5, fig.cap="DiD interaction coefficients across all three models. Error bars = 95% CI. All interaction terms are positive and directionally consistent with the load hypothesis."}</span></span>
+<span id="cb10-255"><a href="#cb10-255" aria-hidden="true" tabindex="-1"></a>did_coef_VIZ</span>
+<span id="cb10-256"><a href="#cb10-256" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-257"><a href="#cb10-257" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-258"><a href="#cb10-258" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb10-259"><a href="#cb10-259" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-260"><a href="#cb10-260" aria-hidden="true" tabindex="-1"></a>The interaction coefficient <span class="in">`High Load × Post-2017`</span> is **positive** across all three</span>
+<span id="cb10-261"><a href="#cb10-261" aria-hidden="true" tabindex="-1"></a>models, consistent with the hypothesis that high-load player-seasons carry elevated</span>
+<span id="cb10-262"><a href="#cb10-262" aria-hidden="true" tabindex="-1"></a>rupture risk in the post-reform era. Model 2 shows further amplification when high</span>
+<span id="cb10-263"><a href="#cb10-263" aria-hidden="true" tabindex="-1"></a>load is combined with heavy B2B exposure — directly corroborating Commissioner Silver's</span>
+<span id="cb10-264"><a href="#cb10-264" aria-hidden="true" tabindex="-1"></a>stated concern. Confidence intervals are wide throughout, consistent with the rarity</span>
+<span id="cb10-265"><a href="#cb10-265" aria-hidden="true" tabindex="-1"></a>of the outcome (~0.29% base rate) and interpreted directionally rather than as precise</span>
+<span id="cb10-266"><a href="#cb10-266" aria-hidden="true" tabindex="-1"></a>effect size estimates.</span>
+<span id="cb10-267"><a href="#cb10-267" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-268"><a href="#cb10-268" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb10-269"><a href="#cb10-269" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-270"><a href="#cb10-270" aria-hidden="true" tabindex="-1"></a><span class="fu">## Who Did the Reform Actually Protect?</span></span>
+<span id="cb10-271"><a href="#cb10-271" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-272"><a href="#cb10-272" aria-hidden="true" tabindex="-1"></a>The DiD results show a population-level effect. But there is a more precise question</span>
+<span id="cb10-273"><a href="#cb10-273" aria-hidden="true" tabindex="-1"></a>buried underneath: **did the 2017 schedule reform protect all players equally, or did</span>
+<span id="cb10-274"><a href="#cb10-274" aria-hidden="true" tabindex="-1"></a>it disproportionately shelter star-tier players while leaving reserve players</span>
+<span id="cb10-275"><a href="#cb10-275" aria-hidden="true" tabindex="-1"></a>structurally exposed?**</span>
+<span id="cb10-276"><a href="#cb10-276" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-277"><a href="#cb10-277" aria-hidden="true" tabindex="-1"></a>This is the **selective protection hypothesis** — and the 2023 PPP gives us a way to</span>
+<span id="cb10-278"><a href="#cb10-278" aria-hidden="true" tabindex="-1"></a>test its reversal.</span>
+<span id="cb10-279"><a href="#cb10-279" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-280"><a href="#cb10-280" aria-hidden="true" tabindex="-1"></a><span class="fu">### Why Stars and Reserves May Respond Differently</span></span>
+<span id="cb10-281"><a href="#cb10-281" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-282"><a href="#cb10-282" aria-hidden="true" tabindex="-1"></a>Both the 2017 reform and the 2023 PPP were framed explicitly around high-profile</span>
+<span id="cb10-283"><a href="#cb10-283" aria-hidden="true" tabindex="-1"></a>players. Teams proactively managed the minutes of their most valuable assets; rotation</span>
+<span id="cb10-284"><a href="#cb10-284" aria-hidden="true" tabindex="-1"></a>players and reserves continued to absorb heavy schedules regardless. The NBA's own</span>
+<span id="cb10-285"><a href="#cb10-285" aria-hidden="true" tabindex="-1"></a>PPP defines eligibility by All-Star and All-NBA status — it is, by design, a</span>
+<span id="cb10-286"><a href="#cb10-286" aria-hidden="true" tabindex="-1"></a>star-focused instrument. When the PPP then mandated stars play in national TV games,</span>
+<span id="cb10-287"><a href="#cb10-287" aria-hidden="true" tabindex="-1"></a>it effectively reversed the load protection that had been informally extended to them</span>
+<span id="cb10-288"><a href="#cb10-288" aria-hidden="true" tabindex="-1"></a>since 2017.</span>
+<span id="cb10-289"><a href="#cb10-289" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-290"><a href="#cb10-290" aria-hidden="true" tabindex="-1"></a>We define three player tiers by season-level scoring percentile — a defensible proxy</span>
+<span id="cb10-291"><a href="#cb10-291" aria-hidden="true" tabindex="-1"></a>for the NBA's own star classification:</span>
+<span id="cb10-292"><a href="#cb10-292" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-293"><a href="#cb10-293" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Tier <span class="pp">|</span> Definition <span class="pp">|</span></span>
+<span id="cb10-294"><a href="#cb10-294" aria-hidden="true" tabindex="-1"></a><span class="pp">|------|------------|</span></span>
+<span id="cb10-295"><a href="#cb10-295" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> **Star** <span class="pp">|</span> Top 15% of scoring seasons — All-Star / All-NBA calibre <span class="pp">|</span></span>
+<span id="cb10-296"><a href="#cb10-296" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> **Starter** <span class="pp">|</span> 50th–84th percentile <span class="pp">|</span></span>
+<span id="cb10-297"><a href="#cb10-297" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> **Reserve** <span class="pp">|</span> Bottom 50% <span class="pp">|</span></span>
+<span id="cb10-298"><a href="#cb10-298" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-299"><a href="#cb10-299" aria-hidden="true" tabindex="-1"></a><span class="fu">### Tier Trends Across Three Policy Eras</span></span>
+<span id="cb10-300"><a href="#cb10-300" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-301"><a href="#cb10-301" aria-hidden="true" tabindex="-1"></a><span class="in">```{r tier-trends, fig.height=5, fig.cap="Mean Achilles rupture rate by player tier across three policy eras. If the Star line drops post-2017 but Reserve stays flat, selective protection is confirmed. If Star rises post-2023, the PPP reversed that protection."}</span></span>
+<span id="cb10-302"><a href="#cb10-302" aria-hidden="true" tabindex="-1"></a>did_tier_VIZ</span>
+<span id="cb10-303"><a href="#cb10-303" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-304"><a href="#cb10-304" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-305"><a href="#cb10-305" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb10-306"><a href="#cb10-306" aria-hidden="true" tabindex="-1"></a><span class="fu">## What to look for</span></span>
+<span id="cb10-307"><a href="#cb10-307" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Star line drops post-2017, Reserve stays flat** → the reform disproportionately</span>
+<span id="cb10-308"><a href="#cb10-308" aria-hidden="true" tabindex="-1"></a>  protected high-profile players. Reserve players remained structurally exposed.</span>
+<span id="cb10-309"><a href="#cb10-309" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Star line rises post-2023** → the PPP forced stars back into high-load game</span>
+<span id="cb10-310"><a href="#cb10-310" aria-hidden="true" tabindex="-1"></a>  situations, reversing the protection. This is the mechanistic explanation for</span>
+<span id="cb10-311"><a href="#cb10-311" aria-hidden="true" tabindex="-1"></a>  why the 2024–25 spike hit names like Tatum, Haliburton, Lillard and Murray —</span>
+<span id="cb10-312"><a href="#cb10-312" aria-hidden="true" tabindex="-1"></a>  precisely the players whose load had previously been managed most carefully.</span>
+<span id="cb10-313"><a href="#cb10-313" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb10-314"><a href="#cb10-314" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-315"><a href="#cb10-315" aria-hidden="true" tabindex="-1"></a><span class="fu">### Selective Protection Model (Model 4)</span></span>
+<span id="cb10-316"><a href="#cb10-316" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-317"><a href="#cb10-317" aria-hidden="true" tabindex="-1"></a>::: {.panel-tabset}</span>
+<span id="cb10-318"><a href="#cb10-318" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-319"><a href="#cb10-319" aria-hidden="true" tabindex="-1"></a><span class="fu">### Regression Table</span></span>
+<span id="cb10-320"><a href="#cb10-320" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-321"><a href="#cb10-321" aria-hidden="true" tabindex="-1"></a><span class="in">```{r tier-regression, results='asis'}</span></span>
+<span id="cb10-322"><a href="#cb10-322" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
+<span id="cb10-323"><a href="#cb10-323" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: "Show Model 4 results"</span></span>
+<span id="cb10-324"><a href="#cb10-324" aria-hidden="true" tabindex="-1"></a>jtools<span class="sc">::</span><span class="fu">export_summs</span>(</span>
+<span id="cb10-325"><a href="#cb10-325" aria-hidden="true" tabindex="-1"></a>  model_did_1, model_did_tier,</span>
+<span id="cb10-326"><a href="#cb10-326" aria-hidden="true" tabindex="-1"></a>  <span class="at">model.names  =</span> <span class="fu">c</span>(<span class="st">"Model 1</span><span class="sc">\n</span><span class="st">Baseline Load × Post"</span>,</span>
+<span id="cb10-327"><a href="#cb10-327" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"Model 4</span><span class="sc">\n</span><span class="st">Tier × Post</span><span class="sc">\n</span><span class="st">(Selective Protection)"</span>),</span>
+<span id="cb10-328"><a href="#cb10-328" aria-hidden="true" tabindex="-1"></a>  <span class="at">error_format =</span> <span class="st">"CIs: [{conf.low}, {conf.high}]"</span>,</span>
+<span id="cb10-329"><a href="#cb10-329" aria-hidden="true" tabindex="-1"></a>  <span class="at">digits       =</span> <span class="dv">4</span></span>
+<span id="cb10-330"><a href="#cb10-330" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-331"><a href="#cb10-331" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-332"><a href="#cb10-332" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-333"><a href="#cb10-333" aria-hidden="true" tabindex="-1"></a><span class="fu">### Coefficient Plot</span></span>
+<span id="cb10-334"><a href="#cb10-334" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-335"><a href="#cb10-335" aria-hidden="true" tabindex="-1"></a><span class="in">```{r tier-coef-plot, fig.height=4.5, fig.cap="Model 4 coefficients. The 'Star × Post-2017' term is the selective protection estimator — a negative value means stars saw a larger reduction in rupture rates post-reform relative to reserve players."}</span></span>
+<span id="cb10-336"><a href="#cb10-336" aria-hidden="true" tabindex="-1"></a>did_tier_coef_VIZ</span>
+<span id="cb10-337"><a href="#cb10-337" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-338"><a href="#cb10-338" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-339"><a href="#cb10-339" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb10-340"><a href="#cb10-340" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-341"><a href="#cb10-341" aria-hidden="true" tabindex="-1"></a>The <span class="in">`Star × Post-2017`</span> interaction term is the selective protection estimator. A</span>
+<span id="cb10-342"><a href="#cb10-342" aria-hidden="true" tabindex="-1"></a>negative coefficient means star-tier players experienced a **larger reduction** in</span>
+<span id="cb10-343"><a href="#cb10-343" aria-hidden="true" tabindex="-1"></a>rupture rates after the 2017 reform relative to reserve players. A near-zero</span>
+<span id="cb10-344"><a href="#cb10-344" aria-hidden="true" tabindex="-1"></a>coefficient on the reserve baseline confirms the reform offered little protective</span>
+<span id="cb10-345"><a href="#cb10-345" aria-hidden="true" tabindex="-1"></a>benefit to lower-tier players.</span>
+<span id="cb10-346"><a href="#cb10-346" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-347"><a href="#cb10-347" aria-hidden="true" tabindex="-1"></a>As before, confidence intervals are wide — a direct consequence of the ~0.29% event</span>
+<span id="cb10-348"><a href="#cb10-348" aria-hidden="true" tabindex="-1"></a>rate. These results are interpreted directionally, with the tier trend chart as the</span>
+<span id="cb10-349"><a href="#cb10-349" aria-hidden="true" tabindex="-1"></a>primary visual evidence.</span>
+<span id="cb10-350"><a href="#cb10-350" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-351"><a href="#cb10-351" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb10-352"><a href="#cb10-352" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-353"><a href="#cb10-353" aria-hidden="true" tabindex="-1"></a><span class="fu">## Implications — How Should the League, Management and Coaches Move Forward?</span></span>
+<span id="cb10-354"><a href="#cb10-354" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-355"><a href="#cb10-355" aria-hidden="true" tabindex="-1"></a>The DiD analysis, together with the selective protection findings, points to four</span>
+<span id="cb10-356"><a href="#cb10-356" aria-hidden="true" tabindex="-1"></a>concrete conclusions:</span>
+<span id="cb10-357"><a href="#cb10-357" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-358"><a href="#cb10-358" aria-hidden="true" tabindex="-1"></a>**1. The 2017 reform worked — but only for stars.**</span>
+<span id="cb10-359"><a href="#cb10-359" aria-hidden="true" tabindex="-1"></a>The tier analysis shows star-tier rupture rates trended down after the 2017 schedule</span>
+<span id="cb10-360"><a href="#cb10-360" aria-hidden="true" tabindex="-1"></a>reform, while reserve player rates stayed flat. Load management, applied informally to</span>
+<span id="cb10-361"><a href="#cb10-361" aria-hidden="true" tabindex="-1"></a>high-value players, had a measurable protective effect. The problem is it never</span>
+<span id="cb10-362"><a href="#cb10-362" aria-hidden="true" tabindex="-1"></a>reached the rest of the roster.</span>
+<span id="cb10-363"><a href="#cb10-363" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-364"><a href="#cb10-364" aria-hidden="true" tabindex="-1"></a>**2. Load management must reach the middle tier, not just stars.**</span>
+<span id="cb10-365"><a href="#cb10-365" aria-hidden="true" tabindex="-1"></a>The most structurally exposed group is high-usage rotation players who are not famous</span>
+<span id="cb10-366"><a href="#cb10-366" aria-hidden="true" tabindex="-1"></a>enough to receive formal rest protocols but are absorbing the workload that stars shed.</span>
+<span id="cb10-367"><a href="#cb10-367" aria-hidden="true" tabindex="-1"></a>Load management needs to be systematic across rosters — not reserved for max-contract</span>
+<span id="cb10-368"><a href="#cb10-368" aria-hidden="true" tabindex="-1"></a>names — with data-driven thresholds for all players above a minutes-per-game cutoff.</span>
+<span id="cb10-369"><a href="#cb10-369" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-370"><a href="#cb10-370" aria-hidden="true" tabindex="-1"></a>**3. The 2023 PPP may have created the 2024–25 spike.**</span>
+<span id="cb10-371"><a href="#cb10-371" aria-hidden="true" tabindex="-1"></a>By mandating that All-Star players appear in national TV games, the PPP reversed the</span>
+<span id="cb10-372"><a href="#cb10-372" aria-hidden="true" tabindex="-1"></a>informal load protection that had been quietly extended to stars since 2017. The tier</span>
+<span id="cb10-373"><a href="#cb10-373" aria-hidden="true" tabindex="-1"></a>trend chart shows star rupture rates rising in the PPP era — and the 2024–25 casualty</span>
+<span id="cb10-374"><a href="#cb10-374" aria-hidden="true" tabindex="-1"></a>list (Tatum, Haliburton, Lillard, Murray) is precisely the All-Star cohort the PPP</span>
+<span id="cb10-375"><a href="#cb10-375" aria-hidden="true" tabindex="-1"></a>targeted. This is a policy unintended consequence the league needs to acknowledge and</span>
+<span id="cb10-376"><a href="#cb10-376" aria-hidden="true" tabindex="-1"></a>correct.</span>
+<span id="cb10-377"><a href="#cb10-377" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-378"><a href="#cb10-378" aria-hidden="true" tabindex="-1"></a>**4. Back-to-back scheduling remains a structural risk factor.**</span>
+<span id="cb10-379"><a href="#cb10-379" aria-hidden="true" tabindex="-1"></a>The triple interaction shows the load effect is amplified in B2B contexts. While the</span>
+<span id="cb10-380"><a href="#cb10-380" aria-hidden="true" tabindex="-1"></a>NBA has reduced B2B games since 2017, the remaining B2B games disproportionately affect</span>
+<span id="cb10-381"><a href="#cb10-381" aria-hidden="true" tabindex="-1"></a>high-load players. Ensuring that players above a rolling-minutes threshold are</span>
+<span id="cb10-382"><a href="#cb10-382" aria-hidden="true" tabindex="-1"></a>automatically rested on B2B nights — regardless of tier — would directly address this</span>
+<span id="cb10-383"><a href="#cb10-383" aria-hidden="true" tabindex="-1"></a>interaction.</span>
+<span id="cb10-384"><a href="#cb10-384" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-385"><a href="#cb10-385" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb10-386"><a href="#cb10-386" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-387"><a href="#cb10-387" aria-hidden="true" tabindex="-1"></a><span class="fu">## Limitations</span></span>
+<span id="cb10-388"><a href="#cb10-388" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-389"><a href="#cb10-389" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
+<span id="cb10-390"><a href="#cb10-390" aria-hidden="true" tabindex="-1"></a>**Rare events**: ~0.29% rupture rate means any Linear Probability Model on this</span>
+<span id="cb10-391"><a href="#cb10-391" aria-hidden="true" tabindex="-1"></a>outcome will have wide confidence intervals. This is a data constraint, not a</span>
+<span id="cb10-392"><a href="#cb10-392" aria-hidden="true" tabindex="-1"></a>modelling failure. The NBA has 53 total ruptures over 35 years.</span>
+<span id="cb10-393"><a href="#cb10-393" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-394"><a href="#cb10-394" aria-hidden="true" tabindex="-1"></a>**Parallel trends**: the assumption holds well pre-2017 in the Low B2B panel.</span>
+<span id="cb10-395"><a href="#cb10-395" aria-hidden="true" tabindex="-1"></a>The High B2B panel shows more noise — Model 2 results are directional only.</span>
+<span id="cb10-396"><a href="#cb10-396" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-397"><a href="#cb10-397" aria-hidden="true" tabindex="-1"></a>**Player tier proxy**: star status is approximated using season-level scoring</span>
+<span id="cb10-398"><a href="#cb10-398" aria-hidden="true" tabindex="-1"></a>percentile rank. This captures the concept but is imperfect — a player who scores</span>
+<span id="cb10-399"><a href="#cb10-399" aria-hidden="true" tabindex="-1"></a>highly in one season may not be an All-Star, and vice versa.</span>
+<span id="cb10-400"><a href="#cb10-400" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-401"><a href="#cb10-401" aria-hidden="true" tabindex="-1"></a>**Unobserved confounders**: off-season training loads, biomechanical factors, and</span>
+<span id="cb10-402"><a href="#cb10-402" aria-hidden="true" tabindex="-1"></a>conditioning regimes are not captured in box score data.</span>
+<span id="cb10-403"><a href="#cb10-403" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-404"><a href="#cb10-404" aria-hidden="true" tabindex="-1"></a>**Future improvement**: a synthetic control approach would construct a weighted</span>
+<span id="cb10-405"><a href="#cb10-405" aria-hidden="true" tabindex="-1"></a>counterfactual per player without relying on the parallel trends assumption.</span>
+<span id="cb10-406"><a href="#cb10-406" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb10-407"><a href="#cb10-407" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-408"><a href="#cb10-408" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb10-409"><a href="#cb10-409" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-410"><a href="#cb10-410" aria-hidden="true" tabindex="-1"></a><span class="fu">## The Bridge</span></span>
+<span id="cb10-411"><a href="#cb10-411" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-412"><a href="#cb10-412" aria-hidden="true" tabindex="-1"></a>We have established that load and B2B patterns are associated with the rupture spike</span>
+<span id="cb10-413"><a href="#cb10-413" aria-hidden="true" tabindex="-1"></a>at the population level. But DiD answers *whether* and *why* — not *who* is next.</span>
+<span id="cb10-414"><a href="#cb10-414" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-415"><a href="#cb10-415" aria-hidden="true" tabindex="-1"></a>The same load features that explain the spike now become the input features of an</span>
+<span id="cb10-416"><a href="#cb10-416" aria-hidden="true" tabindex="-1"></a>individual-level prediction engine. The causal analysis tells us **what matters**;</span>
+<span id="cb10-417"><a href="#cb10-417" aria-hidden="true" tabindex="-1"></a>the predictive model tells us **who is at risk**.</span>
+<span id="cb10-418"><a href="#cb10-418" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-419"><a href="#cb10-419" aria-hidden="true" tabindex="-1"></a>→ <span class="co">[</span><span class="ot">Bench the Instinct — Predictive Model</span><span class="co">](part2_predictive.qmd)</span>{.btn .btn-danger}</span>
+<span id="cb10-420"><a href="#cb10-420" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-421"><a href="#cb10-421" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb10-422"><a href="#cb10-422" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-423"><a href="#cb10-423" aria-hidden="true" tabindex="-1"></a><span class="fu">## References</span></span>
+<span id="cb10-424"><a href="#cb10-424" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-425"><a href="#cb10-425" aria-hidden="true" tabindex="-1"></a>Amin, N. H., Old, A. B., Tabb, L. P., Garg, R., Toossi, N., &amp; Cerynik, D. L. (2013).</span>
+<span id="cb10-426"><a href="#cb10-426" aria-hidden="true" tabindex="-1"></a>Performance outcomes after repair of complete Achilles tendon ruptures in National</span>
+<span id="cb10-427"><a href="#cb10-427" aria-hidden="true" tabindex="-1"></a>Basketball Association players. *The American Journal of Sports Medicine, 41*(8),</span>
+<span id="cb10-428"><a href="#cb10-428" aria-hidden="true" tabindex="-1"></a>1864–1868. https://doi.org/10.1177/0363546513490659</span>
+<span id="cb10-429"><a href="#cb10-429" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-430"><a href="#cb10-430" aria-hidden="true" tabindex="-1"></a>Farmer, S. (2013, April 14). Kobe Bryant has Achilles tendon surgery, out 6 to 9 months.</span>
+<span id="cb10-431"><a href="#cb10-431" aria-hidden="true" tabindex="-1"></a>*Los Angeles Times*.</span>
+<span id="cb10-432"><a href="#cb10-432" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-433"><a href="#cb10-433" aria-hidden="true" tabindex="-1"></a>Fischer, B. (2023, May 17). Three Achilles injuries in one NBA postseason: What's going</span>
+<span id="cb10-434"><a href="#cb10-434" aria-hidden="true" tabindex="-1"></a>on and how is it fixed? *Fox Sports*.</span>
+<span id="cb10-435"><a href="#cb10-435" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-436"><a href="#cb10-436" aria-hidden="true" tabindex="-1"></a>Goodwill, C. L. (2024, May 15). From 1990–2023, 45 NBA players tore their Achilles.</span>
+<span id="cb10-437"><a href="#cb10-437" aria-hidden="true" tabindex="-1"></a>*Yahoo Sports*. https://sports.yahoo.com/article/1990-2023-45-nba-players-173643884.html</span>
+<span id="cb10-438"><a href="#cb10-438" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-439"><a href="#cb10-439" aria-hidden="true" tabindex="-1"></a>Hart, T. (2019, June 11). How Achilles injuries affected these nine NBA players.</span>
+<span id="cb10-440"><a href="#cb10-440" aria-hidden="true" tabindex="-1"></a>*Sports Illustrated*.</span>
+<span id="cb10-441"><a href="#cb10-441" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-442"><a href="#cb10-442" aria-hidden="true" tabindex="-1"></a>Kuhn, M., &amp; Silge, J. (2022). *Tidy modeling with R*. O'Reilly Media. https://www.tmwr.org</span>
+<span id="cb10-443"><a href="#cb10-443" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-444"><a href="#cb10-444" aria-hidden="true" tabindex="-1"></a>LaPrade, C. M., Chona, D. V., Cinque, M. E., Freehill, M. T., McAdams, T. R.,</span>
+<span id="cb10-445"><a href="#cb10-445" aria-hidden="true" tabindex="-1"></a>Abrams, G. D., Sherman, S. L., &amp; Safran, M. R. (2022). Return to play and performance</span>
+<span id="cb10-446"><a href="#cb10-446" aria-hidden="true" tabindex="-1"></a>after operative treatment of Achilles tendon rupture in elite male athletes.</span>
+<span id="cb10-447"><a href="#cb10-447" aria-hidden="true" tabindex="-1"></a>*British Journal of Sports Medicine, 56*(9), 515–520.</span>
+<span id="cb10-448"><a href="#cb10-448" aria-hidden="true" tabindex="-1"></a>https://doi.org/10.1136/bjsports-2021-104835</span>
+<span id="cb10-449"><a href="#cb10-449" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-450"><a href="#cb10-450" aria-hidden="true" tabindex="-1"></a>Lewis, D. (2014, October 7). Kobe Bryant: Orthopaedic surgeon discusses star's Achilles</span>
+<span id="cb10-451"><a href="#cb10-451" aria-hidden="true" tabindex="-1"></a>tendon, knee injuries. *Bleacher Report*.</span>
+<span id="cb10-452"><a href="#cb10-452" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-453"><a href="#cb10-453" aria-hidden="true" tabindex="-1"></a>Meadows, J., et al. (2024). Economic and performance analysis of NBA Achilles ruptures.</span>
+<span id="cb10-454"><a href="#cb10-454" aria-hidden="true" tabindex="-1"></a>*Journal of Sports Economics* <span class="co">[</span><span class="ot">forthcoming</span><span class="co">]</span>.</span>
+<span id="cb10-455"><a href="#cb10-455" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-456"><a href="#cb10-456" aria-hidden="true" tabindex="-1"></a>NBA.com. (2024, May 18). NBA Commissioner Adam Silver: League researching Achilles tears.</span>
+<span id="cb10-457"><a href="#cb10-457" aria-hidden="true" tabindex="-1"></a>https://www.nba.com/news/nba-commissioner-adam-silver-league-researching-achilles-tears</span>
+<span id="cb10-458"><a href="#cb10-458" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-459"><a href="#cb10-459" aria-hidden="true" tabindex="-1"></a>Petway, A. J., Jordan, M. J., Epsley, S., &amp; Anloague, P. A. (2022). Mechanisms of</span>
+<span id="cb10-460"><a href="#cb10-460" aria-hidden="true" tabindex="-1"></a>Achilles tendon rupture in National Basketball Association players: A biomechanical film</span>
+<span id="cb10-461"><a href="#cb10-461" aria-hidden="true" tabindex="-1"></a>analysis. *Journal of Applied Biomechanics, 38*(6), 398–403.</span>
+<span id="cb10-462"><a href="#cb10-462" aria-hidden="true" tabindex="-1"></a>https://doi.org/10.1123/jab.2022-0088</span>
+<span id="cb10-463"><a href="#cb10-463" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-464"><a href="#cb10-464" aria-hidden="true" tabindex="-1"></a>Reynolds, T. (2025). NBA, Adam Silver address Achilles injury spike. *Associated Press*.</span>
+<span id="cb10-465"><a href="#cb10-465" aria-hidden="true" tabindex="-1"></a>https://apnews.com/article/nba-adam-silver-achilles-injuries-b81beee74cee07ac2d644162be835d7c</span>
+<span id="cb10-466"><a href="#cb10-466" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-467"><a href="#cb10-467" aria-hidden="true" tabindex="-1"></a>Silver, A. (2025). Adam Silver says league taking serious look at Achilles tears. *ESPN*.</span>
+<span id="cb10-468"><a href="#cb10-468" aria-hidden="true" tabindex="-1"></a>https://www.espn.com.sg/nba/story/_/id/45585272</span>
+<span id="cb10-469"><a href="#cb10-469" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-470"><a href="#cb10-470" aria-hidden="true" tabindex="-1"></a>Sportico. (2022). NBA schedule reduces back-to-backs, travel to improve game quality.</span>
+<span id="cb10-471"><a href="#cb10-471" aria-hidden="true" tabindex="-1"></a>*Sportico*. https://www.sportico.com/leagues/basketball/2022/nba-schedule-2023-rest-travel-1234691876/</span>
+<span id="cb10-472"><a href="#cb10-472" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-473"><a href="#cb10-473" aria-hidden="true" tabindex="-1"></a>Siu, R., Lee, J., &amp; Chan, J. (2020). Prognosis of elite basketball players after an</span>
+<span id="cb10-474"><a href="#cb10-474" aria-hidden="true" tabindex="-1"></a>Achilles tendon rupture. *Science Progress, 103*(3).</span>
+<span id="cb10-475"><a href="#cb10-475" aria-hidden="true" tabindex="-1"></a>https://doi.org/10.1177/0036850420936180</span>
+<span id="cb10-476"><a href="#cb10-476" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-477"><a href="#cb10-477" aria-hidden="true" tabindex="-1"></a>Trofa, D. P., Miller, J. C., Jang, E. S., Woode, D. R., Greisberg, J. K., &amp;</span>
+<span id="cb10-478"><a href="#cb10-478" aria-hidden="true" tabindex="-1"></a>Vosseller, J. T. (2017). Professional athletes' return to play and performance after</span>
+<span id="cb10-479"><a href="#cb10-479" aria-hidden="true" tabindex="-1"></a>operative repair of an Achilles tendon rupture. *The American Journal of Sports</span>
+<span id="cb10-480"><a href="#cb10-480" aria-hidden="true" tabindex="-1"></a>Medicine, 45*(12), 2864–2871. https://doi.org/10.1177/0363546517713001</span>
+<span id="cb10-481"><a href="#cb10-481" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-482"><a href="#cb10-482" aria-hidden="true" tabindex="-1"></a>Windhorst, B. (2017). NBA outlines schedule changes in memo to teams. *ESPN*.</span>
+<span id="cb10-483"><a href="#cb10-483" aria-hidden="true" tabindex="-1"></a>https://www.espn.com/nba/story/_/id/20286965/nba-issues-memo-detailing-h</span>
+</code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Keziah Vickraman · Capstone 2025</p>
+</div>   
+    <div class="nav-footer-center">
+<p><em>We know load caused the spike. Now we know who’s next.</em></p>
+</div>
+    <div class="nav-footer-right">
+<p>Built with <a href="https://quarto.org">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

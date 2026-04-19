@@ -1,8 +1,25 @@
-all_seasons_NBA_2002_2025.csv
-00_Shared_Data.RData
-*_cache/
-*.rdb
+# R workspace dumps
+.RData
+.RDataTmp
+*.RDataTmp
+.Rhistory
+
+# Large data files
+*.csv
 *.rds
 
-/.quarto/
-**/*.quarto_ipynb
+# RData files (too large — kept locally only)
+*.RData
+
+# Quarto render artifacts
+_freeze/
+*_cache/
+*_files/
+site_libs/
+.quarto/
+
+# macOS
+.DS_Store
+
+# rsconnect
+rsconnect/
