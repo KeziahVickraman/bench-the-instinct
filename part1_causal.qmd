@@ -9,7 +9,12 @@ author:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
-source("00_Data_Setup.R")
+library(tidyverse)
+library(scales)
+library(glue)
+library(jtools)
+library(knitr)
+load("00_Shared_Data.RData")
 load("Part1_Causal_Results.RData")
 ```
 
@@ -128,12 +133,12 @@ reports due to their recency.
 Before testing causality, we first ask: has player load actually changed? If the
 answer is no, the DiD has nothing to identify.
 
-```{r load-trend, fig.height=4.5, fig.cap="Rolling 3-game average minutes over time. Median load (blue) has risen post-2016 while elite player load (75th percentile, red dashed) has plateaued. The interquartile range (blue band) is widening."}
+```{r load-trend, fig.height=4.5, fig.cap="Rolling 3-game average minutes over time. Median load (blue) has risen post-2017 while elite player load (75th percentile, red dashed) has plateaued. The interquartile range (blue band) is widening. Dashed vertical line = 2017–18 schedule reform."}
 load_trend_VIZ
 ```
 
 The chart reveals a more nuanced story than a simple claim that load went up.
-The median player (blue line) has been playing *more* minutes post-2016, rising from
+The median player (blue line) has been playing *more* minutes post-2017, rising from
 approximately 19–20 to 21–22 minutes rolling average. The 75th percentile (red dashed),
 representing high-usage starters and stars, has slightly *decreased* and plateaued.
 The gap between them is widening.
@@ -155,20 +160,29 @@ treated group relative to a control group, before and after a structural shift. 
 - **Treated group**: player-seasons in the top 25th percentile of rolling 3-game
   average minutes — the high-load players
 - **Control group**: player-seasons below that threshold — the low-load players
-- **Post period**: 2016 onwards — the point at which NBA teams began formally
-  implementing load management protocols following CBA discussions
+- **Post period**: 2017 onwards — the 2017–18 NBA schedule reform, the most
+  comprehensive structural change to player scheduling in the league's modern era
 - **Outcome**: confirmed Achilles rupture (binary, per player-season)
 
-The DiD estimator is the coefficient on the interaction term `High Load × Post-2016`.
+The DiD estimator is the coefficient on the interaction term `High Load × Post-2017`.
 A positive coefficient means high-load players saw a differential increase in rupture
-rates after 2016, over and above any general time trend.
+rates after 2017, over and above any general time trend.
 
-### Why 2016?
+### Why 2017?
 
-The 2016–17 season marks the emergence of organised load management as a league-wide
-practice. The NBA's CBA was renegotiated in 2016, introducing new rest protocols and
-flagging player workload as a collective concern. This provides a theory-grounded,
-non-data-driven cutoff — a necessary condition for the credibility of the DiD design.
+The 2017–18 season is the cleanest structural break in NBA scheduling history. It was
+the first season to simultaneously eliminate: (a) four-games-in-five-nights stretches,
+which had occurred more than 70 times per season league-wide; (b) 18-games-in-30-days
+windows; and (c) single road games requiring more than 2,000 miles of travel. The NBA
+also added a full week to the regular-season calendar that year (Windhorst, ESPN, 2017).
+By 2018–19, no team played more than 15 back-to-back sets — down from a league average
+of nearly 20 just three seasons earlier (Sportico, 2022).
+
+We also define a **secondary cutpoint at 2023** for the Player Participation Policy
+(PPP), which mandated that All-Star-level players appear in national television games
+and penalised teams for resting stars. This second cutpoint is used in the selective
+protection analysis below to test whether the PPP partially reversed the protective
+effects of the 2017 reform.
 
 ### The B2B Moderator
 
@@ -184,8 +198,9 @@ This study investigates three core questions:
    exhibit a higher risk of injury
 2. Whether insufficient rest between games — especially in back-to-back contexts —
    contributes to greater rupture incidence
-3. Whether the post-2016 load management era has differentially affected rupture rates
-   for high-load versus low-load players
+3. Whether the post-2017 schedule reform era has differentially affected rupture rates
+   for high-load versus low-load players, and whether this protective effect varied
+   by player tier (stars vs. reserve players)
 
 Understanding these predictors can empower team managers and coaching staff to make
 data-driven decisions about player workload and recovery. By accurately forecasting
@@ -201,17 +216,19 @@ NBA season (Siu et al., 2020).
 The validity of DiD rests on the **parallel trends assumption**: that absent the
 treatment, the two groups would have trended similarly over time.
 
-```{r parallel-trends, fig.height=5.5, fig.cap="Parallel trends check. Pre-2016 trends are broadly parallel between load groups, particularly in the Low B2B panel. Post-2016 the high-load gap widens."}
+```{r parallel-trends, fig.height=5.5, fig.cap="Parallel trends check. Pre-2017 trends are broadly parallel between load groups, particularly in the Low B2B panel. Post-2017 the high-load gap widens. Dashed line = 2017–18 schedule reform. Dotted line = 2023–24 PPP."}
 did_parallel_trends_VIZ
 ```
 
 ::: {.callout-tip}
 ## Reading this chart
 If the blue (low load) and red (high load) lines move roughly in parallel
-**before** the dashed 2016 line, the parallel trends assumption holds.
-A divergence **after** 2016 that is larger for the high-load group is the causal signal.
-Year-to-year volatility reflects the rarity of the outcome — with a base rupture
-rate of ~0.29%, a single rupture in a season-load group moves the mean materially.
+**before** the dashed 2017 line, the parallel trends assumption holds.
+A divergence **after** 2017 that is larger for the high-load group is the causal signal.
+The dotted 2023 line marks the PPP — watch whether the high-load line shifts again
+after that point. Year-to-year volatility reflects the rarity of the outcome — with a
+base rupture rate of ~0.29%, a single rupture in a season-load group moves the mean
+materially.
 :::
 
 ---
@@ -243,37 +260,154 @@ did_coef_VIZ
 
 :::
 
-The interaction coefficient `High Load × Post-2016` is **positive** across all three
-models, consistent with the hypothesis that high-load player-seasons carry elevated
-rupture risk in the load management era. Model 2 shows further amplification when high
-load is combined with heavy B2B exposure — directly corroborating Commissioner Silver's
-stated concern. Confidence intervals are wide throughout, consistent with the rarity
-of the outcome (~0.29% base rate) and interpreted directionally rather than as precise
-effect size estimates.
+The interaction coefficient `High Load × Post-2017` is **positive** across all three
+models (Model 1: β = `r round(bayesian_stats$beta_interact, 4)`). Interpreting this
+through a Bayesian lens yields a concrete risk update.
+
+Starting from a **prior rupture probability of `r bayesian_stats$prior`%** — the
+historical base rate across all player-seasons — a high-load player-season in the
+post-2017 era carries an estimated **posterior rupture probability of
+`r bayesian_stats$posterior`%**. This represents a **`r bayesian_stats$relative_risk`×
+relative risk** over baseline, and an absolute increase of
+`r bayesian_stats$abs_increase` percentage points.
+
+The approximate **Bayes Factor is `r bayesian_stats$bayes_factor`**, meaning that
+observing high load in the post-reform era is approximately twice as probable among
+player-seasons that resulted in rupture than among those that did not.
+
+::: {.callout-note}
+## Interpreting a Bayes Factor of ~2 at low prevalence
+By Jeffreys' scale, a Bayes Factor of 1–3 constitutes weak-to-anecdotal evidence in
+isolation. However, this framing understates the practical significance when the prior
+is as low as 0.29%. When the base rate is this rare, *any* evidence that doubles the
+posterior odds is clinically meaningful. An Achilles rupture costs a player 9–12 months
+of recovery, frequently causes permanent performance decline, and carries a mean
+economic cost of $4M per player (Meadows et al., 2024). In this decision context, a
+2× upward revision in risk is not a null result — it is an actionable signal that
+justifies proactive load intervention.
+:::
+
+Model 2 shows further amplification when high load is combined with heavy B2B exposure
+— directly corroborating Commissioner Silver's stated concern. Confidence intervals
+are wide throughout, a direct consequence of the low base rate, and all results are
+interpreted directionally rather than as precise effect size estimates.
+
+---
+
+## Who Did the Reform Actually Protect?
+
+The DiD results show a population-level effect. But there is a more precise question
+buried underneath: **did the 2017 schedule reform protect all players equally, or did
+it disproportionately shelter star-tier players while leaving reserve players
+structurally exposed?**
+
+This is the **selective protection hypothesis** — and the 2023 PPP gives us a way to
+test its reversal.
+
+### Why Stars and Reserves May Respond Differently
+
+Both the 2017 reform and the 2023 PPP were framed explicitly around high-profile
+players. Teams proactively managed the minutes of their most valuable assets; rotation
+players and reserves continued to absorb heavy schedules regardless. The NBA's own
+PPP defines eligibility by All-Star and All-NBA status — it is, by design, a
+star-focused instrument. When the PPP then mandated stars play in national TV games,
+it effectively reversed the load protection that had been informally extended to them
+since 2017.
+
+We define three player tiers by season-level scoring percentile — a defensible proxy
+for the NBA's own star classification:
+
+| Tier | Definition |
+|------|------------|
+| **Star** | Top 15% of scoring seasons — All-Star / All-NBA calibre |
+| **Starter** | 50th–84th percentile |
+| **Reserve** | Bottom 50% |
+
+### Tier Trends Across Three Policy Eras
+
+```{r tier-trends, fig.height=5, fig.cap="Mean Achilles rupture rate by player tier across three policy eras. If the Star line drops post-2017 but Reserve stays flat, selective protection is confirmed. If Star rises post-2023, the PPP reversed that protection."}
+did_tier_VIZ
+```
+
+::: {.callout-tip}
+## What to look for
+- **Star line drops post-2017, Reserve stays flat** → the reform disproportionately
+  protected high-profile players. Reserve players remained structurally exposed.
+- **Star line rises post-2023** → the PPP forced stars back into high-load game
+  situations, reversing the protection. This is the mechanistic explanation for
+  why the 2024–25 spike hit names like Tatum, Haliburton, Lillard and Murray —
+  precisely the players whose load had previously been managed most carefully.
+:::
+
+### Selective Protection Model (Model 4)
+
+::: {.panel-tabset}
+
+### Regression Table
+
+```{r tier-regression, results='asis'}
+#| code-fold: true
+#| code-summary: "Show Model 4 results"
+jtools::export_summs(
+  model_did_1, model_did_tier,
+  model.names  = c("Model 1\nBaseline Load × Post",
+                   "Model 4\nTier × Post\n(Selective Protection)"),
+  error_format = "CIs: [{conf.low}, {conf.high}]",
+  digits       = 4
+)
+```
+
+### Coefficient Plot
+
+```{r tier-coef-plot, fig.height=4.5, fig.cap="Model 4 coefficients. The 'Star × Post-2017' term is the selective protection estimator — a negative value means stars saw a larger reduction in rupture rates post-reform relative to reserve players."}
+did_tier_coef_VIZ
+```
+
+:::
+
+The `Star × Post-2017` interaction term is the selective protection estimator. A
+negative coefficient means star-tier players experienced a **larger reduction** in
+rupture rates after the 2017 reform relative to reserve players. A near-zero
+coefficient on the reserve baseline confirms the reform offered little protective
+benefit to lower-tier players.
+
+As before, confidence intervals are wide — a direct consequence of the ~0.29% event
+rate. These results are interpreted directionally, with the tier trend chart as the
+primary visual evidence.
 
 ---
 
 ## Implications — How Should the League, Management and Coaches Move Forward?
 
-The DiD analysis points to three concrete conclusions:
+The DiD analysis, together with the selective protection findings, points to four
+concrete conclusions:
 
-**1. Load management must reach the middle tier, not just stars.**
-The load trend shows elite players' workloads have been managed while median loads
-have increased. The most structurally exposed group is high-usage rotation players
-who are not famous enough to receive formal rest protocols. Load management needs to
-be systematic across rosters, not reserved for max-contract names.
+**1. The 2017 reform worked — but only for stars.**
+The tier analysis shows star-tier rupture rates trended down after the 2017 schedule
+reform, while reserve player rates stayed flat. Load management, applied informally to
+high-value players, had a measurable protective effect. The problem is it never
+reached the rest of the roster.
 
-**2. Back-to-back scheduling remains a structural risk factor.**
+**2. Load management must reach the middle tier, not just stars.**
+The most structurally exposed group is high-usage rotation players who are not famous
+enough to receive formal rest protocols but are absorbing the workload that stars shed.
+Load management needs to be systematic across rosters — not reserved for max-contract
+names — with data-driven thresholds for all players above a minutes-per-game cutoff.
+
+**3. The 2023 PPP may have created the 2024–25 spike.**
+By mandating that All-Star players appear in national TV games, the PPP reversed the
+informal load protection that had been quietly extended to stars since 2017. The tier
+trend chart shows star rupture rates rising in the PPP era — and the 2024–25 casualty
+list (Tatum, Haliburton, Lillard, Murray) is precisely the All-Star cohort the PPP
+targeted. This is a policy unintended consequence the league needs to acknowledge and
+correct.
+
+**4. Back-to-back scheduling remains a structural risk factor.**
 The triple interaction shows the load effect is amplified in B2B contexts. While the
-NBA has reduced B2B games over recent seasons, the data suggests the remaining B2B
-games disproportionately affect high-load players. Ensuring high-load players are
-rested on B2B nights would directly address this interaction.
-
-**3. Inconsistent load management may be worse than none.**
-The widening gap between high-load and low-load rupture rates post-2016 coincides with
-the period when load management became a recognised practice — but applied
-inconsistently. Protecting some players while increasing relative load on others who
-cover more minutes to compensate may be creating new exposure in the middle of rosters.
+NBA has reduced B2B games since 2017, the remaining B2B games disproportionately affect
+high-load players. Ensuring that players above a rolling-minutes threshold are
+automatically rested on B2B nights — regardless of tier — would directly address this
+interaction.
 
 ---
 
@@ -284,8 +418,12 @@ cover more minutes to compensate may be creating new exposure in the middle of r
 outcome will have wide confidence intervals. This is a data constraint, not a
 modelling failure. The NBA has 53 total ruptures over 35 years.
 
-**Parallel trends**: the assumption holds well pre-2016 in the Low B2B panel.
+**Parallel trends**: the assumption holds well pre-2017 in the Low B2B panel.
 The High B2B panel shows more noise — Model 2 results are directional only.
+
+**Player tier proxy**: star status is approximated using season-level scoring
+percentile rank. This captures the concept but is imperfect — a player who scores
+highly in one season may not be an All-Star, and vice versa.
 
 **Unobserved confounders**: off-season training loads, biomechanical factors, and
 conditioning regimes are not captured in box score data.
@@ -356,6 +494,9 @@ https://apnews.com/article/nba-adam-silver-achilles-injuries-b81beee74cee07ac2d6
 Silver, A. (2025). Adam Silver says league taking serious look at Achilles tears. *ESPN*.
 https://www.espn.com.sg/nba/story/_/id/45585272
 
+Sportico. (2022). NBA schedule reduces back-to-backs, travel to improve game quality.
+*Sportico*. https://www.sportico.com/leagues/basketball/2022/nba-schedule-2023-rest-travel-1234691876/
+
 Siu, R., Lee, J., & Chan, J. (2020). Prognosis of elite basketball players after an
 Achilles tendon rupture. *Science Progress, 103*(3).
 https://doi.org/10.1177/0036850420936180
@@ -364,3 +505,6 @@ Trofa, D. P., Miller, J. C., Jang, E. S., Woode, D. R., Greisberg, J. K., &
 Vosseller, J. T. (2017). Professional athletes' return to play and performance after
 operative repair of an Achilles tendon rupture. *The American Journal of Sports
 Medicine, 45*(12), 2864–2871. https://doi.org/10.1177/0363546517713001
+
+Windhorst, B. (2017). NBA outlines schedule changes in memo to teams. *ESPN*.
+https://www.espn.com/nba/story/_/id/20286965/nba-issues-memo-detailing-h

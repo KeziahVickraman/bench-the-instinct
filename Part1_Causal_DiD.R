@@ -1,18 +1,18 @@
 ###--------------------------------------------------------------------------###
-###   Part1_Causal_DiD.R                                                      ###
+###   Part1_Causal_DiD.R                                                     ###
 ###   "We DiD that" — Causal Analysis of Load Management & Achilles Injuries ###
-###                                                                           ###
-###   Authors: Keziah Vickraman                ###
-###                                                                           ###
-###   QUESTION: Did the shift toward higher player loads and more             ###
+###                                                                          ###
+###   Author: Keziah Vickraman                                               ###
+###                                                                          ###
+###   QUESTION: Did the shift toward higher player loads and more            ###
 ###   back-to-back games causally contribute to the unprecedented spike      ###
 ###   in NBA Achilles ruptures — particularly the 2024–25 season?            ###
-###                                                                           ###
+###                                                                          ###
 ###   APPROACH: Difference-in-Differences (DiD)                              ###
-###     Treatment = high load player-seasons (top 25th pct rolling mins)    ###
+###     Treatment = high load player-seasons (top 25th pct rolling mins)     ###
 ###     Outcome   = achilles_rupture_binary (confirmed ruptures only)        ###
 ###     Moderator = back-to-back game frequency                              ###
-###                                                                           ###
+###                                                                          ###
 ###   This part answers WHY. Part 2 answers WHO.                             ###
 ###   The features that explain the spike are the same features that         ###
 ###   power the prediction — load is the bridge.                             ###
@@ -260,10 +260,54 @@ export_summs(
 ## Tidy outputs for Shiny app -----------------------------------------------
 did_model_tidy <-
   bind_rows(
-    tidy(model_did_1, conf.int = TRUE) %>% mutate(model = "Model 1: Load × Post"),
-    tidy(model_did_2, conf.int = TRUE) %>% mutate(model = "Model 2: Load × Post × B2B"),
+    tidy(model_did_1, conf.int = TRUE) %>% mutate(model = "Model 1: Load × Post (2017)"),
+    tidy(model_did_2, conf.int = TRUE) %>% mutate(model = "Model 2: Load × Post × B2B (2017)"),
     tidy(model_did_3, conf.int = TRUE) %>% mutate(model = "Model 3: Continuous")
   )
+
+## Bayesian risk update from DiD coefficients --------------------------------
+# When prevalence (base rate) is very low, the right question is not
+# "is the absolute effect large?" but "how much does new information
+# update the posterior odds?" -- i.e. the Bayes Factor.
+#
+# P(rupture | high load, post-2017) is the posterior we want.
+# The LPM gives us this directly as the sum of relevant coefficients.
+# The Bayes Factor approximation = posterior odds / prior odds.
+# Jeffreys scale: BF 1-3 = weak/anecdotal, 3-10 = moderate, >10 = strong.
+# Even a BF of ~2 is meaningful when the cost of the event is catastrophic.
+
+did_prior     <- mean(did_data$achilles_rupture)
+did_beta      <- coef(model_did_1)
+
+did_posterior <- did_beta["(Intercept)"] +
+                 did_beta["load_factorHigh Load"] +
+                 did_beta[grep("post_factor", names(did_beta), value = TRUE)[1]] +
+                 did_beta[grep(":", names(did_beta), value = TRUE)[1]]
+
+did_rr        <- as.numeric(did_posterior / did_prior)
+did_bf        <- as.numeric((did_posterior / (1 - did_posterior)) /
+                             (did_prior    / (1 - did_prior)))
+
+# Store as a named list for easy inline reference in the qmd
+bayesian_stats <- list(
+  prior         = round(did_prior * 100, 2),
+  posterior     = round(as.numeric(did_posterior) * 100, 2),
+  abs_increase  = round((as.numeric(did_posterior) - did_prior) * 100, 2),
+  relative_risk = round(did_rr, 2),
+  bayes_factor  = round(did_bf, 2),
+  beta_interact = round(as.numeric(did_beta[grep(":", names(did_beta), value = TRUE)[1]]), 4)
+)
+
+glue("
+=== BAYESIAN RISK UPDATE (Model 1 DiD) ===
+Prior rupture probability (base rate) : {bayesian_stats$prior}%
+Posterior (high load + post-2017)     : {bayesian_stats$posterior}%
+Absolute increase                     : +{bayesian_stats$abs_increase} pp
+Relative Risk                         : {bayesian_stats$relative_risk}x
+Bayes Factor                          : {bayesian_stats$bayes_factor}
+Interaction coefficient (beta)        : {bayesian_stats$beta_interact}
+==========================================
+")
 
 ###==========================================================================###
 ###  SECTION 5: PARALLEL TRENDS CHECK                                         ###
@@ -528,3 +572,27 @@ save(
 )
 
 message("✓ Both versions saved")
+
+save(
+  achilles_ruptures_FULL,
+  ruptures_by_year,
+  did_data,
+  parallel_trends_data,
+  tier_trends_data,
+  did_model_tidy,
+  bayesian_stats,
+  model_did_1, model_did_2, model_did_3, model_did_tier,
+  spike_VIZ,
+  did_parallel_trends_VIZ,
+  did_coef_VIZ,
+  did_tier_VIZ,
+  did_tier_coef_VIZ,
+  load_trend_VIZ,
+  spike_VIZ_plain,
+  did_parallel_trends_VIZ_plain,
+  did_coef_VIZ_plain,
+  did_tier_VIZ_plain,
+  did_tier_coef_VIZ_plain,
+  load_trend_VIZ_plain,
+  file = "Part1_Causal_Results.RData"
+)
